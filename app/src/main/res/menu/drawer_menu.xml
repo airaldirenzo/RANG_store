@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/drawerHome"
+        android:title="home"
+        android:orderInCategory="1" />
+
+    <item
+        android:id="@+id/drawerSearch"
+        android:title="search"
+        android:orderInCategory="2"/>
+
+    <item
+        android:id="@+id/drawerNotifications"
+        android:title="notifications"
+        android:orderInCategory="2"/>
+
+    <item
+        android:id="@+id/drawerPurchases"
+        android:title="purchases"
+        android:orderInCategory="2"/>
+
+    <item
+        android:id="@+id/drawerFavourites"
+        android:title="favourites"
+        android:orderInCategory="2"/>
+
+    <item
+        android:id="@+id/drawerMyAccount"
+        android:title="myAccount"
+        android:orderInCategory="2"/>
+
+
+</menu>
