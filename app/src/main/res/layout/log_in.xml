@@ -13,8 +13,7 @@
         android:layout_gravity="center"
         android:textSize="32dp"
         android:padding="10dp"
-        android:layout_marginTop="125dp"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="125dp"/>
 
     <TextView
         android:id="@+id/textViewCorreo"
@@ -32,8 +31,7 @@
         android:inputType="textEmailAddress"
         android:hint="example@example.com"
         android:textSize="14dp"
-        android:layout_marginStart="30dp"
-        android:textColor="@color/black"/>
+        android:layout_marginStart="30dp"/>
 
     <TextView
         android:id="@+id/textViewPassword"
@@ -51,8 +49,7 @@
         android:inputType="textPassword"
         android:hint="contraseña"
         android:textSize="14dp"
-        android:layout_marginStart="30dp"
-        android:textColor="@color/black"/>
+        android:layout_marginStart="30dp"/>
 
     <Button
         android:id="@+id/buttonIniciarSesion"
