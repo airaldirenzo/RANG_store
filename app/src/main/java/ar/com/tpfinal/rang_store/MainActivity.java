@@ -1,4 +1,4 @@
-package ar.com.airaldirenzo.rang_store;
+package ar.com.tpfinal.rang_store;
 
 import androidx.appcompat.app.AppCompatActivity;
 
