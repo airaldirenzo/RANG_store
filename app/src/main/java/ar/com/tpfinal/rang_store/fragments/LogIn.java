@@ -1,7 +1,6 @@
-package ar.com.airaldirenzo.rang_store.fragments;
+package ar.com.tpfinal.rang_store.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import ar.com.airaldirenzo.rang_store.R;
-import ar.com.airaldirenzo.rang_store.databinding.LogInBinding;
+import ar.com.tpfinal.rang_store.R;
+import ar.com.tpfinal.rang_store.databinding.LogInBinding;
 
 public class LogIn extends Fragment {
 

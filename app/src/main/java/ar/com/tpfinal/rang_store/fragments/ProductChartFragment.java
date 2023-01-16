@@ -1,4 +1,4 @@
-package ar.com.airaldirenzo.rang_store.fragments;
+package ar.com.tpfinal.rang_store.fragments;
 
 import android.os.Bundle;
 
@@ -12,8 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import ar.com.airaldirenzo.rang_store.R;
-import ar.com.airaldirenzo.rang_store.databinding.ProductChartBinding;
+import ar.com.tpfinal.rang_store.databinding.ProductChartBinding;
 
 public class ProductChartFragment extends Fragment {
 

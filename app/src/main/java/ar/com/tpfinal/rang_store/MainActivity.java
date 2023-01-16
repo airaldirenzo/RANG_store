@@ -1,19 +1,14 @@
-package ar.com.airaldirenzo.rang_store;
+package ar.com.tpfinal.rang_store;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
-import ar.com.airaldirenzo.rang_store.databinding.ActivityMainBinding;
-import ar.com.airaldirenzo.rang_store.databinding.LogInBinding;
+import ar.com.tpfinal.rang_store.databinding.LogInBinding;
 
 public class MainActivity extends AppCompatActivity {
 
