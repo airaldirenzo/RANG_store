@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'ar.com.airaldirenzo.rang_store'
+    namespace 'ar.com.tpfinal.rang_store'
     compileSdk 32
 
     defaultConfig {
-        applicationId "ar.com.airaldirenzo.rang_store"
+        applicationId "ar.com.tpfinal.rang_store"
         minSdk 26
         targetSdk 32
         versionCode 1
