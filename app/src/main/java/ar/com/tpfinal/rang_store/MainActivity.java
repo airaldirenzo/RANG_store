@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import ar.com.airaldirenzo.rang_store.databinding.ActivityMainBinding;
+import ar.com.tpfinal.rang_store.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
