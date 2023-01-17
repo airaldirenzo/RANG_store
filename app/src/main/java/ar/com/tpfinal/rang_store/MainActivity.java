@@ -8,21 +8,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import ar.com.tpfinal.rang_store.databinding.LogInBinding;
+import ar.com.tpfinal.rang_store.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private LogInBinding binding;
-    //private ActivityMainBinding binding;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = LogInBinding.inflate(getLayoutInflater());
-        //binding = ActivityMainBinding.inflate(getLayoutInflater());
-        //setSupportActionBar(binding.materialToolbar);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
     }
+    
 
     @Override
     public boolean onSupportNavigateUp() {
