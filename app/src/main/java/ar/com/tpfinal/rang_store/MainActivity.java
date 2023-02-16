@@ -1,5 +1,6 @@
 package ar.com.tpfinal.rang_store;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,39 +25,44 @@ public class MainActivity extends AppCompatActivity {
         binding =  ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Toggle para drawer
+        new ActionBarDrawerToggle(this, binding.drawerLayout, binding.materialToolbar, 0,0);
+
+
         NavigationView navigationView = this.findViewById(R.id.navigationView);
-        navigationView.getMenu().getItem(6).setOnMenuItemClickListener(menuItem -> {
-            switch (menuItem.getItemId()) {
+        for (int i=0; i<navigationView.getMenu().size();i++) {
+            navigationView.getMenu().getItem(i).setOnMenuItemClickListener(menuItem -> {
+                switch (menuItem.getItemId()) {
 
-                case R.id.drawerHome:
-                    //TODO
-                    break;
-                case R.id.drawerSearch:
-                    //TODO
-                    break;
-                case R.id.drawerNotifications:
-                    //TODO
-                    break;
-                case R.id.drawerPurchases:
-                    //TODO
-                    break;
-                case R.id.drawerFavourites:
-                    //TODO
-                    break;
-                case R.id.drawerMyAccount:
-                    //TODO
-                    break;
-                case R.id.drawerLogOut:
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(this,LoginActivity.class));
-                    //TODO CERRAR EL DRAWER
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + menuItem.getItemId());
-            }
-
-            return true;
-        });
+                    case R.id.drawerHome:
+                        //TODO
+                        break;
+                    case R.id.drawerSearch:
+                        //TODO
+                        break;
+                    case R.id.drawerNotifications:
+                        //TODO
+                        break;
+                    case R.id.drawerPurchases:
+                        //TODO
+                        break;
+                    case R.id.drawerFavourites:
+                        //TODO
+                        break;
+                    case R.id.drawerMyAccount:
+                        Toast.makeText(this, "My account", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.drawerLogOut:
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(this,LoginActivity.class));
+                        //TODO CERRAR EL DRAWER
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + menuItem.getItemId());
+                }
+                return true;
+            });
+        }
     }
 
     @Override
@@ -69,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
     }
+
 
     @Override
     public void onBackPressed() {

@@ -56,16 +56,16 @@ public class ProductChartFragment extends Fragment {
         }
 
         //TODO BORRAR o COMENTAR, es para testing
-        Product product1 = new Product("1","producto1","descripcion1",1.0,1, LocalDateTime.now(),LocalDateTime.now());
-        Product product2 = new Product("2","producto2","descripcion2",2.0,2, LocalDateTime.now(),LocalDateTime.now());
-        Product product3 = new Product("3","producto3","descripcion3",3.0,3, LocalDateTime.now(),LocalDateTime.now());
-        Product product4 = new Product("4","producto4","descripcion4",4.0,4, LocalDateTime.now(),LocalDateTime.now());
-        Product product5 = new Product("5","producto5","descripcion5",5.0,5, LocalDateTime.now(),LocalDateTime.now());
-        Product product6 = new Product("6","producto6","descripcion6",6.0,6, LocalDateTime.now(),LocalDateTime.now());
-        Product product7 = new Product("7","producto7","descripcion7",7.0,7, LocalDateTime.now(),LocalDateTime.now());
-        Product product8 = new Product("8","producto8","descripcion8",8.0,8, LocalDateTime.now(),LocalDateTime.now());
-        Product product9 = new Product("9","producto9","descripcion9",9.0,9, LocalDateTime.now(),LocalDateTime.now());
-        Product product10 = new Product("10","producto10","descripcion10",10.0,10, LocalDateTime.now(),LocalDateTime.now());
+        Product product1 = new Product(1,"producto1","descripcion1",1.0,1, LocalDateTime.now(),LocalDateTime.now());
+        Product product2 = new Product(2,"producto2","descripcion2",2.0,2, LocalDateTime.now(),LocalDateTime.now());
+        Product product3 = new Product(3,"producto3","descripcion3",3.0,3, LocalDateTime.now(),LocalDateTime.now());
+        Product product4 = new Product(4,"producto4","descripcion4",4.0,4, LocalDateTime.now(),LocalDateTime.now());
+        Product product5 = new Product(5,"producto5","descripcion5",5.0,5, LocalDateTime.now(),LocalDateTime.now());
+        Product product6 = new Product(6,"producto6","descripcion6",6.0,6, LocalDateTime.now(),LocalDateTime.now());
+        Product product7 = new Product(7,"producto7","descripcion7",7.0,7, LocalDateTime.now(),LocalDateTime.now());
+        Product product8 = new Product(8,"producto8","descripcion8",8.0,8, LocalDateTime.now(),LocalDateTime.now());
+        Product product9 = new Product(9,"producto9","descripcion9",9.0,9, LocalDateTime.now(),LocalDateTime.now());
+        Product product10 = new Product(10,"producto10","descripcion10",10.0,10, LocalDateTime.now(),LocalDateTime.now());
 
         products.add(product1);products.add(product2);products.add(product3);products.add(product4);products.add(product5);
         products.add(product6);products.add(product7);products.add(product8);products.add(product9);products.add(product10);
