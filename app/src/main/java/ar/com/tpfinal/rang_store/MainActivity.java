@@ -2,8 +2,6 @@ package ar.com.tpfinal.rang_store;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import android.content.Intent;
 import android.os.Bundle;

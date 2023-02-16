@@ -1,17 +1,12 @@
 package ar.com.tpfinal.rang_store;
 
-import static com.google.firebase.FirebaseError.ERROR_EMAIL_ALREADY_IN_USE;
-
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +18,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import ar.com.tpfinal.rang_store.databinding.RegisterBinding;
 import ar.com.tpfinal.rang_store.model.User;
 
 public class RegisterUser extends Fragment {
 
-    private NavController navHost;
     private RegisterBinding binding;
     private FirebaseAuth mAuth;
     private FirebaseFirestore mFirestore;
@@ -48,7 +38,6 @@ public class RegisterUser extends Fragment {
         super.onCreate(savedInstanceState);
         mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        navHost = NavHostFragment.findNavController(this);
     }
 
     @Override
@@ -61,8 +50,6 @@ public class RegisterUser extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        navHost = NavHostFragment.findNavController(this);
 
         binding.buttonRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,20 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/materialToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:menu="@menu/toolbar_menu"
-            app:navigationIcon="@drawable/baseline_menu_24"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-<!--        TODO COMO HACER EL CAROUSEL?-->
+<!--        TODO deberiamos usar un viewPager para hacer el carousel-->
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutProductInfo"
