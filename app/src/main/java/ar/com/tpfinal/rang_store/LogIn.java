@@ -56,7 +56,7 @@ public class LogIn extends Fragment {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            navHost.navigate(R.id.action_logIn_to_productChartFragment);
+            navHost.navigate(R.id.action_logIn_to_mainActivity);
         }
     }
 
@@ -127,7 +127,7 @@ public class LogIn extends Fragment {
 
                             progressBarOff();
 
-                            navHost.navigate(R.id.action_logIn_to_productChartFragment);
+                            navHost.navigate(R.id.action_logIn_to_mainActivity);
 
                             //TODO PONER BIENVENIDO NOMBRE DE USUARIO?
                             Toast.makeText(requireContext(), "Bienvenido", Toast.LENGTH_SHORT).show();

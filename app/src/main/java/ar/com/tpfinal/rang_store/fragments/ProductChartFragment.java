@@ -77,43 +77,6 @@ public class ProductChartFragment extends Fragment {
         recycler.setLayoutManager(new GridLayoutManager(this.getContext(), numberOfColumns));
         ProductAdapter productAdapter = new ProductAdapter(products);
         recycler.setAdapter(productAdapter);
-
-        NavigationView navigationView = (NavigationView) requireActivity().findViewById(R.id.navigationView);
-        navigationView.getMenu().getItem(6).setOnMenuItemClickListener(menuItem -> {
-            switch (menuItem.getItemId()) {
-
-                case R.id.drawerHome:
-                    //TODO
-                    break;
-                case R.id.drawerSearch:
-                    //TODO
-                    break;
-                case R.id.drawerNotifications:
-                    //TODO
-                    break;
-                case R.id.drawerPurchases:
-                    //TODO
-                    break;
-                case R.id.drawerFavourites:
-                    //TODO
-                    break;
-                case R.id.drawerMyAccount:
-                    //TODO
-                    break;
-                case R.id.drawerLogOut:
-                    FirebaseAuth.getInstance().signOut();
-                    navHost.navigate(R.id.action_global_logIn);
-                    //TODO CERRAR EL DRAWER
-                    break;
-
-
-                default:
-                    throw new IllegalStateException("Unexpected value: " + menuItem.getItemId());
-            }
-
-            return true;
-        });
-
     }
 
 }

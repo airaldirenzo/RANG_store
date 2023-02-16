@@ -51,15 +51,6 @@ public class RegisterUser extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            navHost.navigate(R.id.action_registerUser_to_productChartFragment);
-        }
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = RegisterBinding.inflate(inflater,container,false);
@@ -120,7 +111,7 @@ public class RegisterUser extends Fragment {
                             mFirestore.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    navHost.navigate(R.id.action_registerUser_to_productChartFragment);
+                                    navHost.navigate(R.id.action_registerUser_to_mainActivity);
                                     Toast.makeText(requireContext(),"Usuario creado con exito",Toast.LENGTH_LONG).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {

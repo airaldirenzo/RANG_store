@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/productChartFragment">
+    <fragment
+        android:id="@+id/productChartFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.ProductChartFragment"
+        android:label="product_chart"
+        tools:layout="@layout/product_chart" >
+        <action
+            android:id="@+id/action_productChartFragment_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productInfoFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.ProductInfoFragment"
+        android:label="product_info"
+        tools:layout="@layout/product_info" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="ar.com.tpfinal.rang_store.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <action android:id="@+id/action_global_logIn" app:destination="@id/loginActivity"/>
+</navigation>
