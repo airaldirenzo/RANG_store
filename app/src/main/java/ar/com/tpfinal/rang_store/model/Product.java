@@ -13,47 +13,34 @@ import java.util.UUID;
 
 public class Product implements Parcelable {
 
-    private String uid;
+    private Integer id;
     private String title;
     private String description;
     private Double price;
     private Integer stock;
+
+    private Category category;
+
     //TODO ArrayList de imagenes
-    private LocalDateTime creationAt;
-    private LocalDateTime updatedAt;
+
     //TODO private Categoria category;
 
-    public Product(final String uid, final String title, final String description, final Double price,
+    public Product(final Integer id, final String title, final String description, final Double price,
                       final Integer stock, final LocalDateTime creationAt, final LocalDateTime updatedAt) {
 
-        this.uid = uid;
+        this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
         this.stock = stock;
-        this.creationAt = creationAt;
-        this.updatedAt = updatedAt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return uid.equals(product.uid) && Objects.equals(title, product.title) && Objects.equals(description, product.description) && Objects.equals(price, product.price) && Objects.equals(stock, product.stock) && Objects.equals(creationAt, product.creationAt) && Objects.equals(updatedAt, product.updatedAt);
+    public Integer getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(uid, title, description, price, stock, creationAt, updatedAt);
-    }
-
-    public String getId() {
-        return uid;
-    }
-
-    public void setId(String id) {
-        this.uid = id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -88,69 +75,28 @@ public class Product implements Parcelable {
         this.stock = stock;
     }
 
-    public LocalDateTime getCreationAt() {
-        return creationAt;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCreationAt(LocalDateTime creationAt) {
-        this.creationAt = creationAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
-    public int describeContents() {
-        return 0;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id.equals(product.id) && Objects.equals(title, product.title) && Objects.equals(description, product.description) && Objects.equals(price, product.price) && Objects.equals(stock, product.stock) && Objects.equals(category, product.category);
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.uid);
-        dest.writeString(this.title);
-        dest.writeString(this.description);
-        dest.writeValue(this.price);
-        dest.writeValue(this.stock);
-        dest.writeSerializable(this.creationAt);
-        dest.writeSerializable(this.updatedAt);
+    public int hashCode() {
+        return Objects.hash(id, title, description, price, stock, category);
     }
 
-    public void readFromParcel(Parcel source) {
-        this.uid = source.readString();
-        this.title = source.readString();
-        this.description = source.readString();
-        this.price = (Double) source.readValue(Double.class.getClassLoader());
-        this.stock = (Integer) source.readValue(Integer.class.getClassLoader());
-        this.creationAt = (LocalDateTime) source.readSerializable();
-        this.updatedAt = (LocalDateTime) source.readSerializable();
-    }
 
-    protected Product(Parcel in) {
-        this.uid = in.readString();
-        this.title = in.readString();
-        this.description = in.readString();
-        this.price = (Double) in.readValue(Double.class.getClassLoader());
-        this.stock = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.creationAt = (LocalDateTime) in.readSerializable();
-        this.updatedAt = (LocalDateTime) in.readSerializable();
-    }
-
-    public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>() {
-        @Override
-        public Product createFromParcel(Parcel source) {
-            return new Product(source);
-        }
-
-        @Override
-        public Product[] newArray(int size) {
-            return new Product[size];
-        }
-    };
 
     public static final DiffUtil.ItemCallback<Product> DIFF_CALLBACK =
             new DiffUtil.ItemCallback<>() {
@@ -169,4 +115,49 @@ public class Product implements Parcelable {
                     return oldProduct.equals(newProduct);
                 }
             };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.description);
+        dest.writeValue(this.price);
+        dest.writeValue(this.stock);
+        dest.writeParcelable(this.category, flags);
+    }
+
+    public void readFromParcel(Parcel source) {
+        this.id = (Integer) source.readValue(Integer.class.getClassLoader());
+        this.title = source.readString();
+        this.description = source.readString();
+        this.price = (Double) source.readValue(Double.class.getClassLoader());
+        this.stock = (Integer) source.readValue(Integer.class.getClassLoader());
+        this.category = source.readParcelable(Category.class.getClassLoader());
+    }
+
+    protected Product(Parcel in) {
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.title = in.readString();
+        this.description = in.readString();
+        this.price = (Double) in.readValue(Double.class.getClassLoader());
+        this.stock = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.category = in.readParcelable(Category.class.getClassLoader());
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel source) {
+            return new Product(source);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 }
