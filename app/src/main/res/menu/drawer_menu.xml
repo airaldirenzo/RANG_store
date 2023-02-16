@@ -3,33 +3,37 @@
 
     <item
         android:id="@+id/drawerHome"
-        android:title="home"
+        android:title="Inicio"
         android:orderInCategory="1" />
 
     <item
         android:id="@+id/drawerSearch"
-        android:title="search"
+        android:title="Busqueda"
         android:orderInCategory="2"/>
 
     <item
         android:id="@+id/drawerNotifications"
-        android:title="notifications"
-        android:orderInCategory="2"/>
+        android:title="Notificaciones"
+        android:orderInCategory="3"/>
 
     <item
         android:id="@+id/drawerPurchases"
-        android:title="purchases"
-        android:orderInCategory="2"/>
+        android:title="Compras"
+        android:orderInCategory="4"/>
 
     <item
         android:id="@+id/drawerFavourites"
-        android:title="favourites"
-        android:orderInCategory="2"/>
+        android:title="Favoritos"
+        android:orderInCategory="5"/>
 
     <item
         android:id="@+id/drawerMyAccount"
-        android:title="myAccount"
-        android:orderInCategory="2"/>
+        android:title="Mi cuenta"
+        android:orderInCategory="6"/>
 
+    <item
+        android:id="@+id/drawerLogOut"
+        android:title="Cerrar sesion"
+        android:orderInCategory="7"/>
 
 </menu>

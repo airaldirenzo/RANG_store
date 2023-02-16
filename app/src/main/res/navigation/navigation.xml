@@ -3,22 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/logInFragment">
+    app:startDestination="@id/logIn">
     <fragment
         android:id="@+id/productChartFragment"
         android:name="ar.com.tpfinal.rang_store.fragments.ProductChartFragment"
         android:label="product_chart"
-        tools:layout="@layout/product_chart" />
-    <fragment
-        android:id="@+id/logInFragment"
-        android:name="ar.com.tpfinal.rang_store.fragments.LogInFragment"
-        android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" >
+        tools:layout="@layout/product_chart" >
         <action
-            android:id="@+id/action_logInFragment_to_productChartFragment"
-            app:destination="@id/productChartFragment" />
-        <action
-            android:id="@+id/action_logInFragment_to_productChartFragment2"
-            app:destination="@id/productChartFragment" />
+            android:id="@+id/action_productChartFragment_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/productInfoFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.ProductInfoFragment"
+        android:label="product_info"
+        tools:layout="@layout/product_info" />
+    <fragment
+        android:id="@+id/logIn"
+        android:name="ar.com.tpfinal.rang_store.LogIn"
+        android:label="log_in"
+        tools:layout="@layout/log_in" >
+        <action
+            android:id="@+id/action_logIn_to_productChartFragment"
+            app:destination="@id/productChartFragment" />
+        <action
+            android:id="@+id/action_logIn_to_registerUser"
+            app:destination="@id/registerUser" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerUser"
+        android:name="ar.com.tpfinal.rang_store.RegisterUser"
+        android:label="register"
+        tools:layout="@layout/register" >
+        <action
+            android:id="@+id/action_registerUser_to_productChartFragment"
+            app:destination="@id/productChartFragment" />
+    </fragment><action android:id="@+id/action_global_logIn" app:destination="@id/logIn"/>
 </navigation>

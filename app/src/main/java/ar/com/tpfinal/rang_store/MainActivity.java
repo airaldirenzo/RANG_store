@@ -2,11 +2,13 @@ package ar.com.tpfinal.rang_store;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import ar.com.tpfinal.rang_store.databinding.ActivityMainBinding;
 
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.toolbarFavourite:
                 //TODO abrir favoritos
+                Toast.makeText(this,"Favoritos",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.toolbarCart:
                 //TODO navegar hacia carrito
@@ -52,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
                 throw new IllegalStateException("Unexpected value: " + item.getItemId());
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
 

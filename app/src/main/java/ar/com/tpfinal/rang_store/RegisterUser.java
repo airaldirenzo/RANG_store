@@ -1,73 +1,235 @@
-package ar.com.tpfinal.rang_store.fragments;
+package ar.com.tpfinal.rang_store;
+
+import static com.google.firebase.FirebaseError.ERROR_EMAIL_ALREADY_IN_USE;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import ar.com.tpfinal.rang_store.R;
-import ar.com.tpfinal.rang_store.databinding.RegisterFragmentBinding;
+import ar.com.tpfinal.rang_store.databinding.RegisterBinding;
+import ar.com.tpfinal.rang_store.model.User;
 
-public class UserRegister extends Fragment {
+public class RegisterUser extends Fragment {
 
-    private RegisterFragmentBinding binding;
-    private ProgressBar progressBar;
+    private NavController navHost;
+    private RegisterBinding binding;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
 
-    public RegisterFragment() {
+    public RegisterUser() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = RegisterFragmentBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
+        navHost = NavHostFragment.findNavController(this);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.register_fragment, container, false);
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            navHost.navigate(R.id.action_registerUser_to_productChartFragment);
+        }
     }
 
-    private boolean register(){
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = RegisterBinding.inflate(inflater,container,false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        navHost = NavHostFragment.findNavController(this);
+
+        binding.buttonRegistrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = binding.editTextEmailAddress.getText().toString().trim();
+                String password = binding.editTextPassword.getText().toString().trim();
+                progressBarOn();
+                //TODO no estoy seguro si el createAccount habria que hacerlo en un Thread
+                //Si hay que hacerlo, entonces tener cuidado con los elementos de interfaz
+                //no manipular interfaz en hilo secundario
+                createAccount(email,password);
+                progressBarOff();
+            }
+        });
+
+    }
+
+
+    private void createAccount(String email,String password){
+
+        boolean flag = false;
+
+        flag = checkEmptyFields();
+        if(flag) return;
+        flag = checkPasswords(password,binding.editTextPasswordConfirm.getText().toString());
+        if(flag) return;
+//        flag = checkExistingEmail(email);
+//        if(flag) return;
+
+        mAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        String uid;
+                            try {
+                                uid = mAuth.getCurrentUser().getUid();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                                Toast.makeText(requireContext(),"El email se encuentra en uso",Toast.LENGTH_SHORT).show();
+                                return;
+                            };
+                            User user = new User(uid,
+                                    binding.editTextName.getText().toString(),
+                                    binding.editTextLastName.getText().toString(),
+                                    email);
+
+                            mFirestore.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    navHost.navigate(R.id.action_registerUser_to_productChartFragment);
+                                    Toast.makeText(requireContext(),"Usuario creado con exito",Toast.LENGTH_LONG).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(requireContext(),"No se pudo crear el usuario",Toast.LENGTH_SHORT).show();
+                                    }
+                            });
+                    }
+                });
+        }
+
+//    private boolean checkExistingEmail(String email) {
+//
+//        Runnable r = new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                mFirestore.collection("users")
+//                        .whereEqualTo("email",email)
+//                        .get()
+//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                if (task.isSuccessful()) {
+//                                    if(task.getResult().isEmpty()){
+//                                        Log.i(null, "No se encuentran coincidencias");
+//                                    }else{
+//                                        for (QueryDocumentSnapshot document : task.getResult()) {
+//                                            Log.i(null, document.getId() + " => " + document.getData());
+//                                        }
+//                                    }
+//                                } else {
+//                                    Log.i(null, "Error al obtener documentos: ", task.getException());
+//                                }
+//                            }
+//                        });
+//            }
+//
+//        };Thread thread = new Thread(r); thread.start();
+//
+//        return flag;
+//    }
+
+    private boolean checkPasswords(String pass1, String pass2){
+        boolean flag = false;
+
+        if(binding.editTextPassword.length() < 6){
+            binding.editTextPassword.setError("La contraseña debe tener al menos 6 caracteres");
+            binding.editTextPassword.requestFocus();
+
+            flag = true;
+        }
+        if(flag) return flag;
+
+        flag = !(pass1.equals(pass2));
+
+        if(flag){
+            binding.editTextPassword.setError("Las contraseñas no coinciden");
+            binding.editTextPassword.requestFocus();
+        }
+
+        return flag;
+    }
+
+    private boolean checkEmptyFields(){
+
+        boolean flag = false;
+
+        if(binding.editTextName.getText().toString().isEmpty()){
+            binding.editTextName.setError("Nombre obligatorio");
+            binding.editTextName.requestFocus();
+
+            flag = true;
+        }
+
+        if(binding.editTextLastName.getText().toString().isEmpty()){
+            binding.editTextLastName.setError("Apellido obligatorio");
+            binding.editTextLastName.requestFocus();
+
+            flag = true;
+        }
 
         if(binding.editTextEmailAddress.getText().toString().isEmpty()){
             binding.editTextEmailAddress.setError("Email obligatorio");
             binding.editTextEmailAddress.requestFocus();
-            return false;
+
+            flag = true;
         }
-        else if(binding.editTextPassword.getText().toString().isEmpty()) {
+        if(binding.editTextPassword.getText().toString().isEmpty()) {
             binding.editTextPassword.setError("Contraseña obligatoria");
             binding.editTextPassword.requestFocus();
-            return false;
-        }
-        else if(binding.editTextPassword.length() < 5){
-            binding.editTextPassword.setError("La contraseña debe tener al menos 6 caracteres");
-            binding.editTextPassword.requestFocus();
-            return false;
+
+            flag = true;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
-        mAuth
-        //verificar mail disponible
-        //verificar que no se repita dni
-        //email not found
-        //else if la contraseña es incorrecta
-
-        return true;
-
+        return flag;
     }
 
+    private void progressBarOn(){
+        binding.buttonRegistrarse.setVisibility(View.GONE);
+        binding.buttonRegistrarseGoogle.setVisibility(View.GONE);
+        binding.progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void progressBarOff(){
+        binding.progressBar.setVisibility(View.GONE);
+        binding.buttonRegistrarse.setVisibility(View.VISIBLE);
+        binding.buttonRegistrarseGoogle.setVisibility(View.VISIBLE);
+    }
 
 }

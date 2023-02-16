@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:minWidth="175dp"
-    android:minHeight="175dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+    android:minWidth="100dp"
+    android:minHeight="100dp"
+    android:padding="15dp"
+    android:id="@+id/productRV">
 
         <ImageView
             android:id="@+id/productImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="150dp"
-            android:minWidth="150dp"
+            android:minHeight="125dp"
+            android:minWidth="125dp"
             android:src="@mipmap/ic_launcher"
             android:layout_gravity="center">
         </ImageView>
@@ -26,16 +22,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
-            android:textSize="16dp"
-            android:text="Product aaaaaaaaaaab bbbbccccc">
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:text="Product">
         </TextView>
         <TextView
-            android:id="@+id/productPrize"
-            android:layout_width="match_parent"
+            android:id="@+id/productPrice"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:textSize="24dp"
-            android:text="$2090">
+            android:layout_marginTop="5dp"
+            android:layout_gravity="end"
+            android:textSize="24sp"
+            android:text="$00000000">
         </TextView>
-    </LinearLayout>
-</FrameLayout>
+</GridLayout>
