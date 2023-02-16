@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "780589455676",
+    "project_id": "tpfinal-rang-store",
+    "storage_bucket": "tpfinal-rang-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780589455676:android:ddc8da20a84d0f38db6639",
+        "android_client_info": {
+          "package_name": "ar.com.tpfinal.rang_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780589455676-ftld617aukulfif4takk71p2oo38qktk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ar.com.tpfinal.rang_store",
+            "certificate_hash": "d5b88195d3b90c76bdccade2a892224a0f00004d"
+          }
+        },
+        {
+          "client_id": "780589455676-0uhh910vp40siu2if8174b3gcrd427hp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEBgHfsJRsmZTS5Z7uNOEGIFojFG-efko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780589455676-0uhh910vp40siu2if8174b3gcrd427hp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

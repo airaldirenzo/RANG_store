@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollViewProductInfo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ProductInfoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutProductInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:menu="@menu/toolbar_menu"
+            app:navigationIcon="@drawable/baseline_menu_24"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+<!--        TODO COMO HACER EL CAROUSEL?-->
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutProductInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/descriptionProductInfo">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewProductInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/titleProductInfo"
+                android:padding="30dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/titleProductInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minEms="8"
+                android:text="Title"
+                android:layout_marginStart="30dp"
+                android:textSize="32sp">
+
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/favouriteButtonProductInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_favorite_24"
+                android:layout_gravity="end"
+                android:layout_marginEnd="30dp"
+                android:padding="15dp">
+
+            </ImageButton>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/descriptionProductInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutProductInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/priceProductInfo"
+            android:text="Description"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="60dp"
+            android:textSize="16sp">
+
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Cantidad"
+            android:gravity="center"
+            android:maxLength="2"
+            android:layout_marginEnd="150dp"
+            android:layout_marginStart="150dp"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/descriptionProductInfo"
+            app:layout_constraintBottom_toTopOf="@id/priceProductInfo">
+
+        </EditText>
+
+
+        <TextView
+            android:id="@+id/priceProductInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/descriptionProductInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/buttonAddToCartProductInfo"
+            android:gravity="end"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="100dp"
+            android:text="Price"
+            android:layout_marginEnd="30dp"
+            android:textSize="40sp">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/buttonAddToCartProductInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/priceProductInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutProductInfo"
+            android:text="Agregar al carrito"
+            android:maxWidth="170dp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/buttonBuyProductInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/buttonAddToCartProductInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayoutProductInfo"
+            android:text="Comprar ahora"
+            android:minWidth="170dp">
+
+        </Button>
+
+        ></androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>
