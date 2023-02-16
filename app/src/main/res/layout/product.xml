@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:minWidth="100dp"
+    android:minHeight="100dp"
+    android:padding="15dp"
+    android:id="@+id/productRV">
+
+        <ImageView
+            android:id="@+id/productImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="125dp"
+            android:minWidth="125dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center">
+        </ImageView>
+        <TextView
+            android:id="@+id/productTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:text="Product">
+        </TextView>
+        <TextView
+            android:id="@+id/productPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="end"
+            android:textSize="24sp"
+            android:text="$00000000">
+        </TextView>
+</GridLayout>
