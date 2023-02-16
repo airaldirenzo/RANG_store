@@ -1,4 +1,4 @@
-package ar.com.tpfinal.rang_store;
+package ar.com.tpfinal.rang_store.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,24 +20,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
+import ar.com.tpfinal.rang_store.MainActivity;
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.databinding.LogInBinding;
-import ar.com.tpfinal.rang_store.databinding.RegisterBinding;
 
 public class LogIn extends Fragment {
 
     private LogInBinding binding;
     private FirebaseAuth mAuth;
     private NavController navHost;
-
-    //TODO EL DRAWER SE MUESTRA EN LA PANTALLA DE LOGIN
-    //PORQUE el fragmento logIn pertenece a la MainActivity
-    //y la mainActivity tiene en su xml el drawer.
-    //LA TOOLBAR LA MOVI AL FRAGMENTO PRODUCTCHART PERO DEBERIA ESTAR EN UNA
-    //ACTIVIDAD QUE ENGLOBE A TODOS LOS FRAGMENTOS DONDE QUIERAS QUE SE VEA LA
-    //TOOLBAR, LO MISMO PARA EL DRAWER
 
     public LogIn() {
         // Required empty public constructor
@@ -56,7 +47,7 @@ public class LogIn extends Fragment {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            navHost.navigate(R.id.action_logIn_to_mainActivity);
+            startActivity(new Intent(requireActivity(), MainActivity.class));
         }
     }
 
@@ -127,7 +118,7 @@ public class LogIn extends Fragment {
 
                             progressBarOff();
 
-                            navHost.navigate(R.id.action_logIn_to_mainActivity);
+                            startActivity(new Intent(requireActivity(), MainActivity.class));
 
                             //TODO PONER BIENVENIDO NOMBRE DE USUARIO?
                             Toast.makeText(requireContext(), "Bienvenido", Toast.LENGTH_SHORT).show();

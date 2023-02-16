@@ -2,6 +2,7 @@ package ar.com.tpfinal.rang_store;
 
 import static com.google.firebase.FirebaseError.ERROR_EMAIL_ALREADY_IN_USE;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -111,7 +112,7 @@ public class RegisterUser extends Fragment {
                             mFirestore.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    navHost.navigate(R.id.action_registerUser_to_mainActivity);
+                                    startActivity(new Intent(requireActivity(), MainActivity.class));
                                     Toast.makeText(requireContext(),"Usuario creado con exito",Toast.LENGTH_LONG).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {

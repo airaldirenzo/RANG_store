@@ -23,6 +23,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 
     @Override
     public boolean onSupportNavigateUp() {

@@ -18,10 +18,4 @@
         android:name="ar.com.tpfinal.rang_store.fragments.ProductInfoFragment"
         android:label="product_info"
         tools:layout="@layout/product_info" />
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="ar.com.tpfinal.rang_store.LoginActivity"
-        android:label="activity_login"
-        tools:layout="@layout/activity_login" />
-    <action android:id="@+id/action_global_logIn" app:destination="@id/loginActivity"/>
 </navigation>
