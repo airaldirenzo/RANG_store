@@ -1,5 +1,7 @@
 package ar.com.tpfinal.rang_store;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -24,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding =  ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Toggle para drawer
+        new ActionBarDrawerToggle(this, binding.drawerLayout, binding.materialToolbar, 0,0);
+
 
         NavigationView navigationView = this.findViewById(R.id.navigationView);
         for (int i=0; i<navigationView.getMenu().size();i++) {
@@ -72,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
     }
+
 
     @Override
     public void onBackPressed() {
