@@ -1,28 +1,41 @@
 package ar.com.tpfinal.rang_store;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
+import ar.com.tpfinal.rang_store.data.OnResult;
+import ar.com.tpfinal.rang_store.data.datasource.retrofit.AppRetrofit;
+import ar.com.tpfinal.rang_store.data.factory.ProductRepositoryFactory;
+import ar.com.tpfinal.rang_store.data.repository.ProductRepository;
 import ar.com.tpfinal.rang_store.databinding.ActivityMainBinding;
+import ar.com.tpfinal.rang_store.model.Product;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    long tInicio = System.currentTimeMillis();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding =  ActivityMainBinding.inflate(getLayoutInflater());
+        setSupportActionBar(binding.materialToolbar);
         setContentView(binding.getRoot());
 
         // Toggle para drawer
@@ -75,6 +88,41 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        OnResult<List<Product>> callback = new OnResult<List<Product>>() {
+            @Override
+            public void onSuccess(List<Product> result) {
+                long tFinal = System.currentTimeMillis();
+                long tDiferencia = tFinal - tInicio;
+                Log.i("TIEMPO DE ESPERA", ""+ tDiferencia);
+
+                int i = 1;
+                for (Product product : result) {
+                    Log.i("PRODUCTO "+ i, product.toString());
+                    i++;
+                }
+            }
+            @Override
+            public void onError(Throwable exception) {
+                exception.printStackTrace();
+            }
+        };
+
+        ProductRepository pr = ProductRepositoryFactory.create();
+
+        switch (item.getItemId()) {
+            case R.id.toolbarCart:
+
+
+                AppRetrofit.EXECUTOR_API.execute(()-> {
+                    Log.i("INICIO CONSULTA", "");
+                    pr.listProducts(callback);
+                });
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
