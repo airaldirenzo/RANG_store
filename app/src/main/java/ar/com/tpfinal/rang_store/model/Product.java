@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.AsyncDifferConfig;
 import androidx.recyclerview.widget.DiffUtil;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,19 +18,18 @@ public class Product implements Parcelable {
     private String title;
     private String description;
     private Double price;
-    private Integer stock;
-
+    private List<String> images;
     private Category category;
     //TODO ArrayList de imagenes
 
-    public Product(final Integer id, final String title, final String description, final Double price,
-                      final Integer stock) {
 
+    public Product(Integer id, String title, String description, Double price, List<String> images, Category category) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.stock = stock;
+        this.images = images;
+        this.category = category;
     }
 
     public Integer getId() {
@@ -64,12 +64,12 @@ public class Product implements Parcelable {
         this.price = price;
     }
 
-    public Integer getStock() {
-        return stock;
+    public List<String> getImages() {
+        return images;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public Category getCategory() {
@@ -81,37 +81,17 @@ public class Product implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return id.equals(product.id) && Objects.equals(title, product.title) && Objects.equals(description, product.description) && Objects.equals(price, product.price) && Objects.equals(stock, product.stock) && Objects.equals(category, product.category);
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", images=" + images +
+                ", category=" + category +
+                '}';
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, price, stock, category);
-    }
-
-
-
-    public static final DiffUtil.ItemCallback<Product> DIFF_CALLBACK =
-            new DiffUtil.ItemCallback<>() {
-                @Override
-                public boolean areItemsTheSame(
-                        @NonNull Product oldProduct, @NonNull Product newProduct) {
-                    // Product properties may have changed if reloaded from the DB, but ID is fixed
-                    return oldProduct.getId() == newProduct.getId();
-                }
-
-                @Override
-                public boolean areContentsTheSame(
-                        // NOTE: if you use equals, your object must properly override Object#equals()
-                        @NonNull Product oldProduct, @NonNull Product newProduct) {
-                    // Incorrectly returning false here will result in too many animations.
-                    return oldProduct.equals(newProduct);
-                }
-            };
 
     @Override
     public int describeContents() {
@@ -124,7 +104,7 @@ public class Product implements Parcelable {
         dest.writeString(this.title);
         dest.writeString(this.description);
         dest.writeValue(this.price);
-        dest.writeValue(this.stock);
+        dest.writeStringList(this.images);
         dest.writeParcelable(this.category, flags);
     }
 
@@ -133,7 +113,7 @@ public class Product implements Parcelable {
         this.title = source.readString();
         this.description = source.readString();
         this.price = (Double) source.readValue(Double.class.getClassLoader());
-        this.stock = (Integer) source.readValue(Integer.class.getClassLoader());
+        this.images = source.createStringArrayList();
         this.category = source.readParcelable(Category.class.getClassLoader());
     }
 
@@ -142,7 +122,7 @@ public class Product implements Parcelable {
         this.title = in.readString();
         this.description = in.readString();
         this.price = (Double) in.readValue(Double.class.getClassLoader());
-        this.stock = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.images = in.createStringArrayList();
         this.category = in.readParcelable(Category.class.getClassLoader());
     }
 
@@ -158,3 +138,4 @@ public class Product implements Parcelable {
         }
     };
 }
+

@@ -9,6 +9,34 @@ public class Category implements Parcelable {
 
     private String name;
 
+    public Category(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 
     @Override
     public int describeContents() {
@@ -26,8 +54,6 @@ public class Category implements Parcelable {
         this.name = source.readString();
     }
 
-    public Category() {
-    }
 
     protected Category(Parcel in) {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
