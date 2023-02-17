@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    long tInicio = System.currentTimeMillis();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,9 +92,6 @@ public class MainActivity extends AppCompatActivity {
         OnResult<List<Product>> callback = new OnResult<List<Product>>() {
             @Override
             public void onSuccess(List<Product> result) {
-                long tFinal = System.currentTimeMillis();
-                long tDiferencia = tFinal - tInicio;
-                Log.i("TIEMPO DE ESPERA", ""+ tDiferencia);
 
                 int i = 1;
                 for (Product product : result) {

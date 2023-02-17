@@ -1,4 +1,4 @@
-package ar.com.tpfinal.rang_store;
+package ar.com.tpfinal.rang_store.fragments;
 
 import android.os.Bundle;
 

@@ -58,9 +58,6 @@ public class RegisterUser extends Fragment {
                 String email = binding.editTextEmailAddress.getText().toString().trim();
                 String password = binding.editTextPassword.getText().toString().trim();
                 progressBarOn();
-                //TODO no estoy seguro si el createAccount habria que hacerlo en un Thread
-                //Si hay que hacerlo, entonces tener cuidado con los elementos de interfaz
-                //no manipular interfaz en hilo secundario
                 createAccount(email,password);
                 progressBarOff();
             }
@@ -112,38 +109,6 @@ public class RegisterUser extends Fragment {
                     }
                 });
         }
-
-//    private boolean checkExistingEmail(String email) {
-//
-//        Runnable r = new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                mFirestore.collection("users")
-//                        .whereEqualTo("email",email)
-//                        .get()
-//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                if (task.isSuccessful()) {
-//                                    if(task.getResult().isEmpty()){
-//                                        Log.i(null, "No se encuentran coincidencias");
-//                                    }else{
-//                                        for (QueryDocumentSnapshot document : task.getResult()) {
-//                                            Log.i(null, document.getId() + " => " + document.getData());
-//                                        }
-//                                    }
-//                                } else {
-//                                    Log.i(null, "Error al obtener documentos: ", task.getException());
-//                                }
-//                            }
-//                        });
-//            }
-//
-//        };Thread thread = new Thread(r); thread.start();
-//
-//        return flag;
-//    }
 
     private boolean checkPasswords(String pass1, String pass2){
         boolean flag = false;

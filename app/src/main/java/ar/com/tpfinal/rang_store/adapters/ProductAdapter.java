@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import ar.com.tpfinal.rang_store.R;
@@ -22,9 +23,9 @@ import ar.com.tpfinal.rang_store.model.Product;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    private final ArrayList<Product> dataList;
+    private final List<Product> dataList;
 
-    public ProductAdapter(ArrayList<Product> dataList) {
+    public ProductAdapter(List<Product> dataList) {
         this.dataList = dataList;
     }
 

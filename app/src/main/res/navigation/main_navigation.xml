@@ -23,7 +23,7 @@
         tools:layout="@layout/product_info" />
     <fragment
         android:id="@+id/productCreator"
-        android:name="ar.com.tpfinal.rang_store.ProductCreator"
+        android:name="ar.com.tpfinal.rang_store.fragments.ProductCreator"
         android:label="fragment_product_creator"
         tools:layout="@layout/fragment_product_creator" />
 </navigation>
