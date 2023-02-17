@@ -1,4 +1,4 @@
-package ar.com.tpfinal.rang_store;
+package ar.com.tpfinal.rang_store.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import ar.com.tpfinal.rang_store.MainActivity;
 import ar.com.tpfinal.rang_store.databinding.RegisterBinding;
 import ar.com.tpfinal.rang_store.model.User;
 

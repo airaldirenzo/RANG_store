@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-<!--        TODO deberiamos usar un viewPager para hacer el carousel-->
+<!--        TODO deberiamos usar un viewPager para hacer el carousel -->
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutProductInfo"
@@ -21,8 +21,7 @@
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/descriptionProductInfo">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewProductInfo"
@@ -70,26 +69,29 @@
             app:layout_constraintTop_toBottomOf="@id/linearLayoutProductInfo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/priceProductInfo"
+            app:layout_constraintBottom_toTopOf="@id/quantityEditText"
             android:text="Description"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginEnd="30dp"
             android:textSize="16sp">
 
         </TextView>
 
         <EditText
+            android:id="@+id/quantityEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:hint="Cantidad"
             android:gravity="center"
             android:maxLength="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/descriptionProductInfo"
+            app:layout_constraintBottom_toTopOf="@id/priceProductInfo"
             android:layout_marginEnd="150dp"
             android:layout_marginStart="150dp"
             android:inputType="number"
-            app:layout_constraintTop_toBottomOf="@id/descriptionProductInfo"
-            app:layout_constraintBottom_toTopOf="@id/priceProductInfo">
+            >
 
         </EditText>
 
@@ -138,7 +140,5 @@
         </Button>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </ScrollView>

@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerUser"
-        android:name="ar.com.tpfinal.rang_store.RegisterUser"
+        android:name="ar.com.tpfinal.rang_store.fragments.RegisterUser"
         android:label="register"
         tools:layout="@layout/register" />
 </navigation>

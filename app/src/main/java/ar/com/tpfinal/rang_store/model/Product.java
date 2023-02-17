@@ -20,13 +20,10 @@ public class Product implements Parcelable {
     private Integer stock;
 
     private Category category;
-
     //TODO ArrayList de imagenes
 
-    //TODO private Categoria category;
-
     public Product(final Integer id, final String title, final String description, final Double price,
-                      final Integer stock, final LocalDateTime creationAt, final LocalDateTime updatedAt) {
+                      final Integer stock) {
 
         this.id = id;
         this.title = title;

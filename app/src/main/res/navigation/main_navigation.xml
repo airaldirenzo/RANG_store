@@ -12,10 +12,18 @@
         <action
             android:id="@+id/action_productChartFragment_to_productInfoFragment"
             app:destination="@id/productInfoFragment" />
+        <action
+            android:id="@+id/action_productChartFragment_to_productCreator"
+            app:destination="@id/productCreator" />
     </fragment>
     <fragment
         android:id="@+id/productInfoFragment"
         android:name="ar.com.tpfinal.rang_store.fragments.ProductInfoFragment"
         android:label="product_info"
         tools:layout="@layout/product_info" />
+    <fragment
+        android:id="@+id/productCreator"
+        android:name="ar.com.tpfinal.rang_store.ProductCreator"
+        android:label="fragment_product_creator"
+        tools:layout="@layout/fragment_product_creator" />
 </navigation>
