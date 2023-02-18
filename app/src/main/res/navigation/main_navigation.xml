@@ -20,10 +20,19 @@
         android:id="@+id/productInfoFragment"
         android:name="ar.com.tpfinal.rang_store.fragments.ProductInfoFragment"
         android:label="product_info"
-        tools:layout="@layout/product_info" />
+        tools:layout="@layout/product_info" >
+        <action
+            android:id="@+id/action_productInfoFragment_to_purchaseDataFragment"
+            app:destination="@id/purchaseDataFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productCreator"
         android:name="ar.com.tpfinal.rang_store.fragments.ProductCreator"
         android:label="fragment_product_creator"
         tools:layout="@layout/fragment_product_creator" />
+    <fragment
+        android:id="@+id/purchaseDataFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.PurchaseDataFragment"
+        android:label="fragment_purchase_data"
+        tools:layout="@layout/fragment_purchase_data" />
 </navigation>

@@ -59,5 +59,7 @@ public class ProductInfoFragment extends Fragment {
         ImageSliderAdapter adapter = new ImageSliderAdapter(images);
         recyclerView.setAdapter(adapter);
 
+        binding.buttonBuyProductInfo.setOnClickListener(view1 -> { navHost.navigate(R.id.action_productInfoFragment_to_purchaseDataFragment); });
+
     }
 }

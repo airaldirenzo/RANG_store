@@ -1,8 +1,11 @@
 package ar.com.tpfinal.rang_store.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -76,10 +82,40 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
 
         public void dataSetPA(Product product) {
-            // TODO productImage.setImage
-
+            setImage(product.getImages().get(0));
             productTitle.setText(product.getTitle());
             productPrice.setText("$" + product.getPrice());
+
+        }
+
+        private void setImage(String url) {
+            Handler handler = new Handler();
+
+
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    Bitmap bitmap = null;
+                    InputStream inputStream = null;
+                    try {
+                        inputStream = new URL(url).openStream();
+                        bitmap = BitmapFactory.decodeStream(inputStream);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    Bitmap finalBitmap = bitmap;
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            productImage.setImageBitmap(finalBitmap);
+                        }
+                    });
+                }
+            };
+            Thread thread = new Thread(runnable);
+            thread.start();
+
 
         }
     }
