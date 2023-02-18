@@ -42,7 +42,6 @@ public class PurchaseDataFragment extends Fragment {
         binding.radioButtonDebit.setOnClickListener(view1 -> showFields());
         binding.radioButtonTransfer.setOnClickListener(view1 -> showFields());
 
-
     }
 
     private void showFields(){

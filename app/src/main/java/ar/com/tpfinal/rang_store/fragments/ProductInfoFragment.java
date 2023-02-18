@@ -9,6 +9,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +47,18 @@ public class ProductInfoFragment extends Fragment {
         navHost = NavHostFragment.findNavController(this);
 
         //TODO buscar de la api las imagenes para ponerlas en el carousel
-        //HARDCODED para probar
+
+        if (getArguments() != null) {
+//            RecyclerView recyclerView = binding.recyclerViewProductInfo;
+//            ArrayList<Parcelable> parcelables = new ArrayList<>();
+//            parcelables = getArguments().getParcelableArrayList("product_selected");
+//            parcelables.get(0);
+//            Log.i("PARCELABLES[0]: ", ""+parcelables.get(0));
+//            ImageSliderAdapter adapter = new ImageSliderAdapter(images);
+//            recyclerView.setAdapter(adapter);
+        }
+
+
         RecyclerView recyclerView = binding.recyclerViewProductInfo;
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.drawable.baseline_favorite_24);

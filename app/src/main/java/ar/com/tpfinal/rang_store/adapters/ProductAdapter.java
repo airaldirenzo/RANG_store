@@ -48,7 +48,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Product product = dataList.get(position);
-        //TODO probablemente haya que agregarle más datos
         holder.dataSetPA(product);
 
         holder.itemView.setOnClickListener(view -> {

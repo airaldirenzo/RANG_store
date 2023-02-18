@@ -58,6 +58,7 @@ public class ProductChartFragment extends Fragment {
         //Si somos admin mostramos el boton flotante
         enableProductCreator();
         progressBarOn();
+        //Cargamos los productos desde la api
         loadProducts();
 
         return binding.getRoot();
@@ -78,7 +79,6 @@ public class ProductChartFragment extends Fragment {
         if (getArguments() != null) {
             //TODO? products = getArguments().getParcelableArrayList("products_found");
         }
-
 
     }
 

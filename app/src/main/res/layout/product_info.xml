@@ -33,9 +33,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/titleProductInfo"
-                android:padding="30dp">
-
-            </androidx.recyclerview.widget.RecyclerView>
+                android:padding="30dp"/>
 
             <TextView
                 android:id="@+id/titleProductInfo"
@@ -44,9 +42,7 @@
                 android:minEms="8"
                 android:text="Title"
                 android:layout_marginStart="30dp"
-                android:textSize="32sp">
-
-            </TextView>
+                android:textSize="32sp"/>
 
             <ImageButton
                 android:id="@+id/favouriteButtonProductInfo"
@@ -55,10 +51,7 @@
                 android:src="@drawable/baseline_favorite_24"
                 android:layout_gravity="end"
                 android:layout_marginEnd="30dp"
-                android:padding="15dp">
-
-            </ImageButton>
-
+                android:padding="15dp"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -69,13 +62,10 @@
             app:layout_constraintTop_toBottomOf="@id/linearLayoutProductInfo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/quantityEditText"
             android:text="Description"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:textSize="16sp">
-
-        </TextView>
+            android:textSize="16sp"/>
 
         <EditText
             android:id="@+id/quantityEditText"
@@ -86,15 +76,12 @@
             android:maxLength="2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/descriptionProductInfo"
             app:layout_constraintBottom_toTopOf="@id/priceProductInfo"
             android:layout_marginEnd="150dp"
             android:layout_marginStart="150dp"
+            android:layout_marginBottom="30dp"
             android:inputType="number"
-            >
-
-        </EditText>
-
+            android:text="1"/>
 
         <TextView
             android:id="@+id/priceProductInfo"
@@ -109,33 +96,29 @@
             android:layout_marginTop="100dp"
             android:text="Price"
             android:layout_marginEnd="30dp"
-            android:textSize="40sp">
-
-        </TextView>
+            android:textSize="40sp"/>
 
         <Button
             android:id="@+id/buttonAddToCartProductInfo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/priceProductInfo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/constraintLayoutProductInfo"
             android:text="Agregar al carrito"
-            android:maxWidth="170dp">
-
-        </Button>
+            android:layout_marginHorizontal="100dp"/>
 
         <Button
             android:id="@+id/buttonBuyProductInfo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/buttonAddToCartProductInfo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/constraintLayoutProductInfo"
             android:text="Comprar ahora"
-            android:minWidth="170dp">
+            android:layout_marginHorizontal="100dp">
 
         </Button>
 
