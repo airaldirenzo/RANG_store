@@ -87,11 +87,13 @@ public class ProductCreator extends Fragment {
                 OnResult<Product> callback = new OnResult<Product>() {
                     @Override
                     public void onSuccess(Product result) {
-                        requireActivity().runOnUiThread(() ->Toast.makeText(requireContext(), "Producto creado con exito", Toast.LENGTH_LONG).show());
-                        Bundle args = new Bundle();
-                        //TODO cambiar KEY
-//                        args.putParcelable("product_selected", result);
-//                        navHost.navigate(R.id.action_productCreator_to_productInfoFragment, args);
+                        requireActivity().runOnUiThread(() ->{
+                            Toast.makeText(requireContext(), "Producto creado con exito", Toast.LENGTH_LONG).show();
+                            Bundle args = new Bundle();
+                            //TODO cambiar KEY
+                            args.putParcelable("product", result);
+                            navHost.navigate(R.id.action_productCreator_to_productInfoFragment, args);
+                        });
                     }
 
                     @Override

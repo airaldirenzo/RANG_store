@@ -50,7 +50,7 @@ public class ProductInfoFragment extends Fragment {
 
         if (getArguments() != null) {
             RecyclerView recyclerView = binding.recyclerViewProductInfo;
-            Product product = getArguments().getParcelable("product_selected");
+            Product product = getArguments().getParcelable("product");
             binding.titleProductInfo.setText(product.getTitle());
             binding.descriptionProductInfo.setText(product.getDescription());
             binding.priceProductInfo.setText("$"+String.valueOf(product.getPrice()));

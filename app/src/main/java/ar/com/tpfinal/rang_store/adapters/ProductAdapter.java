@@ -53,7 +53,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.itemView.setOnClickListener(view -> {
             Bundle args = new Bundle();
             Product selected = dataList.get(holder.getLayoutPosition());
-            args.putParcelable("product_selected", selected);
+            args.putParcelable("product", selected);
             Navigation.findNavController(view).navigate(R.id.action_productChartFragment_to_productInfoFragment, args);
         });
 
