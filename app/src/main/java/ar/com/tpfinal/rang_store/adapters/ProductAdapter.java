@@ -90,7 +90,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         private void setImage(String url) {
             Handler handler = new Handler();
 
-
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {

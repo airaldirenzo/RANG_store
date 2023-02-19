@@ -20,8 +20,6 @@ public class Product implements Parcelable {
     private Double price;
     private List<String> images;
     private Category category;
-    //TODO ArrayList de imagenes
-
 
     public Product(Integer id, String title, String description, Double price, List<String> images, Category category) {
         this.id = id;

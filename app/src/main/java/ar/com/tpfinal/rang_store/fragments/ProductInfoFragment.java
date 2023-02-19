@@ -16,10 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.adapters.ImageSliderAdapter;
 import ar.com.tpfinal.rang_store.databinding.ProductInfoBinding;
+import ar.com.tpfinal.rang_store.model.Product;
 
 public class ProductInfoFragment extends Fragment {
 
@@ -46,31 +48,17 @@ public class ProductInfoFragment extends Fragment {
 
         navHost = NavHostFragment.findNavController(this);
 
-        //TODO buscar de la api las imagenes para ponerlas en el carousel
-
         if (getArguments() != null) {
-//            RecyclerView recyclerView = binding.recyclerViewProductInfo;
-//            ArrayList<Parcelable> parcelables = new ArrayList<>();
-//            parcelables = getArguments().getParcelableArrayList("product_selected");
-//            parcelables.get(0);
-//            Log.i("PARCELABLES[0]: ", ""+parcelables.get(0));
-//            ImageSliderAdapter adapter = new ImageSliderAdapter(images);
-//            recyclerView.setAdapter(adapter);
+            RecyclerView recyclerView = binding.recyclerViewProductInfo;
+            Product product = getArguments().getParcelable("product_selected");
+            binding.titleProductInfo.setText(product.getTitle());
+            binding.descriptionProductInfo.setText(product.getDescription());
+            binding.priceProductInfo.setText("$"+String.valueOf(product.getPrice()));
+            List<String> urls = product.getImages();
+            Log.i(null, urls.toString());
+            ImageSliderAdapter adapter = new ImageSliderAdapter(urls);
+            recyclerView.setAdapter(adapter);
         }
-
-
-        RecyclerView recyclerView = binding.recyclerViewProductInfo;
-        ArrayList<Integer> images = new ArrayList<>();
-        images.add(R.drawable.baseline_favorite_24);
-        images.add(R.drawable.baseline_menu_24);
-        images.add(R.drawable.baseline_delete_24);
-        images.add(R.drawable.baseline_home_24);
-        images.add(R.drawable.baseline_search_24);
-        images.add(R.drawable.baseline_settings_24);
-        images.add(R.drawable.ic_launcher_background);
-
-        ImageSliderAdapter adapter = new ImageSliderAdapter(images);
-        recyclerView.setAdapter(adapter);
 
         binding.buttonBuyProductInfo.setOnClickListener(view1 -> { navHost.navigate(R.id.action_productInfoFragment_to_purchaseDataFragment); });
 
