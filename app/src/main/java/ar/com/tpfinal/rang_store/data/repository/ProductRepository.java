@@ -25,7 +25,12 @@ public class ProductRepository  implements ProductDataSource {
     }
 
     @Override
-    public void getProduct(Product product, OnResult<Product> callback) {
-        ds.getProduct(product, callback);
+    public void updateProduct(Product product, OnResult<Product> callback) {
+        ds.updateProduct(product, callback);
+    }
+
+    @Override
+    public void deleteProduct(Product product, OnResult<Boolean> callback) {
+        ds.deleteProduct(product, callback);
     }
 }

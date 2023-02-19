@@ -7,8 +7,11 @@ import ar.com.tpfinal.rang_store.data.datasource.retrofit.objects.NewProduct;
 import ar.com.tpfinal.rang_store.model.Product;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ProductApiRest {
@@ -17,4 +20,10 @@ public interface ProductApiRest {
 
     @POST("products")
     Call<Product> createProduct(@Body NewProduct p);
+
+    @PUT("products/{productId}")
+    Call<Product> updateProduct(@Path("productId") Integer productId, @Body NewProduct p);
+
+    @DELETE("products/{productId}")
+    Call<Boolean> deleteProduct(@Path("productId") Integer productId);
 }
