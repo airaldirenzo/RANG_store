@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_productInfoFragment_to_purchaseDataFragment"
             app:destination="@id/purchaseDataFragment" />
+        <action
+            android:id="@+id/action_productInfoFragment_to_productCreator"
+            app:destination="@id/productCreator" />
     </fragment>
     <fragment
         android:id="@+id/productCreator"

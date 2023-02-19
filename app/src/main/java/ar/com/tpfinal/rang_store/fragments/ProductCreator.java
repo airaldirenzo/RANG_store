@@ -48,6 +48,22 @@ public class ProductCreator extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentProductCreatorBinding.inflate(inflater,container,false);
+
+        if(getArguments() != null){
+
+            Product product = getArguments().getParcelable("product");
+            binding.editTextProductTitle.setText(product.getTitle());
+            binding.editTextProductDescription.setText(product.getDescription());
+            binding.editTextProductPrice.setText(String.valueOf(product.getPrice()));
+            binding.categoriesSpinner.setSelection(product.getCategory().getId());
+            binding.buttonCreateProduct.setVisibility(View.GONE);
+            binding.confirmChangesButton.setVisibility(View.VISIBLE);
+            binding.deleteFloatingButton.setVisibility(View.VISIBLE);
+
+
+            return binding.getRoot();
+        }
+
         return binding.getRoot();
     }
 

@@ -15,6 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +44,9 @@ public class ProductInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = ProductInfoBinding.inflate(inflater,container,false);
+
+        enableEditProduct();
+
         return binding.getRoot();
     }
 
@@ -58,9 +65,32 @@ public class ProductInfoFragment extends Fragment {
             Log.i(null, urls.toString());
             ImageSliderAdapter adapter = new ImageSliderAdapter(urls);
             recyclerView.setAdapter(adapter);
+
+            binding.buttonBuyProductInfo.setOnClickListener(view1 -> { navHost.navigate(R.id.action_productInfoFragment_to_purchaseDataFragment); });
+            binding.editfloatingButton.setOnClickListener(view1 -> { navHost.navigate(R.id.action_productInfoFragment_to_productCreator,getArguments()); });
+
         }
 
-        binding.buttonBuyProductInfo.setOnClickListener(view1 -> { navHost.navigate(R.id.action_productInfoFragment_to_purchaseDataFragment); });
+    }
 
+    private void enableEditProduct(){
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        //TODO puede llegar a tirar nullPointer si se nos corta el internet en medio de la app
+        FirebaseFirestore.getInstance().collection("users").document(currentUser.getUid()).get().addOnSuccessListener(document ->{
+            if(document.exists()){
+                String role = document.getString("role");
+                if(role != null && role.equals("admin")){
+                    binding.editfloatingButton.setVisibility(View.VISIBLE);
+                }
+            }
+            else{
+                try {
+                    throw new Exception("No se encontro un documento valido");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
