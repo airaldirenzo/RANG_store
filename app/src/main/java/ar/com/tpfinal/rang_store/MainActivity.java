@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.materialToolbar);
         setContentView(binding.getRoot());
 
+        // Obtencion del nav controller
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavController navController = NavHostFragment.findNavController(currentFragment);
+
         // Toggle para drawer
         new ActionBarDrawerToggle(this, binding.drawerLayout, binding.materialToolbar, 0,0);
 
@@ -48,10 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.drawerHome:
-                        //TODO
-                        break;
-                    case R.id.drawerSearch:
-                        //TODO
+                        navController.navigate(R.id.action_global_productChartFragment);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.drawerNotifications:
                         //TODO

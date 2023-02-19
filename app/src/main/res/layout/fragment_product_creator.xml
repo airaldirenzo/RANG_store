@@ -8,6 +8,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
@@ -16,14 +18,15 @@
             android:gravity="center|start"
             android:paddingHorizontal="30dp"
             android:text="Complete los campos para crear un producto"
-            android:textSize="24dp"/>
+            android:textAlignment="center"
+            android:textSize="24dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="30dp"
             android:paddingHorizontal="30dp"
-            android:text="Titulo"/>
+            android:paddingTop="30dp"
+            android:text="Titulo" />
 
         <EditText
             android:id="@+id/editTextProductTitle"
@@ -36,9 +39,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="30dp"
             android:paddingHorizontal="30dp"
-            android:text="Descripcion"/>
+            android:paddingTop="30dp"
+            android:text="Descripcion" />
 
         <EditText
             android:id="@+id/editTextProductDescription"
@@ -51,42 +54,47 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="30dp"
             android:paddingHorizontal="30dp"
-            android:text="Precio"/>
+            android:paddingTop="30dp"
+            android:text="Precio" />
 
         <EditText
             android:id="@+id/editTextProductPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:inputType="number"
             android:hint="Precio"
+            android:inputType="number"
             android:textSize="14dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="30dp"
             android:paddingHorizontal="30dp"
-            android:text="Stock"/>
+            android:paddingTop="30dp"
+            android:text="Categoria" />
 
-        <EditText
-            android:id="@+id/editTextProductStock"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/categoriesSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="start"
+            android:layout_marginHorizontal="30dp" />
+
+        <Button
+            android:id="@+id/buttonUploadProductImage"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:inputType="number"
-            android:hint="Stock"
-            android:textSize="14dp" />
+            android:layout_marginTop="30dp"
+            android:text="CARGAR IMAGEN" />
 
         <Button
             android:id="@+id/buttonCreateProduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:text="Crear producto"/>
+            android:text="Crear producto" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

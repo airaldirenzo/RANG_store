@@ -114,8 +114,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             };
             Thread thread = new Thread(runnable);
             thread.start();
-
-
         }
     }
 }

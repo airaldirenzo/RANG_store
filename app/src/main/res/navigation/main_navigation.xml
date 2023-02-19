@@ -29,10 +29,14 @@
         android:id="@+id/productCreator"
         android:name="ar.com.tpfinal.rang_store.fragments.ProductCreator"
         android:label="fragment_product_creator"
-        tools:layout="@layout/fragment_product_creator" />
+        tools:layout="@layout/fragment_product_creator" >
+        <action
+            android:id="@+id/action_productCreator_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/purchaseDataFragment"
         android:name="ar.com.tpfinal.rang_store.fragments.PurchaseDataFragment"
         android:label="fragment_purchase_data"
-        tools:layout="@layout/fragment_purchase_data" />
+        tools:layout="@layout/fragment_purchase_data" /><action android:id="@+id/action_global_productChartFragment" app:destination="@id/productChartFragment"/>
 </navigation>

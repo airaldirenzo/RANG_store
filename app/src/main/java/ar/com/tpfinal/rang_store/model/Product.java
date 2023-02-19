@@ -32,6 +32,15 @@ public class Product implements Parcelable {
         this.category = category;
     }
 
+    public Product(String title, String description, Double price, List<String> images, Category category) {
+        this.id = null;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.images = images;
+        this.category = category;
+    }
+
     public Integer getId() {
         return id;
     }

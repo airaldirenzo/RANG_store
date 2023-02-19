@@ -9,9 +9,18 @@ public class Category implements Parcelable {
 
     private String name;
 
+    private String slug;
+
     public Category(Integer id, String name) {
         this.id = id;
         this.name = name;
+        this.slug = null;
+    }
+
+    public Category(Integer id, String name, String slug) {
+        this.id = id;
+        this.name = name;
+        this.slug = slug;
     }
 
     public Integer getId() {
@@ -30,12 +39,13 @@ public class Category implements Parcelable {
         this.name = name;
     }
 
+    public String getSlug() { return slug; }
+
+    public void setSlug(String slug) { this.slug = slug; }
+
     @Override
     public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return name;
     }
 
     @Override
@@ -47,20 +57,22 @@ public class Category implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(this.id);
         dest.writeString(this.name);
+        dest.writeString(this.slug);
     }
 
     public void readFromParcel(Parcel source) {
         this.id = (Integer) source.readValue(Integer.class.getClassLoader());
         this.name = source.readString();
+        this.slug = source.readString();
     }
-
 
     protected Category(Parcel in) {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.name = in.readString();
+        this.slug = in.readString();
     }
 
-    public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
+    public static final Creator<Category> CREATOR = new Creator<Category>() {
         @Override
         public Category createFromParcel(Parcel source) {
             return new Category(source);
