@@ -1,15 +1,14 @@
 package ar.com.tpfinal.rang_store.adapters;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,25 +19,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.model.Product;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private final List<Product> dataList;
+    private final List<Pair<Product,Integer>> dataList;
 
-    public ProductAdapter(List<Product> dataList) {
-        this.dataList = dataList;
-    }
+    public OrderAdapter(List<Pair<Product,Integer> > dataList) { this.dataList = dataList; }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order,null,false);
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(lp);
         return new ViewHolder(view);
@@ -47,39 +42,47 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Product product = dataList.get(position);
-        holder.dataSetPA(product);
-
-        holder.itemView.setOnClickListener(view -> {
-            Bundle args = new Bundle();
-            Product selected = dataList.get(holder.getLayoutPosition());
-            args.putParcelable("product", selected);
-            Navigation.findNavController(view).navigate(R.id.action_productChartFragment_to_productInfoFragment, args);
-        });
+        if(dataList != null){
+            Product product = dataList.get(position).first;
+            Integer quantity = dataList.get(position).second;
+            holder.setData(product,quantity);
+//TODO PODRIAMOS HACER QUE NAVEGUES HASTA EL INFO PRODUCT DE ESE PRODUCTO DE LA ORDEN, PERO SI JUSTO SE BORRA DE LA API RIP.
+//            holder.itemView.setOnClickListener(view -> {
+//                Bundle args = new Bundle();
+//                Product selected = dataList.get(holder.getLayoutPosition()).first;
+//                args.putParcelable("product", selected);
+//                args.putInt("quantity",quantity);
+//                Navigation.findNavController(view).navigate(R.id.action_buyOrderFragment_to_purchaseDataFragment, args);
+//            });
+        }
 
     }
 
     @Override
-    public int getItemCount() {
-        return dataList.size();
-    }
+    public int getItemCount() { return dataList.size(); }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView productImage;
         TextView productTitle;
+        TextView productQuantity;
         TextView productPrice;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            productImage = itemView.findViewById(R.id.productImage);
-            productTitle = itemView.findViewById(R.id.productTitle);
-            productPrice = itemView.findViewById(R.id.productPrice);
+            productImage = itemView.findViewById(R.id.imageViewOrder);
+            productTitle = itemView.findViewById(R.id.titleProductOrder);
+            productQuantity = itemView.findViewById(R.id.quantityOrder);
+            productPrice = itemView.findViewById(R.id.priceOrder);
+
         }
 
-        public void dataSetPA(Product product) {
+        public void setData(Product product, Integer quantity) {
+            Log.i("PRODUCTO", "setData: "+product.getPrice());
             setImage(product.getImages().get(0));
             productTitle.setText(product.getTitle());
+            productQuantity.setText("Cantidad: x" + quantity);
             productPrice.setText("$" + product.getPrice());
 
         }

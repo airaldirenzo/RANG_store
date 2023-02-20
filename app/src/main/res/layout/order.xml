@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/imageViewOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintHeight_max="100dp"
+        app:layout_constraintHeight_min="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/titleProductOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="Titulo"
+        android:textSize="20sp"
+        app:layout_constraintWidth_max="225dp"
+        app:layout_constraintStart_toEndOf="@id/imageViewOrder"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="15dp"/>
+
+    <TextView
+        android:id="@+id/quantityOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cantidad: x1"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/imageViewOrder"
+        app:layout_constraintTop_toBottomOf="@id/titleProductOrder"
+        android:paddingTop="10dp"/>
+
+    <TextView
+        android:id="@+id/priceOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:paddingTop="10dp"
+        android:text="$000000000"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/quantityOrder"
+        app:layout_constraintTop_toBottomOf="@id/titleProductOrder" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

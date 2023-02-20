@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/buyOrderFragment">
+    <fragment
+        android:id="@+id/buyOrderFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.BuyOrderFragment"
+        android:label="fragment_buy_order"
+        tools:layout="@layout/fragment_buy_order" >
+        <action
+            android:id="@+id/action_buyOrderFragment_to_purchaseDataFragment"
+            app:destination="@id/purchaseDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseDataFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.PurchaseDataFragment"
+        android:label="fragment_purchase_data"
+        tools:layout="@layout/fragment_purchase_data" />
+</navigation>

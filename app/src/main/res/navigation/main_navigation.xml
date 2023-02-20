@@ -22,9 +22,6 @@
         android:label="product_info"
         tools:layout="@layout/product_info" >
         <action
-            android:id="@+id/action_productInfoFragment_to_purchaseDataFragment"
-            app:destination="@id/purchaseDataFragment" />
-        <action
             android:id="@+id/action_productInfoFragment_to_productCreator"
             app:destination="@id/productCreator" />
     </fragment>
@@ -37,9 +34,5 @@
             android:id="@+id/action_productCreator_to_productInfoFragment"
             app:destination="@id/productInfoFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/purchaseDataFragment"
-        android:name="ar.com.tpfinal.rang_store.fragments.PurchaseDataFragment"
-        android:label="fragment_purchase_data"
-        tools:layout="@layout/fragment_purchase_data" /><action android:id="@+id/action_global_productChartFragment" app:destination="@id/productChartFragment"/>
+    <action android:id="@+id/action_global_productChartFragment" app:destination="@id/productChartFragment"/>
 </navigation>

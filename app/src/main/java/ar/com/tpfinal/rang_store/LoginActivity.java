@@ -36,28 +36,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.toolbarSearchbar:
-                //TODO buscar? es necesario para que se abra el texto? podemos chequear texto + enter entonces filtrar
-                break;
-            case R.id.toolbarFavourite:
-                //TODO abrir favoritos
-                Toast.makeText(this,"Favoritos",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.toolbarCart:
-                //TODO navegar hacia carrito
-                break;
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + item.getItemId());
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
