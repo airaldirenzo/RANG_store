@@ -35,7 +35,7 @@ public class ProductInfoFragment extends Fragment {
 
     private NavController navHost;
     private ProductInfoBinding binding;
-    private Integer quantity;
+    private Integer quantity = 1;
 
     public ProductInfoFragment() {
 
