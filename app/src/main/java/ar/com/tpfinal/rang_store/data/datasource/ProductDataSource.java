@@ -10,5 +10,7 @@ public interface ProductDataSource {
 
     void listProducts(OnResult<List<Product>> callback);
 
-    void getProduct(Product product, OnResult<Product> callback);
+    void updateProduct(Product product, OnResult<Product> callback);
+
+    void deleteProduct(Product product, OnResult<Boolean> callback);
 }

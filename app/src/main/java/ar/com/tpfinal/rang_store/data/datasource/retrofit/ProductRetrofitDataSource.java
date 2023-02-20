@@ -73,7 +73,53 @@ public class ProductRetrofitDataSource implements ProductDataSource {
     }
 
     @Override
-    public void getProduct(Product product, OnResult<Product> callback) {
+    public void updateProduct(Product product, OnResult<Product> callback) {
+        try {
+            NewProduct newProduct = new NewProduct(
+                    product.getTitle(),
+                    product.getDescription(),
+                    product.getPrice(),
+                    product.getImages(),
+                    product.getCategory().getId());
 
+            Response<Product> response = productApiRest.updateProduct(product.getId(), newProduct).execute();
+
+            IsSuccessful<Product> responseStatus = new IsSuccessful<Product>() {
+                @Override
+                public void isSuccessful(Response<Product> response) throws IOException {
+                    if (response.isSuccessful()) {
+                        callback.onSuccess(response.body());
+                    } else {
+                        throw new IOException("No pudo completarse la solicitud a la API, Codigo de error: " + response.code());
+                    }
+                }
+            };
+            responseStatus.isSuccessful(response);
+        } catch (IOException e) {
+            callback.onError(e);
+        }
+    }
+
+    @Override
+    public void deleteProduct(Product product, OnResult<Boolean> callback) {
+        try {
+
+            Response<Boolean> response = productApiRest.deleteProduct(product.getId()).execute();
+
+            IsSuccessful<Boolean> responseStatus = new IsSuccessful<Boolean>() {
+                @Override
+                public void isSuccessful(Response<Boolean> response) throws IOException {
+                    if (response.isSuccessful()) {
+                        callback.onSuccess(response.body());
+                    } else {
+                        throw new IOException("No pudo completarse la solicitud a la API, Codigo de error: " + response.code());
+                    }
+                }
+            };
+
+            responseStatus.isSuccessful(response);
+        } catch (IOException e) {
+            callback.onError(e);
+        }
     }
 }

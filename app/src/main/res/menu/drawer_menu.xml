@@ -14,19 +14,6 @@
         android:orderInCategory="2"/>
 
     <item
-
-        android:id="@+id/drawerCategories"
-        android:title="Categorias"
-        android:orderInCategory="3">
-        <menu>
-            <item android:title="Item" />
-            <item android:title="Item" />
-            <item android:title="Item" />
-            <item android:title="Item" />
-        </menu>
-    </item>
-
-    <item
         android:id="@+id/drawerPurchases"
         android:title="Compras"
         android:orderInCategory="4"/>
