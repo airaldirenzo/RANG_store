@@ -2,10 +2,8 @@ package ar.com.tpfinal.rang_store.adapters;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +11,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ar.com.tpfinal.rang_store.R;
+import ar.com.tpfinal.rang_store.model.Category;
 import ar.com.tpfinal.rang_store.model.Product;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private final List<Pair<Product,Integer>> dataList;
+    private List<Map<String,Object> > dataList;
 
-    public OrderAdapter(List<Pair<Product,Integer> > dataList) { this.dataList = dataList; }
+    public OrderAdapter(List<Map<String,Object>> dataList) { this.dataList = dataList; }
 
     @NonNull
     @Override
@@ -43,8 +44,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         if(dataList != null){
-            Product product = dataList.get(position).first;
-            Integer quantity = dataList.get(position).second;
+            Log.i("????????", "onBindViewHolder: "+(dataList.get(position)).get("product"));
+            Product product = entityProductToProduct((HashMap) dataList.get(position).get("product"));
+            Integer quantity = (int)(long) dataList.get(position).get("quantity");
             holder.setData(product,quantity);
 //TODO PODRIAMOS HACER QUE NAVEGUES HASTA EL INFO PRODUCT DE ESE PRODUCTO DE LA ORDEN, PERO SI JUSTO SE BORRA DE LA API RIP.
 //            holder.itemView.setOnClickListener(view -> {
@@ -61,6 +63,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public int getItemCount() { return dataList.size(); }
 
+    public Product entityProductToProduct(HashMap data){
+        Category category = new Category((int)(long)((HashMap) data.get("category")).get("id"),
+                (String)((HashMap) data.get("category")).get("name"),
+                (String) ((HashMap) data.get("category")).get("slug"));
+
+        Product product = new Product((int)(long) data.get("id"),
+                (String) data.get("title"),
+                (String) data.get("description"),
+                (Double) data.get("price"),
+                (List<String>) data.get("images"),
+                category);
+
+        return product;
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

@@ -9,39 +9,59 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import ar.com.tpfinal.rang_store.data.OnResult;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.AppRetrofit;
 import ar.com.tpfinal.rang_store.data.factory.ProductRepositoryFactory;
 import ar.com.tpfinal.rang_store.data.repository.ProductRepository;
 import ar.com.tpfinal.rang_store.databinding.ActivityMainBinding;
+import ar.com.tpfinal.rang_store.model.ItemCart;
 import ar.com.tpfinal.rang_store.model.Product;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    FirebaseAuth mAuth;
+    FirebaseFirestore mFirestore;
+    Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.Theme_RANG_store);
         super.onCreate(savedInstanceState);
         binding =  ActivityMainBinding.inflate(getLayoutInflater());
         setSupportActionBar(binding.materialToolbar);
         setContentView(binding.getRoot());
 
+        //Obtencion de las instancias de FireAuth y Firestore
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+
         // Obtencion del nav controller
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         NavController navController = NavHostFragment.findNavController(currentFragment);
 
         // Toggle para drawer
@@ -81,12 +101,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
-
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);
@@ -97,7 +111,29 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.toolbarCart:
-                Log.i("ESTE ES EL CARRITO: ", "CARRITO");
+                //TODO CART
+                String uid = mAuth.getCurrentUser().getUid();
+                Intent intent = new Intent(this,PaymentActivity.class);
+                mFirestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+
+                            List<ItemCart> cart = (List<ItemCart>) document.get("cart");
+                            intent.putParcelableArrayListExtra("cart", (ArrayList<? extends Parcelable>) cart);
+                            startActivity(intent);
+
+                        } else {
+                            Toast.makeText(currentFragment.requireContext(), "No se encontró el carrito",Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(currentFragment.requireContext(),"No se pudo completar la tarea",Toast.LENGTH_SHORT).show();
+                        Log.d("TASK FAILED", "failed with ", task.getException());
+                    }
+                }
+            });
                 break;
 
             case R.id.toolbarFavourite:

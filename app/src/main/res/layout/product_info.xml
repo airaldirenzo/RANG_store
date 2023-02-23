@@ -151,7 +151,7 @@
         android:layout_marginBottom="30dp"
         android:clickable="true"
         android:src="@drawable/baseline_edit_24"
-        app:backgroundTint="#009688"
+        app:backgroundTint="#FE6847"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone" />

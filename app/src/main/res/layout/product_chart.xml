@@ -51,7 +51,7 @@
         android:visibility="gone"
         android:clickable="true"
         android:src="@drawable/baseline_add_circle_24"
-        app:backgroundTint="#009688"
+        app:backgroundTint="#FE6847"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

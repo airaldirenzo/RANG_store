@@ -14,25 +14,37 @@ import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
+import ar.com.tpfinal.rang_store.MainActivity;
 import ar.com.tpfinal.rang_store.PaymentActivity;
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.adapters.ImageSliderAdapter;
 import ar.com.tpfinal.rang_store.databinding.ProductInfoBinding;
+import ar.com.tpfinal.rang_store.model.ItemCart;
 import ar.com.tpfinal.rang_store.model.Product;
 
 public class ProductInfoFragment extends Fragment {
 
+    FirebaseAuth mAuth;
+    FirebaseFirestore mFirestore;
     private NavController navHost;
     private ProductInfoBinding binding;
     private Integer quantity = 1;
@@ -87,6 +99,9 @@ public class ProductInfoFragment extends Fragment {
 
         if (getArguments() != null) {
 
+            mAuth = FirebaseAuth.getInstance();
+            mFirestore = FirebaseFirestore.getInstance();
+
             binding.editfloatingButton.setOnClickListener(view1 -> { navHost.navigate(R.id.action_productInfoFragment_to_productCreator,getArguments()); });
 
             Product product = getArguments().getParcelable("product");
@@ -96,6 +111,30 @@ public class ProductInfoFragment extends Fragment {
                 intent.putExtra("quantity", quantity);
                 intent.putExtra("product",product);
                 startActivity(intent);
+            });
+
+            binding.buttonAddToCartProductInfo.setOnClickListener(view1 -> {
+
+                String uid = mAuth.getCurrentUser().getUid();
+
+                ItemCart cartItem = new ItemCart(product,quantity);
+
+                mFirestore.collection("users")
+                        .document(uid)
+                        .update("cart", FieldValue.arrayUnion(cartItem))
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        startActivity(new Intent(requireActivity(), MainActivity.class));
+                        Toast.makeText(requireContext(),"Producto agregado con exito",Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(requireContext(),"No se pudo agregar el producto",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             });
 
 

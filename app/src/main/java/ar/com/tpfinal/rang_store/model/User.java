@@ -1,6 +1,8 @@
 package ar.com.tpfinal.rang_store.model;
 
-import java.util.UUID;
+import android.util.Pair;
+
+import java.util.List;
 
 public class User {
 
@@ -8,12 +10,14 @@ public class User {
     private String name;
     private String lastname;
     private String email;
+    private List<ItemCart> cart;
 
-    public User(String uid,String name, String lastname, String email) {
+    public User(String uid, String name, String lastname, String email, List<ItemCart> cart) {
         this.uid = uid;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
+        this.cart = cart;
     }
 
     public String getUid() {
@@ -46,5 +50,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<ItemCart> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<ItemCart> cart) {
+        this.cart = cart;
     }
 }

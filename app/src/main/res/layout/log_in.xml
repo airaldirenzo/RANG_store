@@ -18,6 +18,7 @@
             android:layout_marginTop="125dp"
             android:padding="10dp"
             android:text="Bienvenido a RANG store"
+            android:theme="@style/Theme.RANG_store"
             android:textSize="32dp" />
 
         <TextView
@@ -27,6 +28,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="50dp"
             android:padding="5dp"
+            android:theme="@style/Theme.RANG_store"
             android:text="Correo electronico" />
 
         <EditText
@@ -36,7 +38,8 @@
             android:layout_marginStart="30dp"
             android:hint="example@example.com"
             android:inputType="textEmailAddress"
-            android:textSize="14dp" />
+            android:textSize="14dp"
+            android:theme="@style/Theme.RANG_store"/>
 
         <TextView
             android:id="@+id/textViewPassword"
@@ -45,6 +48,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:padding="5dp"
+            android:theme="@style/Theme.RANG_store"
             android:text="Contraseña" />
 
         <EditText
@@ -54,6 +58,7 @@
             android:layout_marginStart="30dp"
             android:hint="contraseña"
             android:inputType="textPassword"
+            android:theme="@style/Theme.RANG_store"
             android:textSize="14dp" />
 
         <ProgressBar
@@ -72,7 +77,7 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="70dp"
-            android:backgroundTint="#2986cc"
+            android:theme="@style/Theme.RANG_store"
             android:text="Iniciar sesion" />
 
         <Button
@@ -81,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginHorizontal="30dp"
-            android:backgroundTint="#2986cc"
+            android:theme="@style/Theme.RANG_store"
             android:text="Iniciar sesion con Google" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -99,7 +104,7 @@
                 android:background="@null"
                 android:text="Registrarse"
                 android:paddingHorizontal="15dp"
-                android:textColor="#2986cc" />
+                android:theme="@style/Theme.RANG_store" />
 
             <Button
                 android:id="@+id/buttonForgotPassword"
@@ -110,7 +115,7 @@
                 android:layout_marginEnd="30dp"
                 android:background="@null"
                 android:text="Olvidé mi contraseña"
-                android:textColor="#2986cc" />
+                android:theme="@style/Theme.RANG_store" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>

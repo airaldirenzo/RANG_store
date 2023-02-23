@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ar.com.tpfinal.rang_store.MainActivity;
 import ar.com.tpfinal.rang_store.databinding.RegisterBinding;
+import ar.com.tpfinal.rang_store.model.Product;
 import ar.com.tpfinal.rang_store.model.User;
 
 public class RegisterUser extends Fragment {
@@ -89,10 +94,11 @@ public class RegisterUser extends Fragment {
                                 Toast.makeText(requireContext(),"El email se encuentra en uso",Toast.LENGTH_SHORT).show();
                                 return;
                             };
+
                             User user = new User(uid,
                                     binding.editTextName.getText().toString(),
                                     binding.editTextLastName.getText().toString(),
-                                    email);
+                                    email, new ArrayList<>());
 
                             mFirestore.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

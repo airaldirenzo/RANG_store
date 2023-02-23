@@ -108,7 +108,6 @@ public class ProductChartFragment extends Fragment {
         OnResult<List<Product>> callback = new OnResult<>() {
             @Override
             public void onSuccess(List<Product> result) {
-                Log.i("PRODUCT 1", result.get(0).toString());
                 requireActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
