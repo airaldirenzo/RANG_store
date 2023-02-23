@@ -49,6 +49,7 @@ public class PurchaseDataFragment extends Fragment {
         binding.buyButton.setOnClickListener(view1 -> {
             if(binding.radioButtonCredit.isChecked() || binding.radioButtonDebit.isChecked()){
                 //TODO NAVEGAR A FACTURA?
+                //TODO GUARDAR DATOS DE COMPRA
             }
             else if(binding.radioButtonTransfer.isChecked()){
                 navHost.navigate(R.id.action_purchaseDataFragment_to_transferFragment);
