@@ -18,6 +18,7 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -111,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.toolbarCart:
-                //TODO CART
                 String uid = mAuth.getCurrentUser().getUid();
                 Intent intent = new Intent(this,PaymentActivity.class);
                 mFirestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -141,7 +141,21 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.toolbarSearchbar:
-                Log.i("ESTE ES LA BARRA DE BUSQUEDA: ", "BUSQUEDA");
+                SearchView searchView = (SearchView) item.getActionView();
+                searchView.setQueryHint("Escriba aqui para buscar");
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String s) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String s) {
+                        //arrayAdapter.getFilter().filter(s);
+                        return false;
+                    }
+                });
+
                 break;
         }
         return super.onOptionsItemSelected(item);

@@ -44,7 +44,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         if(dataList != null){
-            Log.i("????????", "onBindViewHolder: "+(dataList.get(position)).get("product"));
             Product product = entityProductToProduct((HashMap) dataList.get(position).get("product"));
             Integer quantity = (int)(long) dataList.get(position).get("quantity");
             holder.setData(product,quantity);
@@ -63,7 +62,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public int getItemCount() { return dataList.size(); }
 
-    public Product entityProductToProduct(HashMap data){
+    private Product entityProductToProduct(HashMap data){
         Category category = new Category((int)(long)((HashMap) data.get("category")).get("id"),
                 (String)((HashMap) data.get("category")).get("name"),
                 (String) ((HashMap) data.get("category")).get("slug"));
