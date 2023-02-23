@@ -56,7 +56,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             args.putParcelable("product", selected);
             Navigation.findNavController(view).navigate(R.id.action_productChartFragment_to_productInfoFragment, args);
         });
+    }
 
+    //TODO
+    public void addProdcuts(List<Product> newProducts) {
+        this.dataList.addAll(newProducts);
     }
 
     @Override

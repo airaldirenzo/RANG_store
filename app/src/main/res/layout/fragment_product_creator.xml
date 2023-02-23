@@ -74,20 +74,27 @@
                 android:inputType="number"
                 android:textSize="14dp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="30dp"
-                android:paddingTop="30dp"
-                android:text="Categoria" />
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/categoriesSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:layout_gravity="start"
-                android:layout_marginHorizontal="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="Categoria" />
+
+                <Spinner
+                    android:id="@+id/categoriesSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:padding="20dp" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/uploadProductImageButton"
