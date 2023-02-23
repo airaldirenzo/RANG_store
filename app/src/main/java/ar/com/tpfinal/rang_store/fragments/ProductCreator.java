@@ -52,7 +52,7 @@ public class ProductCreator extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentProductCreatorBinding.inflate(inflater,container,false);
 
-        createSpinnerAdapter();
+        createCategoriesSpinnerAdapter();
 
         if(getArguments() != null){
             Product product = getArguments().getParcelable("product");
@@ -199,7 +199,7 @@ public class ProductCreator extends Fragment {
         });
     }
 
-    void createSpinnerAdapter() {
+    void createCategoriesSpinnerAdapter() {
         ArrayList<Category> categories = new ArrayList<>();
         categories.add(new Category(null, "Seleccione una categoria"));
         categories.add(new Category(1, "ropa", "clothes"));

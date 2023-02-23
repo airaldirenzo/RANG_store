@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(this,LoginActivity.class));
                         break;
+
                     default:
                         throw new IllegalStateException("Unexpected value: " + menuItem.getItemId());
                 }
