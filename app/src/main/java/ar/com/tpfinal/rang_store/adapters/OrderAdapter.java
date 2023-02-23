@@ -44,9 +44,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         if(dataList != null){
-            Product product = entityProductToProduct((HashMap) dataList.get(position).get("product"));
-            Integer quantity = (int)(long) dataList.get(position).get("quantity");
-            holder.setData(product,quantity);
+            if(dataList.get(position).get("product") instanceof Product){
+                holder.setData(
+                        (Product) dataList.get(position).get("product"),
+                        (Integer) dataList.get(position).get("quantity"));
+            }
+            else {
+                Product product = entityProductToProduct((HashMap) dataList.get(position).get("product"));
+                Integer quantity = (int)(long) dataList.get(position).get("quantity");
+                holder.setData(product,quantity);
+            }
+
 //TODO PODRIAMOS HACER QUE NAVEGUES HASTA EL INFO PRODUCT DE ESE PRODUCTO DE LA ORDEN, PERO SI JUSTO SE BORRA DE LA API RIP.
 //            holder.itemView.setOnClickListener(view -> {
 //                Bundle args = new Bundle();
@@ -94,7 +102,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         }
 
         public void setData(Product product, Integer quantity) {
-            Log.i("PRODUCTO", "setData: "+product.getPrice());
             setImage(product.getImages().get(0));
             productTitle.setText(product.getTitle());
             productQuantity.setText("Cantidad: x" + quantity);

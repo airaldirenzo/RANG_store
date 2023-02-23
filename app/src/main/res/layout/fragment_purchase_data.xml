@@ -219,10 +219,9 @@
         android:visibility="gone"/>
 
     <Button
-        android:id="@+id/buyButtonCard"
+        android:id="@+id/buyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/editTextCardName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -239,105 +238,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
         android:layout_marginHorizontal="30dp"
-        android:text="Porfavor realice una transferencia bancaria utilizando los siguientes datos:"
+        android:text="Usted va a realizar una transferencia bancaria"
         android:textSize="18sp"
         android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/textViewTitleOwnerName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewDepositTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        android:text="Nombre del propietario de la cuenta:"
-        android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/textViewOwnerName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitleOwnerName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
-        android:text="RENZO GOUX"
-        android:textStyle="bold"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/textViewTitleCuit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewOwnerName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        android:text="Cuit del propietario:"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/textViewCuit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitleCuit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
-        android:text="20-12345678-1"
-        android:textStyle="bold"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/textViewTitleCBU_CVU"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewCuit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        android:text="CBU/CVU:"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/textViewCBU_CVU"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitleCBU_CVU"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
-        android:text="8837440211100094709994"
-        android:textStyle="bold"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/textViewTitleAlias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewCBU_CVU"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        android:text="Alias:"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/textViewAlias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitleAlias"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="30dp"
-        android:text="rang.store"
-        android:textStyle="bold"
-        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -108,8 +108,10 @@ public class ProductInfoFragment extends Fragment {
 
             binding.buttonBuyProductInfo.setOnClickListener(view1 -> {
                 Intent intent = new Intent(requireActivity(),PaymentActivity.class);
-                intent.putExtra("quantity", quantity);
-                intent.putExtra("product",product);
+
+                List<ItemCart> cart = new ArrayList<>();
+                cart.add(new ItemCart(product,quantity));
+                intent.putParcelableArrayListExtra("single_product", (ArrayList<? extends Parcelable>) cart);
                 startActivity(intent);
             });
 

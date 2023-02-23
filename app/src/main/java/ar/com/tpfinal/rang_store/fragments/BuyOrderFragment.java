@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -54,19 +55,16 @@ public class BuyOrderFragment extends Fragment {
 
         if(getArguments() != null){
 
-            List<Map<String,Object>> cart = new ArrayList<>();
-            cart.addAll(getArguments().getParcelableArrayList("cart"));
+            List<ItemCart> singleProduct = getArguments().getParcelableArrayList("single_product");
+            List<Map<String, Object>> cart = new ArrayList<>();
 
-            if(!cart.isEmpty()){
+            if(getArguments().getParcelableArrayList("cart") != null){
+                cart.addAll(getArguments().getParcelableArrayList("cart"));
                 loadOrder(cart);
             }
-
-
-//            Product product = getArguments().getParcelable("product");
-//            int quantity = getArguments().getInt("quantity");
-//            Log.i("QUANTITY", "onCreateView: "+quantity);
-//
-//            loadOrder(product,quantity);
+            else if(singleProduct != null){
+                loadOrder(singleProduct.get(0).getProduct(),singleProduct.get(0).getQuantity());
+            }
 
             binding.continuePurchaseButton.setOnClickListener(view -> { navHost.navigate(R.id.action_buyOrderFragment_to_purchaseDataFragment,getArguments()); });
         }
@@ -81,6 +79,7 @@ public class BuyOrderFragment extends Fragment {
         Map<String,Object> map = new HashMap<>();
         map.put("product",product);
         map.put("quantity",quantity);
+        dataList.add(map);
         OrderAdapter orderAdapter = new OrderAdapter(dataList);
         recycler.setAdapter(orderAdapter);
     }
@@ -88,9 +87,6 @@ public class BuyOrderFragment extends Fragment {
     private void loadOrder(List<Map<String,Object>> cart){
         RecyclerView recycler = binding.orderRV;
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
-
-        Log.i("CART", "onCreateView: "+cart);
-
         OrderAdapter orderAdapter = new OrderAdapter(cart);
         recycler.setAdapter(orderAdapter);
     }
