@@ -95,5 +95,4 @@ public class BuyOrderFragment extends Fragment {
         OrderAdapter orderAdapter = new OrderAdapter(cart);
         recycler.setAdapter(orderAdapter);
     }
-
 }
