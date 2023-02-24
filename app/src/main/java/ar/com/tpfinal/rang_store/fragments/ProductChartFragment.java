@@ -104,14 +104,16 @@ public class ProductChartFragment extends Fragment {
                 FilterObject filter = FilterObject.getInstance();
                 filter.resetFilter();
 
+                String title = binding.titleFilterEditText.getText().toString();
                 Category category = (Category)binding.categoriesFilterSpinner.getSelectedItem();
                 String minPrice = binding.minPriceEditText.getText().toString();
                 String maxPrice = binding.maxPriceEditText.getText().toString();
 
-                if (category.equals("Seleccione una categoria") && minPrice.isEmpty() && maxPrice.isEmpty()) {
+                if (title.isEmpty() && category.equals("Seleccione una categoria") && minPrice.isEmpty() && maxPrice.isEmpty()) {
                     return;
                 }
 
+                filter.setTitleFilter(title);
                 filter.setCategoryId(category.getId());
                 filter.setMinPriceFilter(minPrice);
                 filter.setMaxPriceFilter(maxPrice);
@@ -125,9 +127,15 @@ public class ProductChartFragment extends Fragment {
         binding.resetFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                binding.titleFilterEditText.setText("");
                 binding.categoriesFilterSpinner.setSelection(0);
                 binding.minPriceEditText.setText("");
                 binding.maxPriceEditText.setText("");
+
+                FilterObject filter = FilterObject.getInstance();
+                filter.resetFilter();
+
+                loadProducts(filter);
             }
         });
     }

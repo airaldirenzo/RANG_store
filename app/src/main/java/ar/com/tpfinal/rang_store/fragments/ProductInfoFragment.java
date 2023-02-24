@@ -1,7 +1,6 @@
 package ar.com.tpfinal.rang_store.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,10 +31,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 import ar.com.tpfinal.rang_store.MainActivity;
 import ar.com.tpfinal.rang_store.PaymentActivity;
@@ -191,10 +187,7 @@ public class ProductInfoFragment extends Fragment {
                 });
 
             });
-
-
         }
-
     }
 
     private void updateTotalPrice(Product product){
@@ -213,7 +206,6 @@ public class ProductInfoFragment extends Fragment {
     }
 
     private void enableEditProduct(){
-
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         //TODO puede llegar a tirar nullPointer si se nos corta el internet en medio de la app
         FirebaseFirestore.getInstance().collection("users").document(currentUser.getUid()).get().addOnSuccessListener(document ->{

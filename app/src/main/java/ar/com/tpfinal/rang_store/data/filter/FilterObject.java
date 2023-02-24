@@ -11,7 +11,7 @@ public class FilterObject {
     private String maxPriceFilter;
 
     public static FilterObject getInstance() {
-        if (INSTANCE == null){
+        if (INSTANCE == null) {
             INSTANCE = new FilterObject();
         }
         return INSTANCE;
