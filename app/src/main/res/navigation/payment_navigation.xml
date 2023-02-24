@@ -17,5 +17,14 @@
         android:id="@+id/purchaseDataFragment"
         android:name="ar.com.tpfinal.rang_store.fragments.PurchaseDataFragment"
         android:label="fragment_purchase_data"
-        tools:layout="@layout/fragment_purchase_data" />
+        tools:layout="@layout/fragment_purchase_data" >
+        <action
+            android:id="@+id/action_purchaseDataFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferFragment"
+        android:name="ar.com.tpfinal.rang_store.TransferFragment"
+        android:label="fragment_transfer"
+        tools:layout="@layout/fragment_transfer" />
 </navigation>

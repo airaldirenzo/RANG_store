@@ -8,6 +8,10 @@
     tools:context=".fragments.PurchaseDataFragment"
     android:id="@+id/scrollViewPurchaseData">
 
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -18,31 +22,24 @@
         android:id="@+id/textViewPaymentMethod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Porfavor seleccione un metodo de pago"
+        android:text="Seleccione un metodo de pago"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/linearLayoutPurchaseData"
+        app:layout_constraintBottom_toTopOf="@id/image1"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:textSize="18sp"
-        />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutPurchaseData"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textViewPaymentMethod"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/radioGroup"
-        android:gravity="center|top">
+        android:gravity="start"
+        android:textSize="24sp"/>
 
     <ImageView
         android:id="@+id/image1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewPaymentMethod"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/image2"
+        app:layout_constraintBottom_toTopOf="@id/radioGroup"
         android:minWidth="75dp"
         android:minHeight="75dp"
         android:layout_marginHorizontal="30dp"
@@ -53,6 +50,10 @@
             android:id="@+id/image2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewPaymentMethod"
+            app:layout_constraintStart_toEndOf="@id/image1"
+            app:layout_constraintEnd_toStartOf="@id/image3"
+            app:layout_constraintBottom_toTopOf="@id/radioGroup"
             android:minWidth="75dp"
             android:minHeight="75dp"
             android:layout_marginHorizontal="30dp"
@@ -63,25 +64,26 @@
             android:id="@+id/image3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewPaymentMethod"
+            app:layout_constraintStart_toEndOf="@id/image2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/radioGroup"
             android:minWidth="75dp"
             android:minHeight="75dp"
             android:layout_marginHorizontal="30dp"
             android:layout_marginTop="30dp"
             android:src="@drawable/baseline_attach_money_24" />
 
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutPurchaseData"
+        app:layout_constraintTop_toBottomOf="@id/image1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textViewCardNumber"
-        >
+        app:layout_constraintBottom_toTopOf="@id/textViewCardNumber">
+
         <RadioButton
             android:id="@+id/radioButtonCredit"
             android:layout_width="wrap_content"
@@ -98,6 +100,7 @@
             android:id="@+id/radioButtonDebit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             app:layout_constraintStart_toStartOf="@id/image2"
             app:layout_constraintEnd_toEndOf="@id/image2"
             android:layout_marginHorizontal="30dp"
@@ -128,8 +131,7 @@
         app:layout_constraintBottom_toTopOf="@id/editTextCardNumber"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:text="Numero de tarjeta"
-        android:visibility="gone"/>
+        android:text="Numero de tarjeta" />
 
     <EditText
         android:id="@+id/editTextCardNumber"
@@ -140,8 +142,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/textViewExpirationDate"
         android:inputType="number"
-        android:layout_marginHorizontal="30dp"
-        android:visibility="gone"/>
+        android:layout_marginHorizontal="30dp" />
 
     <TextView
         android:id="@+id/textViewExpirationDate"
@@ -152,8 +153,7 @@
         app:layout_constraintBottom_toTopOf="@id/editTextExpirationDate"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:text="Fecha de expiracion"
-        android:visibility="gone"/>
+        android:text="Fecha de expiracion" />
 
 <!--    TODO SE PUEDE CAMBIAR EL INPUT TYPE A NUMBER Y HACER UN PARSER PARA AGREGAR LAS BARRAS-->
 
@@ -167,8 +167,7 @@
         android:minEms="6"
         android:maxLength="5"
         android:gravity="center"
-        android:layout_marginHorizontal="30dp"
-        android:visibility="gone"/>
+        android:layout_marginHorizontal="30dp" />
 
     <TextView
         android:id="@+id/textViewSecurityCode"
@@ -179,8 +178,7 @@
         app:layout_constraintBottom_toTopOf="@id/editTextExpirationDate"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:text="Codigo de seguridad"
-        android:visibility="gone"/>
+        android:text="Codigo de seguridad" />
 
     <EditText
         android:id="@+id/editTextSecurityCode"
@@ -192,8 +190,7 @@
         android:minEms="6"
         android:maxLength="3"
         android:gravity="center"
-        android:layout_marginHorizontal="30dp"
-        android:visibility="gone"/>
+        android:layout_marginHorizontal="30dp" />
 
     <TextView
         android:id="@+id/textViewCardName"
@@ -204,8 +201,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:text="Nombre en la tarjeta"
-        android:visibility="gone"/>
+        android:text="Nombre en la tarjeta" />
 
     <EditText
         android:id="@+id/editTextCardName"
@@ -215,19 +211,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:inputType="text"
-        android:layout_marginHorizontal="30dp"
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/buyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginVertical="30dp"
-        android:text="Comprar"
-        android:visibility="gone"/>
+        android:layout_marginHorizontal="30dp"/>
 
     <TextView
         android:id="@+id/textViewDepositTitle"
@@ -239,11 +223,22 @@
         android:layout_marginTop="30dp"
         android:layout_marginHorizontal="30dp"
         android:text="Usted va a realizar una transferencia bancaria"
+        android:gravity="start"
         android:textSize="18sp"
         android:visibility="gone"/>
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/buyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:text="Comprar"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 </ScrollView>
