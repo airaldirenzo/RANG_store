@@ -40,7 +40,6 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
     public void onBindViewHolder(@NonNull ImageSliderAdapter.ImageSliderViewHolder holder, int position) {
 
         for(int i = 0; i<urls.size(); i++){
-            Log.i(null, ""+urls.get(i));
             holder.setImage(urls.get(i));
         }
 

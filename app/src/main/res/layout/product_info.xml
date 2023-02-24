@@ -43,10 +43,23 @@
                     app:layout_constraintTop_toBottomOf="@id/recyclerViewProductInfo"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/favouriteButtonProductInfo"
-                    app:layout_constraintBottom_toTopOf="@id/descriptionProductInfo"
+                    app:layout_constraintBottom_toTopOf="@id/categoryProductInfo"
                     android:layout_gravity="bottom"
-                    android:paddingTop="30dp"
+                    android:paddingTop="15dp"
                     android:textSize="32sp"/>
+
+            <TextView
+                android:id="@+id/categoryProductInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categoria: "
+                app:layout_constraintWidth_max="275dp"
+                app:layout_constraintTop_toBottomOf="@id/titleProductInfo"
+                app:layout_constraintBottom_toTopOf="@id/descriptionProductInfo"
+                android:gravity="start"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="10dp"
+                android:textSize="22sp"/>
 
                 <ImageButton
                     android:id="@+id/favouriteButtonProductInfo"
@@ -55,8 +68,7 @@
                     android:src="@drawable/baseline_favorite_24"
                     app:layout_constraintTop_toBottomOf="@id/recyclerViewProductInfo"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/descriptionProductInfo"
-                    android:layout_gravity="end|center"
+                    app:layout_constraintBottom_toTopOf="@id/categoryProductInfo"
                     android:layout_marginEnd="30dp"
                     android:padding="15dp"/>
 
@@ -64,7 +76,7 @@
             android:id="@+id/descriptionProductInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/titleProductInfo"
+            app:layout_constraintTop_toBottomOf="@id/categoryProductInfo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
             android:text="Description"

@@ -7,6 +7,6 @@
     android:layout_height="match_parent"
     android:minHeight="300dp"
     android:src="@mipmap/ic_launcher"
-    android:padding="10dp">
+    android:paddingHorizontal="10dp">
 
 </ImageView>

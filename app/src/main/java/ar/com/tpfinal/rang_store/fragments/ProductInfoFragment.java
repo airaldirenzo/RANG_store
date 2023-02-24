@@ -21,10 +21,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -44,8 +47,8 @@ import ar.com.tpfinal.rang_store.model.Product;
 
 public class ProductInfoFragment extends Fragment {
 
-    FirebaseAuth mAuth;
-    FirebaseFirestore mFirestore;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore mFirestore;
     private NavController navHost;
     private ProductInfoBinding binding;
     private Integer quantity = 1;
@@ -55,23 +58,63 @@ public class ProductInfoFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = ProductInfoBinding.inflate(inflater,container,false);
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
 
         if(getArguments() != null){
             RecyclerView recyclerView = binding.recyclerViewProductInfo;
             Product product = getArguments().getParcelable("product");
+            String uid = mAuth.getCurrentUser().getUid();
 
-            Log.i("QUANTITY", ""+quantity);
+                mFirestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                ArrayList<Object> userCart = (ArrayList<Object>) document.get("cart");
+                                int position = 0;
+                                boolean flag = true;
+                                while(position < userCart.size() && flag){
+
+                                    HashMap productMap = (HashMap) ((HashMap)userCart.get(position)).get("product");
+                                    String quantity = ((HashMap) userCart.get(position)).get("quantity").toString();
+
+                                    if(productMap.get("id").toString().equals(product.getId().toString())){
+
+                                        binding.quantityEditText.setText(quantity);
+                                        binding.quantityEditText.setFocusable(false);
+                                        binding.quantityEditText.setEnabled(false);
+                                        binding.quantityEditText.setCursorVisible(false);
+                                        binding.quantityEditText.setKeyListener(null);
+
+                                        binding.buttonBuyProductInfo.setVisibility(View.GONE);
+                                        binding.buttonAddToCartProductInfo.setVisibility(View.GONE);
+                                        binding.buttonRemoveToCartProductInfo.setVisibility(View.VISIBLE);
+
+                                        flag = false;
+                                    }
+                                    position++;
+                                }
+                            }
+                        } else {
+                            Toast.makeText(requireContext(),"No se pudo completar la tarea",Toast.LENGTH_SHORT).show();
+                            Log.d("TASK FAILED", "failed with ", task.getException());
+                        }
+                    }
+                });
 
             binding.titleProductInfo.setText(product.getTitle());
+            binding.categoryProductInfo.setText(product.getCategory().getName());
             binding.descriptionProductInfo.setText(product.getDescription());
-            binding.priceProductInfo.setText("$"+String.valueOf(product.getPrice()));
+            binding.priceProductInfo.setText("$"+product.getPrice());
             List<String> urls = product.getImages();
             ImageSliderAdapter adapter = new ImageSliderAdapter(urls);
             recyclerView.setAdapter(adapter);
@@ -91,17 +134,6 @@ public class ProductInfoFragment extends Fragment {
 
             binding.quantityEditText.addTextChangedListener(quantityWatcher);
 
-            if (getArguments().getInt("quantity") != 0) {
-                binding.quantityEditText.setText(""+getArguments().getInt("quantity"));
-                binding.quantityEditText.setFocusable(false);
-                binding.quantityEditText.setEnabled(false);
-                binding.quantityEditText.setCursorVisible(false);
-                binding.quantityEditText.setKeyListener(null);
-
-                binding.buttonBuyProductInfo.setVisibility(View.GONE);
-                binding.buttonAddToCartProductInfo.setVisibility(View.GONE);
-                binding.buttonRemoveToCartProductInfo.setVisibility(View.VISIBLE);
-            }
         }
 
 
