@@ -96,10 +96,6 @@ public class PaymentActivity extends AppCompatActivity {
             case R.id.toolbarFavourite:
                 Log.i("ESTOS SON LOS PRODUCTOS FAVORITOS: ", "FAVORITOS");
                 break;
-
-            case R.id.toolbarSearchbar:
-                Log.i("ESTE ES LA BARRA DE BUSQUEDA: ", "BUSQUEDA");
-                break;
         }
         return super.onOptionsItemSelected(item);
     }

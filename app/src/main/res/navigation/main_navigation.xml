@@ -35,4 +35,24 @@
             app:destination="@id/productInfoFragment" />
     </fragment>
     <action android:id="@+id/action_global_productChartFragment" app:destination="@id/productChartFragment"/>
+    <fragment
+        android:id="@+id/buyOrderFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.BuyOrderFragment"
+        android:label="fragment_buy_order"
+        tools:layout="@layout/fragment_buy_order" >
+        <action
+            android:id="@+id/action_buyOrderFragment_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_buyOrderFragment" app:destination="@id/buyOrderFragment" />
+    <action android:id="@+id/action_global_favoritesFragment" app:destination="@id/favoritesFragment" />
 </navigation>

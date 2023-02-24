@@ -3,16 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/buyOrderFragment">
-    <fragment
-        android:id="@+id/buyOrderFragment"
-        android:name="ar.com.tpfinal.rang_store.fragments.BuyOrderFragment"
-        android:label="fragment_buy_order"
-        tools:layout="@layout/fragment_buy_order" >
-        <action
-            android:id="@+id/action_buyOrderFragment_to_purchaseDataFragment"
-            app:destination="@id/purchaseDataFragment" />
-    </fragment>
+    app:startDestination="@id/purchaseDataFragment">
     <fragment
         android:id="@+id/purchaseDataFragment"
         android:name="ar.com.tpfinal.rang_store.fragments.PurchaseDataFragment"

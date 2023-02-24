@@ -1,6 +1,7 @@
 package ar.com.tpfinal.rang_store.fragments;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,9 +28,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import ar.com.tpfinal.rang_store.PaymentActivity;
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.adapters.OrderAdapter;
-import ar.com.tpfinal.rang_store.adapters.ProductAdapter;
 import ar.com.tpfinal.rang_store.databinding.FragmentBuyOrderBinding;
 import ar.com.tpfinal.rang_store.model.ItemCart;
 import ar.com.tpfinal.rang_store.model.Product;
@@ -51,7 +52,7 @@ public class BuyOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         navHost = NavHostFragment.findNavController(this);
         binding = FragmentBuyOrderBinding.inflate(inflater,container,false);
-        this.setArguments(requireActivity().getIntent().getExtras());
+//        this.setArguments(requireActivity().getIntent().getExtras());
 
         if(getArguments() != null){
 
@@ -66,7 +67,11 @@ public class BuyOrderFragment extends Fragment {
                 loadOrder(singleProduct.get(0).getProduct(),singleProduct.get(0).getQuantity());
             }
 
-            binding.continuePurchaseButton.setOnClickListener(view -> { navHost.navigate(R.id.action_buyOrderFragment_to_purchaseDataFragment,getArguments()); });
+            binding.continuePurchaseButton.setOnClickListener(view -> {
+                Intent intent = new Intent(requireActivity(), PaymentActivity.class);
+                intent.putParcelableArrayListExtra("cart", getArguments().getParcelableArrayList("cart"));
+                startActivity(intent);
+            });
         }
 
         return binding.getRoot();

@@ -3,14 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/toolbarSearchbar"
-        android:orderInCategory="1"
-        android:title="searchBar"
-        android:icon="@drawable/baseline_search_24"
-        app:showAsAction="always"
-        app:actionViewClass="androidx.appcompat.widget.SearchView" />
-
-    <item
         android:id="@+id/toolbarFavourite"
         android:orderInCategory="2"
         android:title="favourite"
@@ -23,6 +15,5 @@
         android:title="shopCart"
         android:icon="@drawable/baseline_shopping_cart_24"
         app:showAsAction="always" />
-
 
 </menu>

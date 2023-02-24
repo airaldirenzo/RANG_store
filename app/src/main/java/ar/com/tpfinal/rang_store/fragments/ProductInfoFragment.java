@@ -1,6 +1,7 @@
 package ar.com.tpfinal.rang_store.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -65,6 +66,9 @@ public class ProductInfoFragment extends Fragment {
         if(getArguments() != null){
             RecyclerView recyclerView = binding.recyclerViewProductInfo;
             Product product = getArguments().getParcelable("product");
+
+            Log.i("QUANTITY", ""+quantity);
+
             binding.titleProductInfo.setText(product.getTitle());
             binding.descriptionProductInfo.setText(product.getDescription());
             binding.priceProductInfo.setText("$"+String.valueOf(product.getPrice()));
@@ -86,6 +90,18 @@ public class ProductInfoFragment extends Fragment {
             };
 
             binding.quantityEditText.addTextChangedListener(quantityWatcher);
+
+            if (getArguments().getInt("quantity") != 0) {
+                binding.quantityEditText.setText(""+getArguments().getInt("quantity"));
+                binding.quantityEditText.setFocusable(false);
+                binding.quantityEditText.setEnabled(false);
+                binding.quantityEditText.setCursorVisible(false);
+                binding.quantityEditText.setKeyListener(null);
+
+                binding.buttonBuyProductInfo.setVisibility(View.GONE);
+                binding.buttonAddToCartProductInfo.setVisibility(View.GONE);
+                binding.buttonRemoveToCartProductInfo.setVisibility(View.VISIBLE);
+            }
         }
 
 
@@ -113,6 +129,11 @@ public class ProductInfoFragment extends Fragment {
                 cart.add(new ItemCart(product,quantity));
                 intent.putParcelableArrayListExtra("single_product", (ArrayList<? extends Parcelable>) cart);
                 startActivity(intent);
+
+                Bundle args = new Bundle();
+                args.putParcelableArrayList("single_product", (ArrayList<? extends Parcelable>) cart);
+
+                navHost.navigate(R.id.action_global_buyOrderFragment, args);
             });
 
             binding.buttonAddToCartProductInfo.setOnClickListener(view1 -> {

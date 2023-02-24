@@ -32,10 +32,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import ar.com.tpfinal.rang_store.data.OnResult;
+import ar.com.tpfinal.rang_store.data.datasource.firebase.ProductMapper;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.AppRetrofit;
 import ar.com.tpfinal.rang_store.data.factory.ProductRepositoryFactory;
 import ar.com.tpfinal.rang_store.data.filter.FilterObject;
@@ -116,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.toolbarCart:
                 String uid = mAuth.getCurrentUser().getUid();
-                Intent intent = new Intent(this,PaymentActivity.class);
                 mFirestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -125,8 +126,12 @@ public class MainActivity extends AppCompatActivity {
                         if (document.exists()) {
 
                             List<ItemCart> cart = (List<ItemCart>) document.get("cart");
-                            intent.putParcelableArrayListExtra("cart", (ArrayList<? extends Parcelable>) cart);
-                            startActivity(intent);
+
+                            Bundle args = new Bundle();
+                            args.putParcelableArrayList("cart", (ArrayList<? extends Parcelable>) cart);
+
+                            NavController navController = NavHostFragment.findNavController(currentFragment);
+                            navController.navigate(R.id.action_global_buyOrderFragment, args);
 
                         } else {
                             Toast.makeText(currentFragment.requireContext(), "No se encontró el carrito",Toast.LENGTH_SHORT).show();
@@ -141,26 +146,6 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.toolbarFavourite:
                 Log.i("ESTOS SON LOS PRODUCTOS FAVORITOS: ", "FAVORITOS");
-                break;
-
-            case R.id.toolbarSearchbar:
-                SearchView searchView = (SearchView) item.getActionView();
-                searchView.setQueryHint("Escriba aqui para buscar");
-                searchView.setSubmitButtonEnabled(true);
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        FilterObject.getInstance().setTitleFilter(s);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-//                        arrayAdapter.getFilter().filter(s);
-                        return false;
-                    }
-                });
-
                 break;
         }
         return super.onOptionsItemSelected(item);

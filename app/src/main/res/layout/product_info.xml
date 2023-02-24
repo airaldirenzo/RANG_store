@@ -17,7 +17,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayoutProductInfo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewProductInfo"
@@ -125,6 +126,18 @@
             android:text="Agregar al carrito"
             android:layout_marginTop="30dp"
             android:layout_marginHorizontal="100dp"/>
+
+        <Button
+            android:id="@+id/buttonRemoveToCartProductInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/priceProductInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Eliminar del carrito"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="100dp"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/buttonBuyProductInfo"
