@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
@@ -34,6 +35,7 @@ import ar.com.tpfinal.rang_store.adapters.ProductAdapter;
 import ar.com.tpfinal.rang_store.data.OnResult;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.AppRetrofit;
 import ar.com.tpfinal.rang_store.data.factory.ProductRepositoryFactory;
+import ar.com.tpfinal.rang_store.data.filter.FilterObject;
 import ar.com.tpfinal.rang_store.data.repository.ProductRepository;
 import ar.com.tpfinal.rang_store.databinding.ProductChartBinding;
 import ar.com.tpfinal.rang_store.model.Category;
@@ -63,8 +65,10 @@ public class ProductChartFragment extends Fragment {
         //Si somos admin mostramos el boton flotante
         enableProductCreator();
         progressBarOn();
-        //Cargamos los productos desde la api
-        loadProducts();
+
+        //Cargamos los productos desde la api(sin filtro para cada vez que se ingresa)
+        FilterObject filter = FilterObject.getInstance();
+        loadProducts(filter);
 
         return binding.getRoot();
     }
@@ -80,6 +84,7 @@ public class ProductChartFragment extends Fragment {
                 navHost.navigate(R.id.action_productChartFragment_to_productCreator);
             }
         });
+
         binding.toggleFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,12 +100,34 @@ public class ProductChartFragment extends Fragment {
         binding.filterProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                FilterObject filter = FilterObject.getInstance();
+                filter.resetFilter();
+
                 Category category = (Category)binding.categoriesFilterSpinner.getSelectedItem();
                 String minPrice = binding.minPriceEditText.getText().toString();
                 String maxPrice = binding.maxPriceEditText.getText().toString();
-                if (category.equals("Seleccione una categoria") && minPrice.isEmpty() && maxPrice.isEmpty()) {
 
+                if (category.equals("Seleccione una categoria") && minPrice.isEmpty() && maxPrice.isEmpty()) {
+                    return;
                 }
+
+                filter.setCategoryId(category.getId());
+                filter.setMinPriceFilter(minPrice);
+                filter.setMaxPriceFilter(maxPrice);
+
+                loadProducts(filter);
+
+                binding.filterContainer.setVisibility(View.GONE);
+            }
+        });
+
+        binding.resetFilterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.categoriesFilterSpinner.setSelection(0);
+                binding.minPriceEditText.setText("");
+                binding.maxPriceEditText.setText("");
             }
         });
     }
@@ -126,11 +153,19 @@ public class ProductChartFragment extends Fragment {
         });
     }
 
-    private void loadProducts(){
+    private void loadProducts(FilterObject filterObject){
 
         OnResult<List<Product>> callback = new OnResult<>() {
             @Override
             public void onSuccess(List<Product> result) {
+
+                Log.i("PRODUCTOS FILTRADOS", ""+result.size());
+
+                int i = 0;
+                for (Product p:result) {
+                    Log.i("PRODUCTO "+i, p.toString());
+                    i++;
+                }
                 requireActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -142,7 +177,6 @@ public class ProductChartFragment extends Fragment {
                         progressBarOff();
                     }
                 });
-
             }
 
             @Override
@@ -153,8 +187,7 @@ public class ProductChartFragment extends Fragment {
 
         ProductRepository pr = ProductRepositoryFactory.create();
 
-        AppRetrofit.EXECUTOR_API.execute(()-> { pr.listProducts(callback); });
-
+        AppRetrofit.EXECUTOR_API.execute(()-> { pr.listProducts(callback, filterObject); });
     }
 
     private void progressBarOn(){

@@ -1,5 +1,7 @@
 package ar.com.tpfinal.rang_store.data.datasource.retrofit;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import ar.com.tpfinal.rang_store.data.datasource.ProductDataSource;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.entities.ProductApiRest;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.interfaces.IsSuccessful;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.objects.NewProduct;
+import ar.com.tpfinal.rang_store.data.filter.FilterObject;
 import ar.com.tpfinal.rang_store.model.Product;
 import retrofit2.Response;
 
@@ -52,9 +55,18 @@ public class ProductRetrofitDataSource implements ProductDataSource {
     }
 
     @Override
-    public void listProducts(OnResult<List<Product>> callback) {
+    public void listProducts(OnResult<List<Product>> callback, FilterObject filterObject) {
         try {
-            Response<List<Product>> response = productApiRest.listProducts().execute();
+            Response<List<Product>> response;
+            Log.i("PARAMETROS DE FILTRO", filterObject.toString());
+            response = productApiRest.
+                    listProducts(
+                            filterObject.getTitleFilter(),
+                            filterObject.getCategoryId(),
+                            filterObject.getMinPriceFilter(),
+                            filterObject.getMaxPriceFilter())
+                    .execute();
+
 
             IsSuccessful<List<Product>> responseStatus = new IsSuccessful<List<Product>>() {
                 @Override

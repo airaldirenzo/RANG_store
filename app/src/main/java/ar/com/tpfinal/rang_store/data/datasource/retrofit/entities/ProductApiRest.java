@@ -16,6 +16,13 @@ import retrofit2.http.Query;
 
 public interface ProductApiRest {
     @GET("products")
+    Call<List<Product>> listProducts(
+            @Query("title") String title,
+            @Query("categoryId") Integer categoryId,
+            @Query("price_min") String price_min,
+            @Query("price_max") String price_max);
+
+    @GET("products")
     Call<List<Product>> listProducts();
 
     @POST("products")

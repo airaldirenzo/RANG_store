@@ -18,6 +18,7 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ import java.util.Map;
 import ar.com.tpfinal.rang_store.data.OnResult;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.AppRetrofit;
 import ar.com.tpfinal.rang_store.data.factory.ProductRepositoryFactory;
+import ar.com.tpfinal.rang_store.data.filter.FilterObject;
 import ar.com.tpfinal.rang_store.data.repository.ProductRepository;
 import ar.com.tpfinal.rang_store.databinding.ActivityMainBinding;
 import ar.com.tpfinal.rang_store.model.ItemCart;
@@ -144,15 +146,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.toolbarSearchbar:
                 SearchView searchView = (SearchView) item.getActionView();
                 searchView.setQueryHint("Escriba aqui para buscar");
+                searchView.setSubmitButtonEnabled(true);
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String s) {
+                        FilterObject.getInstance().setTitleFilter(s);
                         return false;
                     }
 
                     @Override
                     public boolean onQueryTextChange(String s) {
-                        //arrayAdapter.getFilter().filter(s);
+//                        arrayAdapter.getFilter().filter(s);
                         return false;
                     }
                 });

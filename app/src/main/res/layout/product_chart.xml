@@ -99,7 +99,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:hint="min."
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:maxLength="7" />
 
                 <TextView
@@ -118,19 +118,37 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:hint="max."
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:maxLength="7" />
 
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/filterProductButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:minWidth="175dp"
-                android:text="Filtrar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/filterProductButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:minWidth="130dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Filtrar" />
+
+                <Button
+                    android:id="@+id/resetFilterButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:minWidth="130dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Limpiar" />
+            </LinearLayout>
 
             <View
                 android:id="@+id/dividerBottom"

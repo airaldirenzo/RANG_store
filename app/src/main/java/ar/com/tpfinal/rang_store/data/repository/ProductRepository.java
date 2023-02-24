@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.com.tpfinal.rang_store.data.OnResult;
 import ar.com.tpfinal.rang_store.data.datasource.ProductDataSource;
+import ar.com.tpfinal.rang_store.data.filter.FilterObject;
 import ar.com.tpfinal.rang_store.model.Product;
 
 public class ProductRepository  implements ProductDataSource {
@@ -20,8 +21,8 @@ public class ProductRepository  implements ProductDataSource {
     }
 
     @Override
-    public void listProducts(OnResult<List<Product>> callback) {
-        ds.listProducts(callback);
+    public void listProducts(OnResult<List<Product>> callback, FilterObject filterObject) {
+        ds.listProducts(callback, filterObject);
     }
 
     @Override
