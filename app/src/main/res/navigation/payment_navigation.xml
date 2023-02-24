@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/transferFragment"
-        android:name="ar.com.tpfinal.rang_store.TransferFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.TransferFragment"
         android:label="fragment_transfer"
         tools:layout="@layout/fragment_transfer" />
 </navigation>

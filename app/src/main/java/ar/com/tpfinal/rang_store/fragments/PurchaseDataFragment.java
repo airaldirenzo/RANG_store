@@ -46,16 +46,55 @@ public class PurchaseDataFragment extends Fragment {
         binding.radioButtonCredit.setOnClickListener(view1 -> showFields());
         binding.radioButtonDebit.setOnClickListener(view1 -> showFields());
         binding.radioButtonTransfer.setOnClickListener(view1 -> showFields());
+
         binding.buyButton.setOnClickListener(view1 -> {
             if(binding.radioButtonCredit.isChecked() || binding.radioButtonDebit.isChecked()){
                 //TODO NAVEGAR A FACTURA?
                 //TODO GUARDAR DATOS DE COMPRA
+                if(checkEmptyFields()) { return; }
+
+
+
             }
             else if(binding.radioButtonTransfer.isChecked()){
                 navHost.navigate(R.id.action_purchaseDataFragment_to_transferFragment);
             }
         });
 
+    }
+
+    private boolean checkEmptyFields(){
+
+        boolean flag = false;
+
+        if(binding.editTextCardNumber.getText().toString().isEmpty()){
+            binding.editTextCardNumber.setError("Numero de tarjeta obligatorio");
+            binding.editTextCardNumber.requestFocus();
+
+            flag = true;
+        }
+
+        if(binding.editTextExpirationDate.getText().toString().isEmpty()){
+            binding.editTextExpirationDate.setError("Fecha de expiracion obligatorio");
+            binding.editTextExpirationDate.requestFocus();
+
+            flag = true;
+        }
+
+        if(binding.editTextSecurityCode.getText().toString().isEmpty()){
+            binding.editTextSecurityCode.setError("Codigo de seguridad obligatorio");
+            binding.editTextSecurityCode.requestFocus();
+
+            flag = true;
+        }
+        if(binding.editTextCardName.getText().toString().isEmpty()) {
+            binding.editTextCardName.setError("Nombre de la tarjeta obligatorio");
+            binding.editTextCardName.requestFocus();
+
+            flag = true;
+        }
+
+        return flag;
     }
 
     private void showFields(){

@@ -140,7 +140,7 @@
             android:layout_marginHorizontal="100dp"/>
 
         <Button
-            android:id="@+id/buttonRemoveToCartProductInfo"
+            android:id="@+id/buttonRemoveProductFromCartProductInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/priceProductInfo"

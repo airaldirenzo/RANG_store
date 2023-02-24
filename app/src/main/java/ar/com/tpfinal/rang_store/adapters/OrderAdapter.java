@@ -60,16 +60,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 holder.setData(product,quantity);
             }
 
-            //TODO PODRIAMOS HACER QUE NAVEGUES HASTA EL INFO PRODUCT DE ESE PRODUCTO DE LA ORDEN, PERO SI JUSTO SE BORRA DE LA API RIP.
             holder.itemView.setOnClickListener(view -> {
                 Bundle args = new Bundle();
-                Log.i("LO QUE SEA", (dataList.get(holder.getLayoutPosition()).get("product")).getClass().toString());
 
                 Product selected = (dataList.get(position).get("product") instanceof Product) ?
                         (Product) dataList.get(position).get("product") :
                         ProductMapper.entityProductToProduct((HashMap) dataList.get(position).get("product"));
 
-                Integer quantity = (int)(long) dataList.get(holder.getLayoutPosition()).get("quantity");
+                Integer quantity = (dataList.get(position).get("quantity") instanceof Long) ?
+                        (int)(long) dataList.get(holder.getLayoutPosition()).get("quantity") :
+                        (Integer) dataList.get(position).get("quantity");
+
                 args.putParcelable("product", selected);
                 args.putInt("quantity",quantity);
                 Navigation.findNavController(view).navigate(R.id.action_buyOrderFragment_to_productInfoFragment, args);

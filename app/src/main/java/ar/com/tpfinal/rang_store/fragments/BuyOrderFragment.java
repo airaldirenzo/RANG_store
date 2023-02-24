@@ -19,6 +19,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -68,9 +69,16 @@ public class BuyOrderFragment extends Fragment {
             }
 
             binding.continuePurchaseButton.setOnClickListener(view -> {
-                Intent intent = new Intent(requireActivity(), PaymentActivity.class);
-                intent.putParcelableArrayListExtra("cart", getArguments().getParcelableArrayList("cart"));
-                startActivity(intent);
+                if(binding.orderRV.getChildCount() == 0){
+                    navHost.navigate(R.id.action_buyOrderFragment_to_productChartFragment);
+                    Toast.makeText(requireContext(),"No hay productos que comprar",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Intent intent = new Intent(requireActivity(), PaymentActivity.class);
+                    intent.putParcelableArrayListExtra("cart", getArguments().getParcelableArrayList("cart"));
+                    startActivity(intent);
+                }
+
             });
         }
 
@@ -95,4 +103,5 @@ public class BuyOrderFragment extends Fragment {
         OrderAdapter orderAdapter = new OrderAdapter(cart);
         recycler.setAdapter(orderAdapter);
     }
+
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,12 +32,14 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ar.com.tpfinal.rang_store.MainActivity;
 import ar.com.tpfinal.rang_store.PaymentActivity;
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.adapters.ImageSliderAdapter;
+import ar.com.tpfinal.rang_store.data.datasource.firebase.Cart;
 import ar.com.tpfinal.rang_store.databinding.ProductInfoBinding;
 import ar.com.tpfinal.rang_store.model.ItemCart;
 import ar.com.tpfinal.rang_store.model.Product;
@@ -93,7 +96,7 @@ public class ProductInfoFragment extends Fragment {
 
                                         binding.buttonBuyProductInfo.setVisibility(View.GONE);
                                         binding.buttonAddToCartProductInfo.setVisibility(View.GONE);
-                                        binding.buttonRemoveToCartProductInfo.setVisibility(View.VISIBLE);
+                                        binding.buttonRemoveProductFromCartProductInfo.setVisibility(View.VISIBLE);
 
                                         flag = false;
                                     }
@@ -151,13 +154,9 @@ public class ProductInfoFragment extends Fragment {
             Product product = getArguments().getParcelable("product");
 
             binding.buttonBuyProductInfo.setOnClickListener(view1 -> {
-                Intent intent = new Intent(requireActivity(),PaymentActivity.class);
 
                 List<ItemCart> cart = new ArrayList<>();
                 cart.add(new ItemCart(product,quantity));
-                intent.putParcelableArrayListExtra("single_product", (ArrayList<? extends Parcelable>) cart);
-                startActivity(intent);
-
                 Bundle args = new Bundle();
                 args.putParcelableArrayList("single_product", (ArrayList<? extends Parcelable>) cart);
 
@@ -185,6 +184,13 @@ public class ProductInfoFragment extends Fragment {
                         Toast.makeText(requireContext(),"No se pudo agregar el producto",Toast.LENGTH_SHORT).show();
                     }
                 });
+
+            });
+
+            binding.buttonRemoveProductFromCartProductInfo.setOnClickListener(view1 -> {
+
+                ItemCart itemCart = new ItemCart(product,quantity);
+                Cart.removeProductFromCart(itemCart,binding.getRoot());
 
             });
         }

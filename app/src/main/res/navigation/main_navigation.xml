@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_buyOrderFragment_to_productInfoFragment"
             app:destination="@id/productInfoFragment" />
+        <action
+            android:id="@+id/action_buyOrderFragment_to_productChartFragment"
+            app:destination="@id/productChartFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"

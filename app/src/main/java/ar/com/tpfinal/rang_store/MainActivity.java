@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import ar.com.tpfinal.rang_store.data.OnResult;
+import ar.com.tpfinal.rang_store.data.datasource.firebase.Cart;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.ProductMapper;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.AppRetrofit;
 import ar.com.tpfinal.rang_store.data.factory.ProductRepositoryFactory;
@@ -117,35 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.toolbarCart:
-                String uid = mAuth.getCurrentUser().getUid();
-                mFirestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-
-                            List<ItemCart> cart = (List<ItemCart>) document.get("cart");
-
-                            Bundle args = new Bundle();
-                            args.putParcelableArrayList("cart", (ArrayList<? extends Parcelable>) cart);
-
-                            NavController navController = NavHostFragment.findNavController(currentFragment);
-                            navController.navigate(R.id.action_global_buyOrderFragment, args);
-
-                        } else {
-                            Toast.makeText(currentFragment.requireContext(), "No se encontró el carrito",Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(currentFragment.requireContext(),"No se pudo completar la tarea",Toast.LENGTH_SHORT).show();
-                        Log.d("TASK FAILED", "failed with ", task.getException());
-                    }
-                }
-            });
+                Cart.goToCart(currentFragment);
                 break;
 
             case R.id.toolbarFavourite:
                 Log.i("ESTOS SON LOS PRODUCTOS FAVORITOS: ", "FAVORITOS");
+                Cart.removeCart();
                 break;
         }
         return super.onOptionsItemSelected(item);
