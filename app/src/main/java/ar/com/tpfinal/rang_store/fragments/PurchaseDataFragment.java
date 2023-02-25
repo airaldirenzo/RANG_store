@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import ar.com.tpfinal.rang_store.R;
+import ar.com.tpfinal.rang_store.data.datasource.firebase.Purchase;
 import ar.com.tpfinal.rang_store.databinding.FragmentPurchaseDataBinding;
 import ar.com.tpfinal.rang_store.model.ItemCart;
 
@@ -22,6 +23,8 @@ public class PurchaseDataFragment extends Fragment {
 
     private FragmentPurchaseDataBinding binding;
     private NavController navHost;
+    private List<ItemCart> singlePurchase;
+    private List<ItemCart> cartPurchase;
 
     public PurchaseDataFragment() {
         // Required empty public constructor
@@ -42,8 +45,8 @@ public class PurchaseDataFragment extends Fragment {
 
         if(getArguments() != null){
 
-            List<ItemCart> singlePurchase = getArguments().getParcelableArrayList("single_purchase");
-            //List<> = getArguments().getParcelableArrayList("cart_purchase");
+            singlePurchase = getArguments().getParcelableArrayList("single_purchase");
+            cartPurchase = getArguments().getParcelableArrayList("cart_purchase");
 
         }
 
@@ -62,11 +65,15 @@ public class PurchaseDataFragment extends Fragment {
 
         binding.buyButton.setOnClickListener(view1 -> {
             if(binding.radioButtonCredit.isChecked() || binding.radioButtonDebit.isChecked()){
-                //TODO NAVEGAR A FACTURA?
-                //TODO GUARDAR DATOS DE COMPRA
+
                 if(checkEmptyFields()) { return; }
 
-
+                if(singlePurchase != null){
+                    Purchase.savePurchase(singlePurchase,binding.getRoot());
+                }
+                else if(cartPurchase != null){
+                    Purchase.savePurchase(cartPurchase,binding.getRoot());
+                }
 
             }
             else if(binding.radioButtonTransfer.isChecked()){
