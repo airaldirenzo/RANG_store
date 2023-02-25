@@ -76,8 +76,8 @@ public class BuyOrderFragment extends Fragment {
                     if(singleProduct != null){
                         intent.putParcelableArrayListExtra("single_purchase", (ArrayList<? extends Parcelable>) singleProduct);
                     }
-                    else if(getArguments().getParcelableArrayList("cart") != null){
-                        intent.putParcelableArrayListExtra("cart_purchase", getArguments().getParcelableArrayList("cart"));
+                    else if(cart != null){
+                        intent.putParcelableArrayListExtra("cart_purchase", (ArrayList<? extends Parcelable>) cart);
                     }
                     startActivity(intent);
                 }
