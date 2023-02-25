@@ -57,14 +57,13 @@ public class BuyOrderFragment extends Fragment {
         if(getArguments() != null){
 
             List<ItemCart> singleProduct = getArguments().getParcelableArrayList("single_product");
-            List<Map<String, Object>> cart = new ArrayList<>();
+            List<ItemCart> cart = getArguments().getParcelableArrayList("cart");
 
-            if(getArguments().getParcelableArrayList("cart") != null){
-                cart.addAll(getArguments().getParcelableArrayList("cart"));
+            if(cart != null){
                 loadOrder(cart);
             }
             else if(singleProduct != null){
-                loadOrder(singleProduct.get(0).getProduct(),singleProduct.get(0).getQuantity());
+                loadOrder(singleProduct.get(0));
             }
 
             binding.continuePurchaseButton.setOnClickListener(view -> {
@@ -89,19 +88,16 @@ public class BuyOrderFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void loadOrder(Product product, int quantity){
+    private void loadOrder(ItemCart itemCart){
         RecyclerView recycler = binding.orderRV;
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
-        List<Map<String,Object>> dataList = new ArrayList<>();
-        Map<String,Object> map = new HashMap<>();
-        map.put("product",product);
-        map.put("quantity",quantity);
-        dataList.add(map);
-        OrderAdapter orderAdapter = new OrderAdapter(dataList);
+        List<ItemCart> singleItem = new ArrayList<>();
+        singleItem.add(itemCart);
+        OrderAdapter orderAdapter = new OrderAdapter(singleItem);
         recycler.setAdapter(orderAdapter);
     }
 
-    private void loadOrder(List<Map<String,Object>> cart){
+    private void loadOrder(List<ItemCart> cart){
         RecyclerView recycler = binding.orderRV;
         recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         OrderAdapter orderAdapter = new OrderAdapter(cart);

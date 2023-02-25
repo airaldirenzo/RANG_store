@@ -27,13 +27,14 @@ import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.ProductMapper;
 import ar.com.tpfinal.rang_store.fragments.LogIn;
 import ar.com.tpfinal.rang_store.model.Category;
+import ar.com.tpfinal.rang_store.model.ItemCart;
 import ar.com.tpfinal.rang_store.model.Product;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private List<Map<String,Object> > dataList;
+    private List<ItemCart> dataList;
 
-    public OrderAdapter(List<Map<String,Object>> dataList) { this.dataList = dataList; }
+    public OrderAdapter(List<ItemCart> dataList) { this.dataList = dataList; }
 
     @NonNull
     @Override
@@ -49,27 +50,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         if(dataList != null){
 
-            if(dataList.get(position).get("product") instanceof Product){
-                holder.setData(
-                        (Product) dataList.get(position).get("product"),
-                        (Integer) dataList.get(position).get("quantity"));
-            }
-            else {
-                Product product = ProductMapper.entityProductToProduct((HashMap) dataList.get(position).get("product"));
-                Integer quantity = (int)(long) dataList.get(position).get("quantity");
-                holder.setData(product,quantity);
-            }
+            holder.setData(dataList.get(position).getProduct(),dataList.get(position).getQuantity());
 
             holder.itemView.setOnClickListener(view -> {
                 Bundle args = new Bundle();
 
-                Product selected = (dataList.get(position).get("product") instanceof Product) ?
-                        (Product) dataList.get(position).get("product") :
-                        ProductMapper.entityProductToProduct((HashMap) dataList.get(position).get("product"));
+                Product selected = dataList.get(position).getProduct();
 
-                Integer quantity = (dataList.get(position).get("quantity") instanceof Long) ?
-                        (int)(long) dataList.get(holder.getLayoutPosition()).get("quantity") :
-                        (Integer) dataList.get(position).get("quantity");
+                Integer quantity = dataList.get(position).getQuantity();
 
                 args.putParcelable("product", selected);
                 args.putInt("quantity",quantity);

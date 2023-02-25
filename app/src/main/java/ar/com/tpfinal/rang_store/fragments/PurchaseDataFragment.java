@@ -12,8 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.databinding.FragmentPurchaseDataBinding;
+import ar.com.tpfinal.rang_store.model.ItemCart;
 
 public class PurchaseDataFragment extends Fragment {
 
@@ -39,7 +42,8 @@ public class PurchaseDataFragment extends Fragment {
 
         if(getArguments() != null){
 
-
+            List<ItemCart> singlePurchase = getArguments().getParcelableArrayList("single_purchase");
+            //List<> = getArguments().getParcelableArrayList("cart_purchase");
 
         }
 

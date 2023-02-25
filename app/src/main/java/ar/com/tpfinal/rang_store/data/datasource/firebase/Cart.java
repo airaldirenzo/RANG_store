@@ -46,7 +46,19 @@ public class Cart {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
 
-                        List<ItemCart> cart = (List<ItemCart>) document.get("cart");
+                        List<HashMap> cartEntity = (List<HashMap>) document.get("cart");
+                        List<ItemCart> cart = new ArrayList<>();
+
+                        for(int i = 0; i < cartEntity.size(); i++){
+
+                            Product product = ProductMapper.entityProductToProduct((HashMap) cartEntity.get(i).get("product"));
+                            Integer quantity = (int)(long) cartEntity.get(i).get("quantity");
+
+                            ItemCart itemCart = new ItemCart(product,quantity);
+                            cart.add(itemCart);
+
+                            Log.i("CART CART", "onComplete: "+cart.get(i).toString());
+                        }
 
                         Bundle args = new Bundle();
                         args.putParcelableArrayList("cart", (ArrayList<? extends Parcelable>) cart);
