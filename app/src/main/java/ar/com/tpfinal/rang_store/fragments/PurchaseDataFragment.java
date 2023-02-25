@@ -35,6 +35,15 @@ public class PurchaseDataFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentPurchaseDataBinding.inflate(inflater,container,false);
+        this.setArguments(requireActivity().getIntent().getExtras());
+
+        if(getArguments() != null){
+
+
+
+        }
+
+
         return binding.getRoot();
     }
 

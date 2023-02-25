@@ -70,45 +70,8 @@ public class ProductInfoFragment extends Fragment {
         if(getArguments() != null){
             RecyclerView recyclerView = binding.recyclerViewProductInfo;
             Product product = getArguments().getParcelable("product");
-            String uid = mAuth.getCurrentUser().getUid();
 
-                mFirestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                ArrayList<Object> userCart = (ArrayList<Object>) document.get("cart");
-                                int position = 0;
-                                boolean flag = true;
-                                while(position < userCart.size() && flag){
-
-                                    HashMap productMap = (HashMap) ((HashMap)userCart.get(position)).get("product");
-                                    String quantity = ((HashMap) userCart.get(position)).get("quantity").toString();
-
-                                    if(productMap.get("id").toString().equals(product.getId().toString())){
-
-                                        binding.quantityEditText.setText(quantity);
-                                        binding.quantityEditText.setFocusable(false);
-                                        binding.quantityEditText.setEnabled(false);
-                                        binding.quantityEditText.setCursorVisible(false);
-                                        binding.quantityEditText.setKeyListener(null);
-
-                                        binding.buttonBuyProductInfo.setVisibility(View.GONE);
-                                        binding.buttonAddToCartProductInfo.setVisibility(View.GONE);
-                                        binding.buttonRemoveProductFromCartProductInfo.setVisibility(View.VISIBLE);
-
-                                        flag = false;
-                                    }
-                                    position++;
-                                }
-                            }
-                        } else {
-                            Toast.makeText(requireContext(),"No se pudo completar la tarea",Toast.LENGTH_SHORT).show();
-                            Log.d("TASK FAILED", "failed with ", task.getException());
-                        }
-                    }
-                });
+            Cart.productInCart(product,binding);
 
             binding.titleProductInfo.setText(product.getTitle());
             binding.categoryProductInfo.setText(product.getCategory().getName());

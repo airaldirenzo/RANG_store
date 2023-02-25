@@ -23,10 +23,13 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ar.com.tpfinal.rang_store.R;
+import ar.com.tpfinal.rang_store.databinding.ProductInfoBinding;
 import ar.com.tpfinal.rang_store.model.ItemCart;
+import ar.com.tpfinal.rang_store.model.Product;
 
 public class Cart {
     public static void goToCart(Fragment currentFragment){
@@ -95,6 +98,52 @@ public class Cart {
                     }
                 });
 
+    }
+
+    public static void productInCart(Product product, ProductInfoBinding binding){
+
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance().collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        ArrayList<Object> userCart = (ArrayList<Object>) document.get("cart");
+                        int position = 0;
+                        boolean flag = true;
+                        while(position < userCart.size() && flag){
+
+                            HashMap productMap = (HashMap) ((HashMap)userCart.get(position)).get("product");
+                            String quantity = ((HashMap) userCart.get(position)).get("quantity").toString();
+
+                            if(productMap.get("id").toString().equals(product.getId().toString())){
+
+                                binding.quantityEditText.setText(quantity);
+                                binding.quantityEditText.setFocusable(false);
+                                binding.quantityEditText.setEnabled(false);
+                                binding.quantityEditText.setCursorVisible(false);
+                                binding.quantityEditText.setKeyListener(null);
+
+                                binding.buttonBuyProductInfo.setVisibility(View.GONE);
+                                binding.buttonAddToCartProductInfo.setVisibility(View.GONE);
+                                binding.buttonRemoveProductFromCartProductInfo.setVisibility(View.VISIBLE);
+
+                                Toast.makeText(binding.getRoot().getContext(),"El producto ya se encuentra en el carrito",Toast.LENGTH_SHORT).show();
+
+                                flag = false;
+                            }
+                            position++;
+                        }
+                    }
+                } else {
+                    Toast.makeText(binding.getRoot().getContext(),"No se pudo completar la tarea",Toast.LENGTH_SHORT).show();
+                    Log.d("TASK FAILED", "failed with ", task.getException());
+                }
+            }
+        });
     }
 
 }

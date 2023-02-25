@@ -53,7 +53,6 @@ public class BuyOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         navHost = NavHostFragment.findNavController(this);
         binding = FragmentBuyOrderBinding.inflate(inflater,container,false);
-//        this.setArguments(requireActivity().getIntent().getExtras());
 
         if(getArguments() != null){
 
@@ -75,7 +74,12 @@ public class BuyOrderFragment extends Fragment {
                 }
                 else{
                     Intent intent = new Intent(requireActivity(), PaymentActivity.class);
-                    intent.putParcelableArrayListExtra("cart", getArguments().getParcelableArrayList("cart"));
+                    if(singleProduct != null){
+                        intent.putParcelableArrayListExtra("single_purchase", (ArrayList<? extends Parcelable>) singleProduct);
+                    }
+                    else if(getArguments().getParcelableArrayList("cart") != null){
+                        intent.putParcelableArrayListExtra("cart_purchase", getArguments().getParcelableArrayList("cart"));
+                    }
                     startActivity(intent);
                 }
 
