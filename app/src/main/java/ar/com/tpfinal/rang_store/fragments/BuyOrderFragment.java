@@ -80,7 +80,7 @@ public class BuyOrderFragment extends Fragment {
                 else{
                     Intent intent = new Intent(requireActivity(), PaymentActivity.class);
                     if(cart != null){
-                        intent.putParcelableArrayListExtra("single_purchase", (ArrayList<? extends Parcelable>) cart);
+                        intent.putParcelableArrayListExtra("purchase", (ArrayList<? extends Parcelable>) cart);
                     }
 
                     startActivity(intent);

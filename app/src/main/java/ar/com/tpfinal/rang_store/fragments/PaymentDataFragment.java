@@ -25,8 +25,7 @@ public class PaymentDataFragment extends Fragment {
 
     private FragmentPaymentDataBinding binding;
     private NavController navHost;
-    private List<ItemCart> singlePurchase;
-    private List<ItemCart> cartPurchase;
+    private List<ItemCart> purchase;
 
     public PaymentDataFragment() {
         // Required empty public constructor
@@ -46,10 +45,7 @@ public class PaymentDataFragment extends Fragment {
         this.setArguments(requireActivity().getIntent().getExtras());
 
         if(getArguments() != null){
-
-            singlePurchase = getArguments().getParcelableArrayList("single_purchase");
-            cartPurchase = getArguments().getParcelableArrayList("cart_purchase");
-
+            purchase = getArguments().getParcelableArrayList("purchase");
         }
 
 
@@ -72,11 +68,8 @@ public class PaymentDataFragment extends Fragment {
 
                 //TODO PARSEAR Y VERIFICAR FECHA VALIDA, FECHA MAYOR A LA ACTUAL, Y QUE NO PONGAN 30 DE FEBRERO, ETC
 
-                if(singlePurchase != null){
-                    Purchase.savePurchase(singlePurchase,binding.getRoot());
-                }
-                else if(cartPurchase != null){
-                    Purchase.savePurchase(cartPurchase,binding.getRoot());
+                if(purchase != null){
+                    Purchase.savePurchase(purchase,binding.getRoot());
                 }
 
                 startActivity(new Intent(requireActivity(), MainActivity.class));

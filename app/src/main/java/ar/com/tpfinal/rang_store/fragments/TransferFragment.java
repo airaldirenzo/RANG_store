@@ -38,15 +38,11 @@ public class TransferFragment extends Fragment {
         binding = FragmentTransferBinding.inflate(inflater,container,false);
 
         if (getArguments() != null) {
-            List<ItemCart> singlePurchase = getArguments().getParcelableArrayList("single_purchase");
-            List<ItemCart> cart = getArguments().getParcelableArrayList("cart_purchase");
+            List<ItemCart> purchase = getArguments().getParcelableArrayList("purchase");
 
             binding.uploadReceipt.setOnClickListener(view -> {
-                if(singlePurchase != null){
-                    Purchase.savePurchase(singlePurchase,binding.getRoot());
-                }
-                else if(cart != null){
-                    Purchase.savePurchase(cart,binding.getRoot());
+                if(purchase != null){
+                    Purchase.savePurchase(purchase,binding.getRoot());
                 }
 
                 startActivity(new Intent(requireActivity(), MainActivity.class));
