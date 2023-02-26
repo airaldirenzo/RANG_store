@@ -109,11 +109,9 @@ public class Cart {
                         Toast.makeText(fragment.requireContext(),"No se pudo eliminar el producto",Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
 
     public static void productInCart(Product product, ProductInfoBinding binding){
-
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -157,5 +155,4 @@ public class Cart {
             }
         });
     }
-
 }

@@ -98,7 +98,7 @@ public class RegisterUser extends Fragment {
                             User user = new User(uid,
                                     binding.editTextName.getText().toString(),
                                     binding.editTextLastName.getText().toString(),
-                                    email, new ArrayList<>());
+                                    email, new ArrayList<>(), new ArrayList<>());
 
                             mFirestore.collection("users").document(uid).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

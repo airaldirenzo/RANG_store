@@ -1,6 +1,7 @@
 package ar.com.tpfinal.rang_store.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ import ar.com.tpfinal.rang_store.PaymentActivity;
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.adapters.ImageSliderAdapter;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.Cart;
+import ar.com.tpfinal.rang_store.data.datasource.firebase.Favorites;
 import ar.com.tpfinal.rang_store.databinding.ProductInfoBinding;
 import ar.com.tpfinal.rang_store.model.ItemCart;
 import ar.com.tpfinal.rang_store.model.Product;
@@ -53,7 +55,6 @@ public class ProductInfoFragment extends Fragment {
     private Integer quantity = 1;
 
     public ProductInfoFragment() {
-
     }
 
     @Override
@@ -72,6 +73,8 @@ public class ProductInfoFragment extends Fragment {
             Product product = getArguments().getParcelable("product");
 
             Cart.productInCart(product,binding);
+
+            Favorites.productInFavorites(product,binding);
 
             binding.titleProductInfo.setText(product.getTitle());
             binding.categoryProductInfo.setText(product.getCategory().getName());
@@ -95,7 +98,6 @@ public class ProductInfoFragment extends Fragment {
             };
 
             binding.quantityEditText.addTextChangedListener(quantityWatcher);
-
         }
 
 
@@ -147,14 +149,11 @@ public class ProductInfoFragment extends Fragment {
                         Toast.makeText(requireContext(),"No se pudo agregar el producto",Toast.LENGTH_SHORT).show();
                     }
                 });
-
             });
 
             binding.buttonRemoveProductFromCartProductInfo.setOnClickListener(view1 -> {
-
                 ItemCart itemCart = new ItemCart(product,quantity);
                 Cart.removeProductFromCart(itemCart,binding.getRoot());
-
             });
         }
     }

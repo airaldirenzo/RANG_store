@@ -38,6 +38,7 @@ import java.util.Map;
 
 import ar.com.tpfinal.rang_store.data.OnResult;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.Cart;
+import ar.com.tpfinal.rang_store.data.datasource.firebase.Favorites;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.ProductMapper;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.AppRetrofit;
 import ar.com.tpfinal.rang_store.data.factory.ProductRepositoryFactory;
@@ -122,8 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.toolbarFavourite:
-                Log.i("ESTOS SON LOS PRODUCTOS FAVORITOS: ", "FAVORITOS");
-                Cart.removeCart();
+                Favorites.goToFavorites(currentFragment);
                 break;
         }
         return super.onOptionsItemSelected(item);

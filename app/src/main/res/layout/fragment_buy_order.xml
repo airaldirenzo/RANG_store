@@ -17,7 +17,8 @@
         android:text="Estas por comprar los siguientes productos"
         android:layout_marginHorizontal="30dp"
         android:paddingTop="30dp"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:textAlignment="center"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderRV"

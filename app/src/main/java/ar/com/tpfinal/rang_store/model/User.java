@@ -12,12 +12,15 @@ public class User {
     private String email;
     private List<ItemCart> cart;
 
-    public User(String uid, String name, String lastname, String email, List<ItemCart> cart) {
+    private List<Product> favorites;
+
+    public User(String uid, String name, String lastname, String email, List<ItemCart> cart, List<Product> favorites) {
         this.uid = uid;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.cart = cart;
+        this.favorites = favorites;
     }
 
     public String getUid() {
@@ -58,5 +61,13 @@ public class User {
 
     public void setCart(List<ItemCart> cart) {
         this.cart = cart;
+    }
+
+    public List<Product> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Product> favorites) {
+        this.favorites = favorites;
     }
 }
