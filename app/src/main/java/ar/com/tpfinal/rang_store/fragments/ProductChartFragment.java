@@ -143,7 +143,7 @@ public class ProductChartFragment extends Fragment {
     private void enableProductCreator(){
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        //TODO puede llegar a tirar nullPointer si se nos corta el internet en medio de la app
+
         FirebaseFirestore.getInstance().collection("users").document(currentUser.getUid()).get().addOnSuccessListener(document ->{
             if(document.exists()){
                 String role = document.getString("role");
@@ -152,11 +152,7 @@ public class ProductChartFragment extends Fragment {
                 }
             }
             else{
-                try {
-                    throw new Exception("No se encontro un documento valido");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                Toast.makeText(requireContext(),"No se encontro el usuario",Toast.LENGTH_SHORT).show();
             }
         });
     }

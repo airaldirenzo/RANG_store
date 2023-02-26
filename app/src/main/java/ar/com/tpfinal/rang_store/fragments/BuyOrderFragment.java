@@ -34,6 +34,7 @@ import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.adapters.OrderAdapter;
 import ar.com.tpfinal.rang_store.databinding.FragmentBuyOrderBinding;
 import ar.com.tpfinal.rang_store.model.ItemCart;
+import ar.com.tpfinal.rang_store.model.Order;
 import ar.com.tpfinal.rang_store.model.Product;
 
 public class BuyOrderFragment extends Fragment {
@@ -60,10 +61,23 @@ public class BuyOrderFragment extends Fragment {
             List<ItemCart> cart = getArguments().getParcelableArrayList("cart");
 
             if(cart != null){
+
                 loadOrder(cart);
+
+                double totalPrice = Order.getTotalPrice(cart);
+                binding.totalPriceOrder.setText("Precio total: $" + totalPrice);
             }
             else if(singleProduct != null){
+
                 loadOrder(singleProduct.get(0));
+
+                double totalPrice = singleProduct.get(0).getProduct().getPrice()*singleProduct.get(0).getQuantity();
+                binding.totalPriceOrder.setText("Precio total: $" + totalPrice);
+            }
+
+            Boolean readOnly = getArguments().getBoolean("readOnly");
+            if(readOnly){
+                binding.continuePurchaseButton.setVisibility(View.GONE);
             }
 
             binding.continuePurchaseButton.setOnClickListener(view -> {

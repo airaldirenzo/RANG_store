@@ -1,5 +1,6 @@
 package ar.com.tpfinal.rang_store.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,19 +15,20 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import ar.com.tpfinal.rang_store.MainActivity;
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.Purchase;
-import ar.com.tpfinal.rang_store.databinding.FragmentPurchaseDataBinding;
+import ar.com.tpfinal.rang_store.databinding.FragmentPaymentDataBinding;
 import ar.com.tpfinal.rang_store.model.ItemCart;
 
-public class PurchaseDataFragment extends Fragment {
+public class PaymentDataFragment extends Fragment {
 
-    private FragmentPurchaseDataBinding binding;
+    private FragmentPaymentDataBinding binding;
     private NavController navHost;
     private List<ItemCart> singlePurchase;
     private List<ItemCart> cartPurchase;
 
-    public PurchaseDataFragment() {
+    public PaymentDataFragment() {
         // Required empty public constructor
     }
 
@@ -40,7 +42,7 @@ public class PurchaseDataFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentPurchaseDataBinding.inflate(inflater,container,false);
+        binding = FragmentPaymentDataBinding.inflate(inflater,container,false);
         this.setArguments(requireActivity().getIntent().getExtras());
 
         if(getArguments() != null){
@@ -68,6 +70,8 @@ public class PurchaseDataFragment extends Fragment {
 
                 if(checkEmptyFields()) { return; }
 
+                //TODO PARSEAR Y VERIFICAR FECHA VALIDA, FECHA MAYOR A LA ACTUAL, Y QUE NO PONGAN 30 DE FEBRERO, ETC
+
                 if(singlePurchase != null){
                     Purchase.savePurchase(singlePurchase,binding.getRoot());
                 }
@@ -75,9 +79,11 @@ public class PurchaseDataFragment extends Fragment {
                     Purchase.savePurchase(cartPurchase,binding.getRoot());
                 }
 
+                startActivity(new Intent(requireActivity(), MainActivity.class));
+
             }
             else if(binding.radioButtonTransfer.isChecked()){
-                navHost.navigate(R.id.action_purchaseDataFragment_to_transferFragment);
+                navHost.navigate(R.id.action_purchaseDataFragment_to_transferFragment,getArguments());
             }
         });
 

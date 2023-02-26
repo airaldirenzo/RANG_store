@@ -130,7 +130,7 @@ public class Favorites {
                             position++;
                         }
 
-                        if (isFavorite == true) {
+                        if (isFavorite) {
                             binding.favouriteButtonProductInfo.setOnClickListener(view1 -> {
                                 Favorites.removeProductFromFavorites(product, view1);
                             });

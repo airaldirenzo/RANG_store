@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PurchaseDataFragment"
+    tools:context=".fragments.PaymentDataFragment"
     android:id="@+id/scrollViewPurchaseData">
 
 <androidx.appcompat.widget.LinearLayoutCompat
@@ -154,8 +154,6 @@
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
         android:text="Fecha de expiracion" />
-
-<!--    TODO SE PUEDE CAMBIAR EL INPUT TYPE A NUMBER Y HACER UN PARSER PARA AGREGAR LAS BARRAS-->
 
     <EditText
         android:id="@+id/editTextExpirationDate"

@@ -30,13 +30,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginLeft="10dp">
+                android:layout_marginStart="10dp">
 
                 <TextView
                     android:id="@+id/titleProductOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Titulo"
+                    android:layout_marginTop="5dp"
                     android:textSize="20sp" />
 
                 <TextView
@@ -44,7 +45,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cantidad: x1"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/unitPriceOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Precio unitario: $"
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/priceOrder"
@@ -53,7 +61,7 @@
                     android:layout_gravity="end"
                     android:layout_weight="1"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:gravity="bottom"
                     android:text="$000000000"
                     android:textSize="14sp" />

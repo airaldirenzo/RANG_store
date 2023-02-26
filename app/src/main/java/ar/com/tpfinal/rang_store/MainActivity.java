@@ -40,6 +40,7 @@ import ar.com.tpfinal.rang_store.data.OnResult;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.Cart;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.Favorites;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.ProductMapper;
+import ar.com.tpfinal.rang_store.data.datasource.firebase.Purchase;
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.AppRetrofit;
 import ar.com.tpfinal.rang_store.data.factory.ProductRepositoryFactory;
 import ar.com.tpfinal.rang_store.data.filter.FilterObject;
@@ -85,16 +86,18 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.drawerNotifications:
                         //TODO
-                        Toast.makeText(this,"Not implemented",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,"No implementado",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.drawerPurchases:
-                        //TODO
+                        Purchase.goToPurchases(currentFragment);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.drawerFavourites:
-                        //TODO
+                        Favorites.goToFavorites(currentFragment);
+                        binding.drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.drawerMyAccount:
-                        Toast.makeText(this, "My account", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Mi cuenta", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.drawerLogOut:
                         FirebaseAuth.getInstance().signOut();
