@@ -123,7 +123,7 @@ public class ProductInfoFragment extends Fragment {
                 List<ItemCart> cart = new ArrayList<>();
                 cart.add(new ItemCart(product,quantity));
                 Bundle args = new Bundle();
-                args.putParcelableArrayList("single_product", (ArrayList<? extends Parcelable>) cart);
+                args.putParcelableArrayList("cart", (ArrayList<? extends Parcelable>) cart);
 
                 navHost.navigate(R.id.action_global_buyOrderFragment, args);
             });

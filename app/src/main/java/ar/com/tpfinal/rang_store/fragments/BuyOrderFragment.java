@@ -57,7 +57,6 @@ public class BuyOrderFragment extends Fragment {
 
         if(getArguments() != null){
 
-            List<ItemCart> singleProduct = getArguments().getParcelableArrayList("single_product");
             List<ItemCart> cart = getArguments().getParcelableArrayList("cart");
 
             if(cart != null){
@@ -65,13 +64,6 @@ public class BuyOrderFragment extends Fragment {
                 loadOrder(cart);
 
                 double totalPrice = Order.getTotalPrice(cart);
-                binding.totalPriceOrder.setText("Precio total: $" + totalPrice);
-            }
-            else if(singleProduct != null){
-
-                loadOrder(singleProduct.get(0));
-
-                double totalPrice = singleProduct.get(0).getProduct().getPrice()*singleProduct.get(0).getQuantity();
                 binding.totalPriceOrder.setText("Precio total: $" + totalPrice);
             }
 
@@ -87,12 +79,10 @@ public class BuyOrderFragment extends Fragment {
                 }
                 else{
                     Intent intent = new Intent(requireActivity(), PaymentActivity.class);
-                    if(singleProduct != null){
-                        intent.putParcelableArrayListExtra("single_purchase", (ArrayList<? extends Parcelable>) singleProduct);
+                    if(cart != null){
+                        intent.putParcelableArrayListExtra("single_purchase", (ArrayList<? extends Parcelable>) cart);
                     }
-                    else if(cart != null){
-                        intent.putParcelableArrayListExtra("cart_purchase", (ArrayList<? extends Parcelable>) cart);
-                    }
+
                     startActivity(intent);
                 }
 
@@ -100,15 +90,6 @@ public class BuyOrderFragment extends Fragment {
         }
 
         return binding.getRoot();
-    }
-
-    private void loadOrder(ItemCart itemCart){
-        RecyclerView recycler = binding.orderRV;
-        recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
-        List<ItemCart> singleItem = new ArrayList<>();
-        singleItem.add(itemCart);
-        OrderAdapter orderAdapter = new OrderAdapter(singleItem);
-        recycler.setAdapter(orderAdapter);
     }
 
     private void loadOrder(List<ItemCart> cart){
