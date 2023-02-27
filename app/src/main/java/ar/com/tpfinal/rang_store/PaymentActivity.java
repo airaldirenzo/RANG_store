@@ -51,7 +51,7 @@ public class PaymentActivity extends AppCompatActivity {
                         break;
                     case R.id.drawerNotifications:
                         //TODO
-                        Toast.makeText(this,"Not implemented",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,"No implementado",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.drawerPurchases:
                         //TODO
@@ -60,7 +60,7 @@ public class PaymentActivity extends AppCompatActivity {
                         //TODO
                         break;
                     case R.id.drawerMyAccount:
-                        Toast.makeText(this, "My account", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Mi cuenta", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.drawerLogOut:
                         FirebaseAuth.getInstance().signOut();

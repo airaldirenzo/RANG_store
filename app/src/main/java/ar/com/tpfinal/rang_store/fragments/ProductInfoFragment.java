@@ -123,7 +123,7 @@ public class ProductInfoFragment extends Fragment {
                 List<ItemCart> cart = new ArrayList<>();
                 cart.add(new ItemCart(product,quantity));
                 Bundle args = new Bundle();
-                args.putParcelableArrayList("single_product", (ArrayList<? extends Parcelable>) cart);
+                args.putParcelableArrayList("cart", (ArrayList<? extends Parcelable>) cart);
 
                 navHost.navigate(R.id.action_global_buyOrderFragment, args);
             });
@@ -155,6 +155,7 @@ public class ProductInfoFragment extends Fragment {
                 ItemCart itemCart = new ItemCart(product,quantity);
                 Cart.removeProductFromCart(itemCart,binding.getRoot());
             });
+
         }
     }
 
@@ -175,7 +176,7 @@ public class ProductInfoFragment extends Fragment {
 
     private void enableEditProduct(){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        //TODO puede llegar a tirar nullPointer si se nos corta el internet en medio de la app
+
         FirebaseFirestore.getInstance().collection("users").document(currentUser.getUid()).get().addOnSuccessListener(document ->{
             if(document.exists()){
                 String role = document.getString("role");

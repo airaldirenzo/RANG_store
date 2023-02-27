@@ -57,7 +57,6 @@ public class Cart {
                             ItemCart itemCart = new ItemCart(product,quantity);
                             cart.add(itemCart);
 
-                            Log.i("CART CART", "onComplete: "+cart.get(i).toString());
                         }
 
                         Bundle args = new Bundle();
@@ -140,8 +139,6 @@ public class Cart {
                                 binding.buttonBuyProductInfo.setVisibility(View.GONE);
                                 binding.buttonAddToCartProductInfo.setVisibility(View.GONE);
                                 binding.buttonRemoveProductFromCartProductInfo.setVisibility(View.VISIBLE);
-
-                                Toast.makeText(binding.getRoot().getContext(),"El producto ya se encuentra en el carrito",Toast.LENGTH_SHORT).show();
 
                                 flag = false;
                             }

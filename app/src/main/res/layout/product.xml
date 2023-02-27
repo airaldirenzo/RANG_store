@@ -15,7 +15,7 @@
             card_view:cardCornerRadius="15dp"
             card_view:cardElevation="5dp">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -39,7 +39,7 @@
                             android:textAllCaps="false"
                             android:textSize="16sp" />
 
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
                     android:id="@+id/productPrice"

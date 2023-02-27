@@ -75,6 +75,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         ImageView productImage;
         TextView productTitle;
         TextView productQuantity;
+        TextView productUnitPrice;
         TextView productPrice;
 
         public ViewHolder(@NonNull View itemView) {
@@ -82,6 +83,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             productImage = itemView.findViewById(R.id.imageViewOrder);
             productTitle = itemView.findViewById(R.id.titleProductOrder);
             productQuantity = itemView.findViewById(R.id.quantityOrder);
+            productUnitPrice = itemView.findViewById(R.id.unitPriceOrder);
             productPrice = itemView.findViewById(R.id.priceOrder);
 
         }
@@ -90,7 +92,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             setImage(product.getImages().get(0));
             productTitle.setText(product.getTitle());
             productQuantity.setText("Cantidad: x" + quantity);
-            productPrice.setText("$" + product.getPrice());
+            productUnitPrice.setText("Precio unitario: $" + product.getPrice());
+            productPrice.setText("Precio total: $" + product.getPrice()*quantity);
         }
 
         private void setImage(String url) {

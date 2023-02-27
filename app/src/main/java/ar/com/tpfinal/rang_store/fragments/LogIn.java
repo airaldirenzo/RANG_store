@@ -120,7 +120,6 @@ public class LogIn extends Fragment {
 
                             startActivity(new Intent(requireActivity(), MainActivity.class));
 
-                            //TODO PONER BIENVENIDO NOMBRE DE USUARIO?
                             Toast.makeText(requireContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
 
                         }

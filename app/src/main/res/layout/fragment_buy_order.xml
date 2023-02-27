@@ -31,12 +31,26 @@
         android:layout_marginVertical="110dp">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <TextView
+        android:id="@+id/totalPriceOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/orderRV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/continuePurchaseButton"
+        android:text="Precio total: $"
+        android:textSize="24sp"
+        android:gravity="end"
+        android:layout_marginEnd="30dp"
+        android:paddingVertical="5dp"/>
+
     <Button
         android:id="@+id/continuePurchaseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Continuar"
-        app:layout_constraintTop_toBottomOf="@id/orderRV"
+        app:layout_constraintTop_toBottomOf="@id/totalPriceOrder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

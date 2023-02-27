@@ -79,7 +79,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         }
 
         public void setData(Product product) {
-            Log.i("PRODUCT", "setData: "+ product.toString());
             setImage(product.getImages().get(0));
             productTitle.setText(product.getTitle());
             productDescription.setText(product.getDescription());
