@@ -10,7 +10,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -51,6 +54,7 @@ import ar.com.tpfinal.rang_store.model.Product;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
     Fragment currentFragment;

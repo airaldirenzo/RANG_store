@@ -1,5 +1,12 @@
 package ar.com.tpfinal.rang_store.fragments;
 
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,18 +22,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,16 +46,41 @@ import ar.com.tpfinal.rang_store.model.Category;
 import ar.com.tpfinal.rang_store.model.Product;
 
 public class ProductChartFragment extends Fragment {
-
     private NavController navHost;
     private ProductChartBinding binding;
+
+    private WifiManager wifiManager;
+
+    // Broadcast receiver
+    private BroadcastReceiver wifiStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int wifiStateExtra = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN);
+            switch (wifiStateExtra) {
+                case WifiManager.WIFI_STATE_ENABLED:
+                    Toast.makeText(context,"Wifi enabled",Toast.LENGTH_LONG).show();
+
+                    //Cargamos los productos desde la api(sin filtro para cada vez que se ingresa)
+                    FilterObject filter = FilterObject.getInstance();
+                    loadProducts(filter);
+                    break;
+
+                case WifiManager.WIFI_STATE_DISABLED:
+                    Toast.makeText(context,"Wifi disabled",Toast.LENGTH_LONG).show();
+                    onWiFiDisabled();
+                    break;
+            }
+        }
+    };
 
     public ProductChartFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,11 +95,18 @@ public class ProductChartFragment extends Fragment {
         enableProductCreator();
         progressBarOn();
 
-        //Cargamos los productos desde la api(sin filtro para cada vez que se ingresa)
-        FilterObject filter = FilterObject.getInstance();
-        loadProducts(filter);
+        wifiManager = (WifiManager)  requireActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+
+        IntentFilter intentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        requireActivity().registerReceiver(wifiStateReceiver, intentFilter);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        requireActivity().unregisterReceiver(wifiStateReceiver);
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -141,7 +177,6 @@ public class ProductChartFragment extends Fragment {
     }
 
     private void enableProductCreator(){
-
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         //TODO puede llegar a tirar nullPointer si se nos corta el internet en medio de la app
         FirebaseFirestore.getInstance().collection("users").document(currentUser.getUid()).get().addOnSuccessListener(document ->{
@@ -162,7 +197,6 @@ public class ProductChartFragment extends Fragment {
     }
 
     private void loadProducts(FilterObject filterObject){
-
         OnResult<List<Product>> callback = new OnResult<>() {
             @Override
             public void onSuccess(List<Product> result) {
@@ -172,7 +206,35 @@ public class ProductChartFragment extends Fragment {
                         RecyclerView recycler = binding.productChartRV;
                         int numberOfColumns = 2;
                         recycler.setLayoutManager(new GridLayoutManager(requireContext(), numberOfColumns));
-                        ProductAdapter productAdapter = new ProductAdapter(result);
+                        ProductAdapter productAdapter = new ProductAdapter(result, false);
+                        recycler.setAdapter(productAdapter);
+                        progressBarOff();
+                    }
+                });
+            }
+
+            @Override
+            public void onError(Throwable exception) {
+                exception.printStackTrace();
+            }
+        };
+
+        ProductRepository pr = ProductRepositoryFactory.create();
+
+        AppRetrofit.EXECUTOR_API.execute(()-> { pr.listProducts(callback, filterObject); });
+    }
+
+    private void loadProductsWithoutImage(FilterObject filterObject){
+        OnResult<List<Product>> callback = new OnResult<>() {
+            @Override
+            public void onSuccess(List<Product> result) {
+                requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        RecyclerView recycler = binding.productChartRV;
+                        int numberOfColumns = 2;
+                        recycler.setLayoutManager(new GridLayoutManager(requireContext(), numberOfColumns));
+                        ProductAdapter productAdapter = new ProductAdapter(result, true);
                         recycler.setAdapter(productAdapter);
                         progressBarOff();
                     }
@@ -212,4 +274,30 @@ public class ProductChartFragment extends Fragment {
         binding.categoriesFilterSpinner.setAdapter(categoriesAdapter);
     }
 
+    void onWiFiDisabled() {
+
+        FilterObject filter = FilterObject.getInstance();
+
+        AlertDialog dialog = new AlertDialog
+                .Builder(requireActivity())
+                .setPositiveButton("Activar ahorro de datos", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Cargamos los productos desde la api(sin filtro para cada vez que se ingresa)
+                        loadProductsWithoutImage(filter);
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Cargamos los productos desde la api(sin filtro para cada vez que se ingresa)
+                        loadProducts(filter);
+                    }
+                })
+                .setTitle("Ahorro de datos") // El título
+                .setMessage("El WI-FI se encuentra deshabilitado. ¿Desea activar el modo de ahorro de datos? (no se mostraran las imagenes de los productos)")
+                .create();
+
+        dialog.show();
+    }
 }

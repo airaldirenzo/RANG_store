@@ -32,8 +32,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     private final List<Product> dataList;
 
-    public ProductAdapter(List<Product> dataList) {
+    private final Boolean dataSaving;
+
+    public ProductAdapter(List<Product> dataList, Boolean dataSaving) {
         this.dataList = dataList;
+        this.dataSaving = dataSaving;
     }
 
     @NonNull
@@ -49,7 +52,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Product product = dataList.get(position);
-        holder.dataSetPA(product);
+        holder.dataSetPA(product, dataSaving);
 
         holder.itemView.setOnClickListener(view -> {
             Bundle args = new Bundle();
@@ -82,8 +85,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             productPrice = itemView.findViewById(R.id.productPrice);
         }
 
-        public void dataSetPA(Product product) {
-            setImage(product.getImages().get(0));
+        public void dataSetPA(Product product, Boolean dataSaving) {
+            if (!dataSaving) {
+                setImage(product.getImages().get(0));
+            }
+
             productTitle.setText(product.getTitle());
             productPrice.setText("$" + product.getPrice());
 
