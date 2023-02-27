@@ -34,7 +34,6 @@ public class PaymentDataFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -47,7 +46,6 @@ public class PaymentDataFragment extends Fragment {
         if(getArguments() != null){
             purchase = getArguments().getParcelableArrayList("purchase");
         }
-
 
         return binding.getRoot();
     }
@@ -79,7 +77,6 @@ public class PaymentDataFragment extends Fragment {
                 navHost.navigate(R.id.action_purchaseDataFragment_to_transferFragment,getArguments());
             }
         });
-
     }
 
     private boolean checkEmptyFields(){
@@ -142,7 +139,6 @@ public class PaymentDataFragment extends Fragment {
 
             binding.textViewDepositTitle.setVisibility(View.VISIBLE);
             binding.buyButton.setVisibility(View.VISIBLE);
-
         }
     }
 }

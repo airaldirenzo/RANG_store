@@ -58,15 +58,12 @@ public class ProductChartFragment extends Fragment {
             int wifiStateExtra = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN);
             switch (wifiStateExtra) {
                 case WifiManager.WIFI_STATE_ENABLED:
-                    Toast.makeText(context,"Wifi enabled",Toast.LENGTH_LONG).show();
-
                     //Cargamos los productos desde la api(sin filtro para cada vez que se ingresa)
                     FilterObject filter = FilterObject.getInstance();
                     loadProducts(filter);
                     break;
 
                 case WifiManager.WIFI_STATE_DISABLED:
-                    Toast.makeText(context,"Wifi disabled",Toast.LENGTH_LONG).show();
                     onWiFiDisabled();
                     break;
             }
