@@ -37,7 +37,7 @@ import ar.com.tpfinal.rang_store.model.Product;
 
 public class Purchase {
 
-    public static void savePurchase(List<ItemCart> itemCartList, View view){
+    public static void savePurchase(List<ItemCart> itemCartList, boolean cartOrder, View view){
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         double totalPrice = Order.getTotalPrice(itemCartList);
@@ -48,7 +48,7 @@ public class Purchase {
         FirebaseFirestore.getInstance().collection("buyOrders").add(order).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                if(itemCartList.size() > 1){
+                if(cartOrder){
                     Cart.removeCart();
                 }
                 Toast.makeText(view.getContext(),"Compra procesada con exito",Toast.LENGTH_SHORT).show();

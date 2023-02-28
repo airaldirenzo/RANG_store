@@ -52,10 +52,11 @@ public class TransferFragment extends Fragment {
 
         if (getArguments() != null) {
             List<ItemCart> purchase = getArguments().getParcelableArrayList("purchase");
+            Boolean cart = getArguments().getBoolean("cartOrder");
 
             binding.uploadReceipt.setOnClickListener(view -> {
                 if(purchase != null){
-                    Purchase.savePurchase(purchase,binding.getRoot());
+                    Purchase.savePurchase(purchase,cart,binding.getRoot());
                     createNotificationChannel();
                     createNotification();
                 }
