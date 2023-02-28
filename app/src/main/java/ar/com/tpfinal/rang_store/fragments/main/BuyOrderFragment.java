@@ -46,6 +46,7 @@ public class BuyOrderFragment extends Fragment {
         if(getArguments() != null){
 
             List<ItemCart> cart = getArguments().getParcelableArrayList("cart");
+            boolean cartOrder = getArguments().getBoolean("cartOrder");
 
             if(cart != null){
 
@@ -69,6 +70,7 @@ public class BuyOrderFragment extends Fragment {
                     Intent intent = new Intent(requireActivity(), PaymentActivity.class);
                     if(cart != null){
                         intent.putParcelableArrayListExtra("purchase", (ArrayList<? extends Parcelable>) cart);
+                        if(cartOrder) intent.putExtra("cartOrder",cartOrder);
                     }
 
                     startActivity(intent);

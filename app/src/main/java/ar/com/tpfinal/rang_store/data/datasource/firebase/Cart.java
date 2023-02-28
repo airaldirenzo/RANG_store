@@ -60,6 +60,7 @@ public class Cart {
 
                         Bundle args = new Bundle();
                         args.putParcelableArrayList("cart", (ArrayList<? extends Parcelable>) cart);
+                        args.putBoolean("cartOrder",true);
 
                         NavController navController = NavHostFragment.findNavController(currentFragment);
                         navController.navigate(R.id.action_global_buyOrderFragment, args);

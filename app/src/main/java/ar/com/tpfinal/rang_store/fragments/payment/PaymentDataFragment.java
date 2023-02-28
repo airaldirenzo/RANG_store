@@ -20,12 +20,14 @@ import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.Purchase;
 import ar.com.tpfinal.rang_store.databinding.FragmentPaymentDataBinding;
 import ar.com.tpfinal.rang_store.model.ItemCart;
+import ar.com.tpfinal.rang_store.notifications.Notification;
 
 public class PaymentDataFragment extends Fragment {
 
     private FragmentPaymentDataBinding binding;
     private NavController navHost;
     private List<ItemCart> purchase;
+    private Boolean cartOrder;
 
     public PaymentDataFragment() {
         // Required empty public constructor
@@ -45,6 +47,7 @@ public class PaymentDataFragment extends Fragment {
 
         if(getArguments() != null){
             purchase = getArguments().getParcelableArrayList("purchase");
+            cartOrder = getArguments().getBoolean("cartOrder");
         }
 
         return binding.getRoot();
@@ -67,7 +70,8 @@ public class PaymentDataFragment extends Fragment {
                 //TODO PARSEAR Y VERIFICAR FECHA VALIDA, FECHA MAYOR A LA ACTUAL, Y QUE NO PONGAN 30 DE FEBRERO, ETC
 
                 if(purchase != null){
-                    Purchase.savePurchase(purchase,binding.getRoot());
+                    Purchase.savePurchase(purchase,cartOrder,binding.getRoot());
+                    makeNotification();
                 }
 
                 startActivity(new Intent(requireActivity(), MainActivity.class));
@@ -140,5 +144,13 @@ public class PaymentDataFragment extends Fragment {
             binding.textViewDepositTitle.setVisibility(View.VISIBLE);
             binding.buyButton.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void makeNotification() {
+        String CHANNEL_ID = "NOTIFICATION";
+        String name = "notification";
+
+        Notification.createNotificationChannel(requireActivity(), CHANNEL_ID, name);
+        Notification.createNotification(requireActivity(), CHANNEL_ID);
     }
 }
