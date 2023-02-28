@@ -67,6 +67,7 @@ public class BuyOrderFragment extends Fragment {
                     Toast.makeText(requireContext(),"No hay productos que comprar",Toast.LENGTH_LONG).show();
                 }
                 else{
+
                     Intent intent = new Intent(requireActivity(), PaymentActivity.class);
                     if(cart != null){
                         intent.putParcelableArrayListExtra("purchase", (ArrayList<? extends Parcelable>) cart);

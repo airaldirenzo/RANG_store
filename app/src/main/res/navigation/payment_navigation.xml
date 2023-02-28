@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/purchaseDataFragment">
+    app:startDestination="@id/shippingFragment">
     <fragment
         android:id="@+id/purchaseDataFragment"
         android:name="ar.com.tpfinal.rang_store.fragments.payment.PaymentDataFragment"
@@ -18,4 +18,13 @@
         android:name="ar.com.tpfinal.rang_store.fragments.payment.TransferFragment"
         android:label="fragment_transfer"
         tools:layout="@layout/fragment_transfer" />
+    <fragment
+        android:id="@+id/shippingFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.payment.ShippingFragment"
+        android:label="fragment_shipping"
+        tools:layout="@layout/fragment_shipping" >
+        <action
+            android:id="@+id/action_shippingFragment_to_purchaseDataFragment"
+            app:destination="@id/purchaseDataFragment" />
+    </fragment>
 </navigation>
