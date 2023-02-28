@@ -1,4 +1,4 @@
-package ar.com.tpfinal.rang_store.fragments;
+package ar.com.tpfinal.rang_store.fragments.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,15 +22,15 @@ import com.google.firebase.auth.FirebaseUser;
 
 import ar.com.tpfinal.rang_store.MainActivity;
 import ar.com.tpfinal.rang_store.R;
-import ar.com.tpfinal.rang_store.databinding.LogInBinding;
+import ar.com.tpfinal.rang_store.databinding.FragmentLogInBinding;
 
-public class LogIn extends Fragment {
+public class LogInFragment extends Fragment {
 
-    private LogInBinding binding;
+    private FragmentLogInBinding binding;
     private FirebaseAuth mAuth;
     private NavController navHost;
 
-    public LogIn() {
+    public LogInFragment() {
         // Required empty public constructor
     }
     @Override
@@ -48,13 +47,14 @@ public class LogIn extends Fragment {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             startActivity(new Intent(requireActivity(), MainActivity.class));
+            requireActivity().finish();
         }
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = LogInBinding.inflate(inflater,container,false);
+        binding = FragmentLogInBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
 
@@ -64,32 +64,22 @@ public class LogIn extends Fragment {
 
 
 
-        binding.buttonIniciarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = binding.editTextEmailAddress.getText().toString().trim();
-                String password = binding.editTextPassword.getText().toString().trim();
-                logIn(email,password);
-
-            }
+        binding.buttonIniciarSesion.setOnClickListener(view1 -> {
+            String email = binding.editTextEmailAddress.getText().toString().trim();
+            String password = binding.editTextPassword.getText().toString().trim();
+            logIn(email,password);
 
         });
 
-        binding.buttonIniciarSesionGoogle.setOnClickListener(view1 -> {
-            Toast.makeText(requireContext(), "Not implemented", Toast.LENGTH_SHORT).show();
-        });
+        binding.buttonIniciarSesionGoogle.setOnClickListener(view1 -> Toast.makeText(requireContext(), "Not implemented", Toast.LENGTH_SHORT).show());
 
-        binding.buttonRegistrarse.setOnClickListener( view1 -> {
-            navHost.navigate(R.id.action_logIn_to_registerUser);
-        });
+        binding.buttonRegistrarse.setOnClickListener( view1 -> navHost.navigate(R.id.action_logInFragment_to_registerUserFragment));
 
-        binding.buttonForgotPassword.setOnClickListener( view1 -> {
-            Toast.makeText(requireContext(), "Not implemented", Toast.LENGTH_SHORT).show();
-        });
+        binding.buttonForgotPassword.setOnClickListener( view1 -> Toast.makeText(requireContext(), "Not implemented", Toast.LENGTH_SHORT).show());
 
     }
 
-        private void logIn(String email, String password){
+    private void logIn(String email, String password){
 
         progressBarOn();
 
@@ -127,7 +117,7 @@ public class LogIn extends Fragment {
                             Toast.makeText(requireContext(),"Error al inciar sesion",Toast.LENGTH_SHORT).show();
                         }
                     }
-                    }).addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
 

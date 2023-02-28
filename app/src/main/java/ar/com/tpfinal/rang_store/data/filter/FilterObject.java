@@ -1,5 +1,7 @@
 package ar.com.tpfinal.rang_store.data.filter;
 
+import androidx.annotation.NonNull;
+
 public class FilterObject {
 
     private static FilterObject INSTANCE;
@@ -56,7 +58,7 @@ public class FilterObject {
         if (minPriceFilter.isEmpty()) {
             return;
         }
-        else if (Double.valueOf(minPriceFilter) == 0) {
+        else if (Double.parseDouble(minPriceFilter) == 0) {
             return;
         }
         this.minPriceFilter = minPriceFilter;
@@ -73,6 +75,7 @@ public class FilterObject {
         this.maxPriceFilter = maxPriceFilter;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "FilterObject{" +

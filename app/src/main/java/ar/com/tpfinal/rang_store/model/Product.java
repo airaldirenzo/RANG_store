@@ -4,13 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.AsyncDifferConfig;
-import androidx.recyclerview.widget.DiffUtil;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 
 public class Product implements Parcelable {
 
@@ -87,6 +82,7 @@ public class Product implements Parcelable {
         this.category = category;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Product{" +
@@ -133,7 +129,7 @@ public class Product implements Parcelable {
         this.category = in.readParcelable(Category.class.getClassLoader());
     }
 
-    public static final Creator<Product> CREATOR = new Creator<Product>() {
+    public static final Creator<Product> CREATOR = new Creator<>() {
         @Override
         public Product createFromParcel(Parcel source) {
             return new Product(source);

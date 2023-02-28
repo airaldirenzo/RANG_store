@@ -1,7 +1,5 @@
 package ar.com.tpfinal.rang_store.model;
 
-import android.util.Pair;
-
 import java.util.List;
 
 public class User {

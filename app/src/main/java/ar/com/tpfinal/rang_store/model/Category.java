@@ -3,6 +3,8 @@ package ar.com.tpfinal.rang_store.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public class Category implements Parcelable {
 
     private Integer id;
@@ -43,6 +45,7 @@ public class Category implements Parcelable {
 
     public void setSlug(String slug) { this.slug = slug; }
 
+    @NonNull
     @Override
     public String toString() {
         return name;
@@ -72,7 +75,7 @@ public class Category implements Parcelable {
         this.slug = in.readString();
     }
 
-    public static final Creator<Category> CREATOR = new Creator<Category>() {
+    public static final Creator<Category> CREATOR = new Creator<>() {
         @Override
         public Category createFromParcel(Parcel source) {
             return new Category(source);

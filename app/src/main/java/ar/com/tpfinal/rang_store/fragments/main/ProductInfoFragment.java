@@ -1,43 +1,33 @@
-package ar.com.tpfinal.rang_store.fragments;
+package ar.com.tpfinal.rang_store.fragments.main;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import ar.com.tpfinal.rang_store.MainActivity;
-import ar.com.tpfinal.rang_store.PaymentActivity;
 import ar.com.tpfinal.rang_store.R;
 import ar.com.tpfinal.rang_store.adapters.ImageSliderAdapter;
 import ar.com.tpfinal.rang_store.data.datasource.firebase.Cart;
@@ -61,7 +51,7 @@ public class ProductInfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = ProductInfoBinding.inflate(inflater,container,false);
@@ -114,7 +104,7 @@ public class ProductInfoFragment extends Fragment {
             mAuth = FirebaseAuth.getInstance();
             mFirestore = FirebaseFirestore.getInstance();
 
-            binding.editfloatingButton.setOnClickListener(view1 -> { navHost.navigate(R.id.action_productInfoFragment_to_productCreator,getArguments()); });
+            binding.editfloatingButton.setOnClickListener(view1 -> navHost.navigate(R.id.action_productInfoFragment_to_productCreator,getArguments()));
 
             Product product = getArguments().getParcelable("product");
 

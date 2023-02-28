@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i=0; i<navigationView.getMenu().size();i++) {
             navigationView.getMenu().getItem(i).setOnMenuItemClickListener(menuItem -> {
                 switch (menuItem.getItemId()) {
-
                     case R.id.drawerHome:
                         navController.navigate(R.id.action_global_productChartFragment);
                         binding.drawerLayout.closeDrawer(GravityCompat.START);
@@ -80,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.drawerLogOut:
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(this,LoginActivity.class));
+                        finish();
                         break;
 
                     default:
@@ -97,12 +97,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.toolbarCart:
                 Cart.goToCart(currentFragment);
                 break;
-
             case R.id.toolbarFavourite:
                 Favorites.goToFavorites(currentFragment);
                 break;

@@ -1,14 +1,8 @@
 package ar.com.tpfinal.rang_store;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import ar.com.tpfinal.rang_store.databinding.ActivityLoginBinding;
 
@@ -23,11 +17,9 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
     }
-
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
     }
 
     @Override

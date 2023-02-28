@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.BuyOrderFragment">
+    tools:context=".fragments.main.BuyOrderFragment">
 
     <TextView
         android:id="@+id/textTitle"

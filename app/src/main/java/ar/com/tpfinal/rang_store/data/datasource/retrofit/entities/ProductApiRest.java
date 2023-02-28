@@ -1,7 +1,6 @@
 package ar.com.tpfinal.rang_store.data.datasource.retrofit.entities;
 
 import java.util.List;
-import java.util.UUID;
 
 import ar.com.tpfinal.rang_store.data.datasource.retrofit.objects.NewProduct;
 import ar.com.tpfinal.rang_store.model.Product;
@@ -21,9 +20,6 @@ public interface ProductApiRest {
             @Query("categoryId") Integer categoryId,
             @Query("price_min") String price_min,
             @Query("price_max") String price_max);
-
-    @GET("products")
-    Call<List<Product>> listProducts();
 
     @POST("products")
     Call<Product> createProduct(@Body NewProduct p);

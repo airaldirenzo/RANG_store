@@ -3,19 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/logIn">
+    app:startDestination="@id/logInFragment">
+
     <fragment
-        android:id="@+id/logIn"
-        android:name="ar.com.tpfinal.rang_store.fragments.LogIn"
-        android:label="log_in"
-        tools:layout="@layout/log_in" >
+        android:id="@+id/registerUserFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.login.RegisterUserFragment"
+        android:label="fragment_register_user"
+        tools:layout="@layout/fragment_register_user" />
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.login.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+
         <action
-            android:id="@+id/action_logIn_to_registerUser"
-            app:destination="@id/registerUser" />
+            android:id="@+id/action_logInFragment_to_registerUserFragment"
+            app:destination="@id/registerUserFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/registerUser"
-        android:name="ar.com.tpfinal.rang_store.fragments.RegisterUser"
-        android:label="register"
-        tools:layout="@layout/register" />
 </navigation>

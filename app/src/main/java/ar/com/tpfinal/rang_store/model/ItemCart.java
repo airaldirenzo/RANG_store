@@ -51,7 +51,7 @@ public class ItemCart implements Parcelable {
         this.quantity = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<ItemCart> CREATOR = new Parcelable.Creator<ItemCart>() {
+    public static final Parcelable.Creator<ItemCart> CREATOR = new Parcelable.Creator<>() {
         @Override
         public ItemCart createFromParcel(Parcel source) {
             return new ItemCart(source);

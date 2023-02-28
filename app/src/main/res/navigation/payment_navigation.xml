@@ -6,7 +6,7 @@
     app:startDestination="@id/purchaseDataFragment">
     <fragment
         android:id="@+id/purchaseDataFragment"
-        android:name="ar.com.tpfinal.rang_store.fragments.PaymentDataFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.payment.PaymentDataFragment"
         android:label="fragment_purchase_data"
         tools:layout="@layout/fragment_payment_data" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/transferFragment"
-        android:name="ar.com.tpfinal.rang_store.fragments.TransferFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.payment.TransferFragment"
         android:label="fragment_transfer"
         tools:layout="@layout/fragment_transfer" />
 </navigation>

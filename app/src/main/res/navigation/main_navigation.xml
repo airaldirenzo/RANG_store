@@ -6,7 +6,7 @@
     app:startDestination="@id/productChartFragment">
     <fragment
         android:id="@+id/productChartFragment"
-        android:name="ar.com.tpfinal.rang_store.fragments.ProductChartFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.ProductChartFragment"
         android:label="product_chart"
         tools:layout="@layout/product_chart" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/productInfoFragment"
-        android:name="ar.com.tpfinal.rang_store.fragments.ProductInfoFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.ProductInfoFragment"
         android:label="product_info"
         tools:layout="@layout/product_info" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/productCreator"
-        android:name="ar.com.tpfinal.rang_store.fragments.ProductCreator"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.ProductCreator"
         android:label="fragment_product_creator"
         tools:layout="@layout/fragment_product_creator" >
         <action
@@ -37,7 +37,7 @@
     <action android:id="@+id/action_global_productChartFragment" app:destination="@id/productChartFragment"/>
     <fragment
         android:id="@+id/buyOrderFragment"
-        android:name="ar.com.tpfinal.rang_store.fragments.BuyOrderFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.BuyOrderFragment"
         android:label="fragment_buy_order"
         tools:layout="@layout/fragment_buy_order" >
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="ar.com.tpfinal.rang_store.fragments.FavoritesFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
@@ -60,7 +60,7 @@
     <action android:id="@+id/action_global_favoritesFragment" app:destination="@id/favoritesFragment" />
     <fragment
         android:id="@+id/purchaseHistory"
-        android:name="ar.com.tpfinal.rang_store.fragments.PurchaseHistory"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.PurchaseHistory"
         android:label="fragment_purchase_history"
         tools:layout="@layout/fragment_purchase_history" >
         <action

@@ -37,7 +37,7 @@ public class ProductRetrofitDataSource implements ProductDataSource {
 
             Response<Product> response = productApiRest.createProduct(newProduct).execute();
 
-            IsSuccessful<Product> responseStatus = new IsSuccessful<Product>() {
+            IsSuccessful<Product> responseStatus = new IsSuccessful<>() {
                 @Override
                 public void isSuccessful(Response<Product> response) throws IOException {
                     if (response.isSuccessful()) {
@@ -68,7 +68,7 @@ public class ProductRetrofitDataSource implements ProductDataSource {
                     .execute();
 
 
-            IsSuccessful<List<Product>> responseStatus = new IsSuccessful<List<Product>>() {
+            IsSuccessful<List<Product>> responseStatus = new IsSuccessful<>() {
                 @Override
                 public void isSuccessful(Response<List<Product>> response) throws IOException {
                     if (response.isSuccessful()) {
@@ -96,7 +96,7 @@ public class ProductRetrofitDataSource implements ProductDataSource {
 
             Response<Product> response = productApiRest.updateProduct(product.getId(), newProduct).execute();
 
-            IsSuccessful<Product> responseStatus = new IsSuccessful<Product>() {
+            IsSuccessful<Product> responseStatus = new IsSuccessful<>() {
                 @Override
                 public void isSuccessful(Response<Product> response) throws IOException {
                     if (response.isSuccessful()) {
@@ -118,7 +118,7 @@ public class ProductRetrofitDataSource implements ProductDataSource {
 
             Response<Boolean> response = productApiRest.deleteProduct(product.getId()).execute();
 
-            IsSuccessful<Boolean> responseStatus = new IsSuccessful<Boolean>() {
+            IsSuccessful<Boolean> responseStatus = new IsSuccessful<>() {
                 @Override
                 public void isSuccessful(Response<Boolean> response) throws IOException {
                     if (response.isSuccessful()) {

@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ar.com.tpfinal.rang_store.R;
-import ar.com.tpfinal.rang_store.data.datasource.firebase.ProductMapper;
-import ar.com.tpfinal.rang_store.fragments.LogIn;
-import ar.com.tpfinal.rang_store.model.Category;
 import ar.com.tpfinal.rang_store.model.ItemCart;
 import ar.com.tpfinal.rang_store.model.Product;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private List<ItemCart> dataList;
+    private final List<ItemCart> dataList;
 
     public OrderAdapter(List<ItemCart> dataList) { this.dataList = dataList; }
 
@@ -99,26 +92,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         private void setImage(String url) {
             Handler handler = new Handler();
 
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    Bitmap bitmap = null;
-                    InputStream inputStream = null;
-                    try {
-                        inputStream = new URL(url).openStream();
-                        bitmap = BitmapFactory.decodeStream(inputStream);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    Bitmap finalBitmap = bitmap;
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            productImage.setImageBitmap(finalBitmap);
-                        }
-                    });
+            Runnable runnable = () -> {
+                Bitmap bitmap = null;
+                InputStream inputStream;
+                try {
+                    inputStream = new URL(url).openStream();
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+
+                Bitmap finalBitmap = bitmap;
+                handler.post(() -> productImage.setImageBitmap(finalBitmap));
             };
             Thread thread = new Thread(runnable);
             thread.start();

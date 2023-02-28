@@ -32,7 +32,8 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:finishOnTaskLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

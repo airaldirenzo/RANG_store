@@ -1,4 +1,4 @@
-package ar.com.tpfinal.rang_store.fragments;
+package ar.com.tpfinal.rang_store.fragments.payment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,7 +37,7 @@ public class PaymentDataFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentPaymentDataBinding.inflate(inflater,container,false);
