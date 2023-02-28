@@ -75,7 +75,7 @@ public class PaymentDataFragment extends Fragment {
                 }
 
                 startActivity(new Intent(requireActivity(), MainActivity.class));
-
+                requireActivity().finish();
             }
             else if(binding.radioButtonTransfer.isChecked()){
                 navHost.navigate(R.id.action_purchaseDataFragment_to_transferFragment,getArguments());

@@ -47,6 +47,8 @@ public class TransferFragment extends Fragment {
                     makeNotification();
                 }
                 startActivity(new Intent(requireActivity(), MainActivity.class));
+                requireActivity().finish();
+
             });
         }
         return binding.getRoot();
