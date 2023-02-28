@@ -99,6 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_weight="0"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:background="@null"
@@ -114,7 +115,9 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:background="@null"
+                android:layout_weight="1"
                 android:text="Olvidé mi contraseña"
+                android:gravity="center"
                 android:theme="@style/Theme.RANG_store" />
 
 
