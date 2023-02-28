@@ -43,7 +43,7 @@ public class PaymentDataFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentPaymentDataBinding.inflate(inflater,container,false);
-        this.setArguments(requireActivity().getIntent().getExtras());
+
 
         if(getArguments() != null){
             purchase = getArguments().getParcelableArrayList("purchase");

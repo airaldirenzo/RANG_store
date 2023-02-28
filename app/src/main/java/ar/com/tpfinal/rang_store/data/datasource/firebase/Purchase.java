@@ -38,7 +38,6 @@ import ar.com.tpfinal.rang_store.model.Product;
 public class Purchase {
 
     public static void savePurchase(List<ItemCart> itemCartList, boolean cartOrder, View view){
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         double totalPrice = Order.getTotalPrice(itemCartList);
         int uniqueProducts = Order.getUniqueProducts(itemCartList);
@@ -52,7 +51,6 @@ public class Purchase {
                     Cart.removeCart();
                 }
                 Toast.makeText(view.getContext(),"Compra procesada con exito",Toast.LENGTH_SHORT).show();
-                //TODO NAVEGAR A FACTURA o intent a mainActivity?
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
