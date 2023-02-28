@@ -109,6 +109,7 @@ public class LogInFragment extends Fragment {
                             progressBarOff();
 
                             startActivity(new Intent(requireActivity(), MainActivity.class));
+                            requireActivity().finish();
 
                             Toast.makeText(requireContext(), "Bienvenido", Toast.LENGTH_SHORT).show();
 

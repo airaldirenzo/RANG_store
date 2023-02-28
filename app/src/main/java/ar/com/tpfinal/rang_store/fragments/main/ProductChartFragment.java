@@ -43,7 +43,7 @@ public class ProductChartFragment extends Fragment {
     private NavController navHost;
     private ProductChartBinding binding;
 
-    private Boolean dataSaving;
+    private boolean dataSaving = false;
 
     // Broadcast receiver
     private final BroadcastReceiver wifiStateReceiver = new BroadcastReceiver() {
@@ -55,16 +55,15 @@ public class ProductChartFragment extends Fragment {
             switch (wifiStateExtra) {
                 case WifiManager.WIFI_STATE_ENABLED:
                     dataSaving = false;
+                    //Cargamos los productos desde la api, dependiendo del dataSaving se mostraran las imagenes o una imagen default
+                    FilterObject filter = FilterObject.getInstance();
+                    loadProducts(filter, dataSaving);
                     break;
 
                 case WifiManager.WIFI_STATE_DISABLED:
                     onWiFiDisabled();
                     break;
             }
-
-            //Cargamos los productos desde la api, dependiendo del dataSaving se mostraran las imagenes o una imagen default
-            FilterObject filter = FilterObject.getInstance();
-            loadProducts(filter, dataSaving);
         }
     };
 
@@ -219,10 +218,17 @@ public class ProductChartFragment extends Fragment {
     }
 
     void onWiFiDisabled() {
+        FilterObject filter = FilterObject.getInstance();
         AlertDialog dialog = new AlertDialog
                 .Builder(requireActivity())
-                .setPositiveButton("Activar ahorro de datos", (dialog1, which) -> dataSaving = true)
-                .setNegativeButton("Cancelar", (dialog12, which) -> dataSaving = false)
+                .setPositiveButton("Activar ahorro de datos", (dialog1, which) -> {
+                    dataSaving = true;
+                    loadProducts(filter, dataSaving);
+                })
+                .setNegativeButton("Cancelar", (dialog12, which) -> {
+                    dataSaving = false;
+                    loadProducts(filter, dataSaving);
+                })
                 .setTitle("Ahorro de datos") // El título
                 .setMessage("El WI-FI se encuentra deshabilitado. ¿Desea activar el modo de ahorro de datos? (no se mostraran las imagenes de los productos)")
                 .create();
