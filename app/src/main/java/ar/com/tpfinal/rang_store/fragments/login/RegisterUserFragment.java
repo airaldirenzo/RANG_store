@@ -72,8 +72,6 @@ public class RegisterUserFragment extends Fragment {
         if(flag) return;
         flag = checkPasswords(password,binding.editTextPasswordConfirm.getText().toString());
         if(flag) return;
-//        flag = checkExistingEmail(email);
-//        if(flag) return;
 
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -109,6 +107,7 @@ public class RegisterUserFragment extends Fragment {
                     }
                 });
     }
+
 
     private boolean checkPasswords(String pass1, String pass2){
         boolean flag = false;

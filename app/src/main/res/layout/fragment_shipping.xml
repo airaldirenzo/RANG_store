@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.payment.ShippingFragment">
+
 <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -25,6 +26,7 @@
         android:layout_marginHorizontal="30dp"/>
 
     <EditText
+        android:id="@+id/countryEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"/>
@@ -38,6 +40,7 @@
         android:layout_marginHorizontal="30dp"/>
 
     <EditText
+        android:id="@+id/provinceEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"/>
@@ -75,6 +78,7 @@
         android:orientation="horizontal">
 
     <EditText
+        android:id="@+id/streetEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -83,6 +87,7 @@
         android:layout_weight="0.8"/>
 
     <EditText
+        android:id="@+id/streetNumberEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
@@ -103,10 +108,25 @@
         android:layout_marginHorizontal="30dp"/>
 
     <EditText
+        android:id="@+id/phoneNumberEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:inputType="number"/>
+        android:inputType="phone"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Observaciones:"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="30dp"/>
+
+    <EditText
+        android:id="@+id/observationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
