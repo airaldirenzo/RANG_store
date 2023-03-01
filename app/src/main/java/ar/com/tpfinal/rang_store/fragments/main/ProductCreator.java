@@ -75,108 +75,16 @@ public class ProductCreator extends Fragment {
         // Se obtiene el repositorio de productos
         ProductRepository pr = ProductRepositoryFactory.create();
 
-        binding.createProductButton.setOnClickListener(view1 -> {
-            String title = binding.editTextProductTitle.getText().toString();
-            String description = binding.editTextProductDescription.getText().toString();
-            String priceString = binding.editTextProductPrice.getText().toString();
-            Category category = (Category) binding.categoriesSpinner.getSelectedItem();
+        binding.createProductButton.setOnClickListener(view1 -> createProduct(pr));
 
-            if (title.isEmpty() || description.isEmpty() || priceString.isEmpty() || category.getName().equals("Seleccione una categoria")) {
-                Toast.makeText(requireContext(), "Complete los campos faltantes para continuar", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        binding.confirmChangesButton.setOnClickListener(view1 -> updateProduct(pr));
 
-            ArrayList<String> imgArray = new ArrayList<>();
-            imgArray.add("https://api.lorem.space/image?w=640&h=480&r=5435");
-            imgArray.add("https://api.lorem.space/image?w=640&h=480&r=5435");
-            Product product = new Product(title, description, Double.valueOf(priceString), imgArray, category);
-
-            OnResult<Product> callback = new OnResult<>() {
-                @Override
-                public void onSuccess(Product result) {
-                    requireActivity().runOnUiThread(() -> {
-                        Toast.makeText(requireContext(), "Producto creado con exito", Toast.LENGTH_LONG).show();
-                        Bundle args = new Bundle();
-                        args.putParcelable("product", result);
-                        navHost.navigate(R.id.action_productCreator_to_productInfoFragment, args);
-                    });
-                }
-
-                @Override
-                public void onError(Throwable exception) {
-                    requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "No pudo crearse el producto", Toast.LENGTH_LONG).show());
-                    exception.printStackTrace();
-                }
-            };
-
-            AppRetrofit.EXECUTOR_API.execute(()->pr.createProduct(product, callback));
-        });
-
-        binding.confirmChangesButton.setOnClickListener(view1 -> {
-
-            Product product = getArguments().getParcelable("product");
-
-            product.setTitle(binding.editTextProductTitle.getText().toString());
-            product.setDescription(binding.editTextProductDescription.getText().toString());
-            product.setPrice(Double.valueOf(binding.editTextProductPrice.getText().toString()));
-            product.setCategory((Category) binding.categoriesSpinner.getSelectedItem());
-
-            OnResult<Product> callback = new OnResult<>() {
-                @Override
-                public void onSuccess(Product result) {
-                    requireActivity().runOnUiThread(() -> {
-                        Toast.makeText(requireContext(), "Producto modificado con exito", Toast.LENGTH_LONG).show();
-                        Bundle args = new Bundle();
-                        args.putParcelable("product", result);
-                        navHost.navigate(R.id.action_productCreator_to_productInfoFragment, args);
-                    });
-                }
-
-                @Override
-                public void onError(Throwable exception) {
-                    requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "No pudo modificarse el producto", Toast.LENGTH_LONG).show());
-                    exception.printStackTrace();
-                }
-            };
-            AppRetrofit.EXECUTOR_API.execute(()->pr.updateProduct(product, callback));
-        });
-
-        binding.deleteFloatingButton.setOnClickListener(view1 -> {
-            Product product = getArguments().getParcelable("product");
-
-            AlertDialog dialog = new AlertDialog
-                    .Builder(requireActivity())
-                    .setPositiveButton("Sí, eliminar", (dialog1, which) -> {
-                        OnResult<Boolean> callback = new OnResult<>() {
-                            @Override
-                            public void onSuccess(Boolean result) {
-                                Log.i("ON SUCCESS", "llego");
-                                requireActivity().runOnUiThread(() -> {
-                                    Toast.makeText(requireContext(), "Producto eliminado con exito", Toast.LENGTH_LONG).show();
-                                    navHost.navigate(R.id.action_global_productChartFragment);
-                                });
-                            }
-
-                            @Override
-                            public void onError(Throwable exception) {
-                                requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "No pudo modificarse el producto", Toast.LENGTH_LONG).show());
-                                exception.printStackTrace();
-                            }
-                        };
-                        AppRetrofit.EXECUTOR_API.execute(()->pr.deleteProduct(product, callback));
-                    })
-                    .setNegativeButton("Cancelar", (dialog12, which) -> dialog12.dismiss())
-                    .setTitle("Eliminar producto") // El título
-                    .setMessage("¿Esta seguro de que desea eliminar el producto?")
-                    .create();
-
-            dialog.show();
-        });
+        binding.deleteFloatingButton.setOnClickListener(view1 -> deleteButton(pr));
 
         binding.uploadProductImageButton.setOnClickListener(view1 -> Toast.makeText(requireContext(), "NO IMPLEMENTADO", Toast.LENGTH_LONG).show());
     }
 
-    void createCategoriesSpinnerAdapter() {
+    private void createCategoriesSpinnerAdapter() {
         ArrayList<Category> categories = new ArrayList<>();
         categories.add(new Category(null, "Seleccione una categoria"));
         categories.add(new Category(1, "ropa", "clothes"));
@@ -186,5 +94,102 @@ public class ProductCreator extends Fragment {
         categories.add(new Category(5, "otros", "others"));
         ArrayAdapter<Category> categoriesAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item,categories);
         binding.categoriesSpinner.setAdapter(categoriesAdapter);
+    }
+
+    private void createProduct(ProductRepository pr) {
+        String title = binding.editTextProductTitle.getText().toString();
+        String description = binding.editTextProductDescription.getText().toString();
+        String priceString = binding.editTextProductPrice.getText().toString();
+        Category category = (Category) binding.categoriesSpinner.getSelectedItem();
+
+        if (title.isEmpty() || description.isEmpty() || priceString.isEmpty() || category.getName().equals("Seleccione una categoria")) {
+            Toast.makeText(requireContext(), "Complete los campos faltantes para continuar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ArrayList<String> imgArray = new ArrayList<>();
+        imgArray.add("https://api.lorem.space/image?w=640&h=480&r=5435");
+        imgArray.add("https://api.lorem.space/image?w=640&h=480&r=5435");
+        Product product = new Product(title, description, Double.valueOf(priceString), imgArray, category);
+
+        OnResult<Product> callback = new OnResult<>() {
+            @Override
+            public void onSuccess(Product result) {
+                requireActivity().runOnUiThread(() -> {
+                    Toast.makeText(requireContext(), "Producto creado con exito", Toast.LENGTH_LONG).show();
+                    Bundle args = new Bundle();
+                    args.putParcelable("product", result);
+                    navHost.navigate(R.id.action_productCreator_to_productInfoFragment, args);
+                });
+            }
+
+            @Override
+            public void onError(Throwable exception) {
+                requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "No pudo crearse el producto", Toast.LENGTH_LONG).show());
+                exception.printStackTrace();
+            }
+        };
+
+        AppRetrofit.EXECUTOR_API.execute(()->pr.createProduct(product, callback));
+    }
+
+    private void updateProduct(ProductRepository pr) {
+        Product product = getArguments().getParcelable("product");
+
+        product.setTitle(binding.editTextProductTitle.getText().toString());
+        product.setDescription(binding.editTextProductDescription.getText().toString());
+        product.setPrice(Double.valueOf(binding.editTextProductPrice.getText().toString()));
+        product.setCategory((Category) binding.categoriesSpinner.getSelectedItem());
+
+        OnResult<Product> callback = new OnResult<>() {
+            @Override
+            public void onSuccess(Product result) {
+                requireActivity().runOnUiThread(() -> {
+                    Toast.makeText(requireContext(), "Producto modificado con exito", Toast.LENGTH_LONG).show();
+                    Bundle args = new Bundle();
+                    args.putParcelable("product", result);
+                    navHost.navigate(R.id.action_productCreator_to_productInfoFragment, args);
+                });
+            }
+
+            @Override
+            public void onError(Throwable exception) {
+                requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "No pudo modificarse el producto", Toast.LENGTH_LONG).show());
+                exception.printStackTrace();
+            }
+        };
+        AppRetrofit.EXECUTOR_API.execute(()->pr.updateProduct(product, callback));
+    }
+
+    private void deleteButton(ProductRepository pr) {
+        Product product = getArguments().getParcelable("product");
+
+        AlertDialog dialog = new AlertDialog
+                .Builder(requireActivity())
+                .setPositiveButton("Sí, eliminar", (dialog1, which) -> {
+                    OnResult<Boolean> callback = new OnResult<>() {
+                        @Override
+                        public void onSuccess(Boolean result) {
+                            Log.i("ON SUCCESS", "llego");
+                            requireActivity().runOnUiThread(() -> {
+                                Toast.makeText(requireContext(), "Producto eliminado con exito", Toast.LENGTH_LONG).show();
+                                navHost.navigate(R.id.action_global_productChartFragment);
+                            });
+                        }
+
+                        @Override
+                        public void onError(Throwable exception) {
+                            requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "No pudo modificarse el producto", Toast.LENGTH_LONG).show());
+                            exception.printStackTrace();
+                        }
+                    };
+                    AppRetrofit.EXECUTOR_API.execute(()->pr.deleteProduct(product, callback));
+                })
+                .setNegativeButton("Cancelar", (dialog12, which) -> dialog12.dismiss())
+                .setTitle("Eliminar producto") // El título
+                .setMessage("¿Esta seguro de que desea eliminar el producto?")
+                .create();
+
+        dialog.show();
     }
 }

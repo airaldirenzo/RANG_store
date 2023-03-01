@@ -58,7 +58,6 @@ public class ProductRetrofitDataSource implements ProductDataSource {
     public void listProducts(OnResult<List<Product>> callback, FilterObject filterObject) {
         try {
             Response<List<Product>> response;
-            Log.i("PARAMETROS DE FILTRO", filterObject.toString());
             response = productApiRest.
                     listProducts(
                             filterObject.getTitleFilter(),
