@@ -93,7 +93,6 @@
         android:layout_marginEnd="30dp"
         android:layout_marginStart="10dp"
         android:layout_weight="0.2"
-        android:gravity="end"
         android:maxEms="4"
         android:minEms="4"/>
 
