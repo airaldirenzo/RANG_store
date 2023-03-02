@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.login.RegisterUserFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleRANG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:padding="10dp"
+            android:text="Bienvenido a RANG store"
+            android:textSize="32dp" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:padding="5dp"
+            android:text="Nombre" />
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="nombre"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textViewLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:text="Apellido" />
+
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="apellido"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textViewCorreo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:text="Correo electronico" />
+
+        <EditText
+            android:id="@+id/editTextEmailAddress"
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="ejemplo@ejemplo.com"
+            android:inputType="textEmailAddress"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textViewPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:text="Contraseña" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="contraseña"
+            android:inputType="textPassword"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textViewPasswordConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:text="Confrimar contraseña" />
+
+        <EditText
+            android:id="@+id/editTextPasswordConfirm"
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:hint="contraseña"
+            android:inputType="textPassword"
+            android:textSize="14dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="60dp">
+
+        </ProgressBar>
+
+        <Button
+            android:id="@+id/buttonRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="Registrarse" />
+
+
+        <Button
+            android:id="@+id/buttonRegistrarseGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="30dp"
+            android:text="Registrarse con Google" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

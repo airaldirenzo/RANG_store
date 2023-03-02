@@ -4,56 +4,42 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.AsyncDifferConfig;
-import androidx.recyclerview.widget.DiffUtil;
 
-import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.List;
 
 public class Product implements Parcelable {
 
-    private String uid;
+    private Integer id;
     private String title;
     private String description;
     private Double price;
-    private Integer stock;
-    //TODO ArrayList de imagenes
-    private LocalDateTime creationAt;
-    private LocalDateTime updatedAt;
-    //TODO private Categoria category;
+    private List<String> images;
+    private Category category;
 
-    public Product(final String uid, final String title, final String description, final Double price,
-                      final Integer stock, final LocalDateTime creationAt, final LocalDateTime updatedAt) {
-
-        this.uid = uid;
+    public Product(Integer id, String title, String description, Double price, List<String> images, Category category) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.stock = stock;
-        this.creationAt = creationAt;
-        this.updatedAt = updatedAt;
+        this.images = images;
+        this.category = category;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return uid.equals(product.uid) && Objects.equals(title, product.title) && Objects.equals(description, product.description) && Objects.equals(price, product.price) && Objects.equals(stock, product.stock) && Objects.equals(creationAt, product.creationAt) && Objects.equals(updatedAt, product.updatedAt);
+    public Product(String title, String description, Double price, List<String> images, Category category) {
+        this.id = null;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.images = images;
+        this.category = category;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(uid, title, description, price, stock, creationAt, updatedAt);
+    public Integer getId() {
+        return id;
     }
 
-    public String getId() {
-        return uid;
-    }
-
-    public void setId(String id) {
-        this.uid = id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -80,29 +66,35 @@ public class Product implements Parcelable {
         this.price = price;
     }
 
-    public Integer getStock() {
-        return stock;
+    public List<String> getImages() {
+        return images;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
-    public LocalDateTime getCreationAt() {
-        return creationAt;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCreationAt(LocalDateTime creationAt) {
-        this.creationAt = creationAt;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    @NonNull
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", images=" + images +
+                ", category=" + category +
+                '}';
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     @Override
     public int describeContents() {
@@ -111,36 +103,33 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.uid);
+        dest.writeValue(this.id);
         dest.writeString(this.title);
         dest.writeString(this.description);
         dest.writeValue(this.price);
-        dest.writeValue(this.stock);
-        dest.writeSerializable(this.creationAt);
-        dest.writeSerializable(this.updatedAt);
+        dest.writeStringList(this.images);
+        dest.writeParcelable(this.category, flags);
     }
 
     public void readFromParcel(Parcel source) {
-        this.uid = source.readString();
+        this.id = (Integer) source.readValue(Integer.class.getClassLoader());
         this.title = source.readString();
         this.description = source.readString();
         this.price = (Double) source.readValue(Double.class.getClassLoader());
-        this.stock = (Integer) source.readValue(Integer.class.getClassLoader());
-        this.creationAt = (LocalDateTime) source.readSerializable();
-        this.updatedAt = (LocalDateTime) source.readSerializable();
+        this.images = source.createStringArrayList();
+        this.category = source.readParcelable(Category.class.getClassLoader());
     }
 
     protected Product(Parcel in) {
-        this.uid = in.readString();
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.title = in.readString();
         this.description = in.readString();
         this.price = (Double) in.readValue(Double.class.getClassLoader());
-        this.stock = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.creationAt = (LocalDateTime) in.readSerializable();
-        this.updatedAt = (LocalDateTime) in.readSerializable();
+        this.images = in.createStringArrayList();
+        this.category = in.readParcelable(Category.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>() {
+    public static final Creator<Product> CREATOR = new Creator<>() {
         @Override
         public Product createFromParcel(Parcel source) {
             return new Product(source);
@@ -151,22 +140,5 @@ public class Product implements Parcelable {
             return new Product[size];
         }
     };
-
-    public static final DiffUtil.ItemCallback<Product> DIFF_CALLBACK =
-            new DiffUtil.ItemCallback<>() {
-                @Override
-                public boolean areItemsTheSame(
-                        @NonNull Product oldProduct, @NonNull Product newProduct) {
-                    // Product properties may have changed if reloaded from the DB, but ID is fixed
-                    return oldProduct.getId() == newProduct.getId();
-                }
-
-                @Override
-                public boolean areContentsTheSame(
-                        // NOTE: if you use equals, your object must properly override Object#equals()
-                        @NonNull Product oldProduct, @NonNull Product newProduct) {
-                    // Incorrectly returning false here will result in too many animations.
-                    return oldProduct.equals(newProduct);
-                }
-            };
 }
+

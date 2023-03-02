@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.payment.PaymentDataFragment"
+    android:id="@+id/scrollViewPurchaseData">
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewPaymentMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccione un metodo de pago"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/image1"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:gravity="start"
+        android:textSize="24sp"/>
+
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewPaymentMethod"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/image2"
+        app:layout_constraintBottom_toTopOf="@id/radioGroup"
+        android:minWidth="75dp"
+        android:minHeight="75dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/baseline_credit_card_24" />
+
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewPaymentMethod"
+            app:layout_constraintStart_toEndOf="@id/image1"
+            app:layout_constraintEnd_toStartOf="@id/image3"
+            app:layout_constraintBottom_toTopOf="@id/radioGroup"
+            android:minWidth="75dp"
+            android:minHeight="75dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/baseline_credit_card_24" />
+
+        <ImageView
+            android:id="@+id/image3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textViewPaymentMethod"
+            app:layout_constraintStart_toEndOf="@id/image2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/radioGroup"
+            android:minWidth="75dp"
+            android:minHeight="75dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/baseline_attach_money_24" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/image1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textViewCardNumber">
+
+        <RadioButton
+            android:id="@+id/radioButtonCredit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/image1"
+            app:layout_constraintEnd_toEndOf="@id/image1"
+            android:layout_marginHorizontal="30dp"
+            android:layout_gravity="center"
+            android:minWidth="75dp"
+            android:minHeight="48dp"
+            android:text="Credito" />
+
+        <RadioButton
+            android:id="@+id/radioButtonDebit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintStart_toStartOf="@id/image2"
+            app:layout_constraintEnd_toEndOf="@id/image2"
+            android:layout_marginHorizontal="30dp"
+            android:layout_gravity="center"
+            android:minWidth="75dp"
+            android:minHeight="48dp"
+            android:text="Debito" />
+        <RadioButton
+            android:id="@+id/radioButtonTransfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/image3"
+            app:layout_constraintEnd_toEndOf="@id/image3"
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="center"
+            android:minWidth="75dp"
+            android:minHeight="48dp"
+            android:text="Transferencia" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/editTextCardNumber"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Numero de tarjeta" />
+
+    <EditText
+        android:id="@+id/editTextCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewCardNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textViewExpirationDate"
+        android:inputType="number"
+        android:layout_marginHorizontal="30dp" />
+
+    <TextView
+        android:id="@+id/textViewExpirationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/editTextCardNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/editTextExpirationDate"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Fecha de expiracion" />
+
+    <EditText
+        android:id="@+id/editTextExpirationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewExpirationDate"
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="date"
+        android:minEms="6"
+        android:maxLength="5"
+        android:gravity="center"
+        android:layout_marginHorizontal="30dp" />
+
+    <TextView
+        android:id="@+id/textViewSecurityCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/editTextCardNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/editTextExpirationDate"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Codigo de seguridad" />
+
+    <EditText
+        android:id="@+id/editTextSecurityCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewExpirationDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="number"
+        android:minEms="6"
+        android:maxLength="3"
+        android:gravity="center"
+        android:layout_marginHorizontal="30dp" />
+
+    <TextView
+        android:id="@+id/textViewCardName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/editTextExpirationDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Nombre en la tarjeta" />
+
+    <EditText
+        android:id="@+id/editTextCardName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewCardName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="text"
+        android:layout_marginHorizontal="30dp"/>
+
+    <TextView
+        android:id="@+id/textViewDepositTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="30dp"
+        android:text="Usted va a realizar una transferencia bancaria"
+        android:gravity="start"
+        android:textSize="18sp"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/buyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:text="Comprar"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+</ScrollView>

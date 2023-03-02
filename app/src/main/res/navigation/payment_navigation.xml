@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/shippingFragment">
+    <fragment
+        android:id="@+id/purchaseDataFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.payment.PaymentDataFragment"
+        android:label="fragment_purchase_data"
+        tools:layout="@layout/fragment_payment_data" >
+        <action
+            android:id="@+id/action_purchaseDataFragment_to_transferFragment"
+            app:destination="@id/transferFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.payment.TransferFragment"
+        android:label="fragment_transfer"
+        tools:layout="@layout/fragment_transfer" />
+    <fragment
+        android:id="@+id/shippingFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.payment.ShippingFragment"
+        android:label="fragment_shipping"
+        tools:layout="@layout/fragment_shipping" >
+        <action
+            android:id="@+id/action_shippingFragment_to_purchaseDataFragment"
+            app:destination="@id/purchaseDataFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/productChartFragment">
+    <fragment
+        android:id="@+id/productChartFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.ProductChartFragment"
+        android:label="product_chart"
+        tools:layout="@layout/product_chart" >
+        <action
+            android:id="@+id/action_productChartFragment_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
+        <action
+            android:id="@+id/action_productChartFragment_to_productCreator"
+            app:destination="@id/productCreator" />
+    </fragment>
+    <fragment
+        android:id="@+id/productInfoFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.ProductInfoFragment"
+        android:label="product_info"
+        tools:layout="@layout/product_info" >
+        <action
+            android:id="@+id/action_productInfoFragment_to_productCreator"
+            app:destination="@id/productCreator" />
+    </fragment>
+    <fragment
+        android:id="@+id/productCreator"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.ProductCreator"
+        android:label="fragment_product_creator"
+        tools:layout="@layout/fragment_product_creator" >
+        <action
+            android:id="@+id/action_productCreator_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_productChartFragment" app:destination="@id/productChartFragment"/>
+    <fragment
+        android:id="@+id/buyOrderFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.BuyOrderFragment"
+        android:label="fragment_buy_order"
+        tools:layout="@layout/fragment_buy_order" >
+        <action
+            android:id="@+id/action_buyOrderFragment_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
+        <action
+            android:id="@+id/action_buyOrderFragment_to_productChartFragment"
+            app:destination="@id/productChartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_buyOrderFragment" app:destination="@id/buyOrderFragment" />
+    <action android:id="@+id/action_global_favoritesFragment" app:destination="@id/favoritesFragment" />
+    <fragment
+        android:id="@+id/purchaseHistory"
+        android:name="ar.com.tpfinal.rang_store.fragments.main.PurchaseHistory"
+        android:label="fragment_purchase_history"
+        tools:layout="@layout/fragment_purchase_history" >
+        <action
+            android:id="@+id/action_purchaseHistory_to_buyOrderFragment"
+            app:destination="@id/buyOrderFragment" />
+    </fragment><action android:id="@+id/action_global_purchaseHistory" app:destination="@id/purchaseHistory"/>
+</navigation>

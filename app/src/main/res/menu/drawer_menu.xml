@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 
     <item
         android:id="@+id/drawerHome"
         android:title="Inicio"
+        android:icon="@drawable/baseline_home_24"
         android:orderInCategory="1" />
-
-    <item
-        android:id="@+id/drawerSearch"
-        android:title="Busqueda"
-        android:orderInCategory="2"/>
 
     <item
         android:id="@+id/drawerNotifications"
         android:title="Notificaciones"
-        android:orderInCategory="3"/>
+        android:icon="@drawable/baseline_notifications_24"
+        android:orderInCategory="2"/>
 
     <item
         android:id="@+id/drawerPurchases"
         android:title="Compras"
-        android:orderInCategory="4"/>
+        android:icon="@drawable/baseline_history_24"
+        android:orderInCategory="3"/>
 
     <item
         android:id="@+id/drawerFavourites"
         android:title="Favoritos"
-        android:orderInCategory="5"/>
+        android:icon="@drawable/baseline_favorite_24"
+        android:orderInCategory="4"/>
 
     <item
         android:id="@+id/drawerMyAccount"
         android:title="Mi cuenta"
-        android:orderInCategory="6"/>
+        android:icon="@drawable/baseline_account_circle_24"
+        android:orderInCategory="5"/>
 
     <item
         android:id="@+id/drawerLogOut"
         android:title="Cerrar sesion"
-        android:orderInCategory="7"/>
+        android:icon="@drawable/baseline_logout_24"
+        android:orderInCategory="6"/>
 
 </menu>

@@ -1,6 +1,8 @@
 package ar.com.tpfinal.rang_store.adapters;
 
-import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +11,19 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import ar.com.tpfinal.rang_store.R;
 
 public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.ImageSliderViewHolder> {
 
-    private List<Integer> images;
+    private final List<String> urls;
 
-    public ImageSliderAdapter(List<Integer> images) {
-        this.images = images;
+    public ImageSliderAdapter(List<String> urls) {
+        this.urls = urls;
     }
 
     @NonNull
@@ -32,12 +37,16 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ImageSliderAdapter.ImageSliderViewHolder holder, int position) {
-        holder.imageView.setImageResource(images.get(position));
+
+        for(int i = 0; i<urls.size(); i++){
+            holder.setImage(urls.get(i));
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return images.size();
+        return urls.size();
     }
 
     static class ImageSliderViewHolder extends RecyclerView.ViewHolder {
@@ -46,6 +55,27 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
         ImageSliderViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
+        }
+
+        private void setImage(String url) {
+            Handler handler = new Handler();
+
+            Runnable runnable = () -> {
+                Bitmap bitmap = null;
+                InputStream inputStream;
+                try {
+                    inputStream = new URL(url).openStream();
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Bitmap finalBitmap = bitmap;
+                handler.post(() -> imageView.setImageBitmap(finalBitmap));
+            };
+            Thread thread = new Thread(runnable);
+            thread.start();
+
         }
     }
 }
