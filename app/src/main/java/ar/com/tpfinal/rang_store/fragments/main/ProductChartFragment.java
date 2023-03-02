@@ -106,7 +106,7 @@ public class ProductChartFragment extends Fragment {
 
         navHost = NavHostFragment.findNavController(this);
 
-        binding.floatingActionButton.setOnClickListener(view1 -> navHost.navigate(R.id.action_productChartFragment_to_productCreator));
+        binding.floatingCreateProductActionButton.setOnClickListener(view1 -> navHost.navigate(R.id.action_productChartFragment_to_productCreator));
 
         binding.toggleFilterButton.setOnClickListener(view1 -> {
             if (binding.filterContainer.getVisibility() == View.GONE) {
@@ -161,7 +161,7 @@ public class ProductChartFragment extends Fragment {
             if(document.exists()){
                 String role = document.getString("role");
                 if(role != null && role.equals("admin")){
-                    binding.floatingActionButton.setVisibility(View.VISIBLE);
+                    binding.floatingCreateProductActionButton.setVisibility(View.VISIBLE);
                 }
             }
             else{

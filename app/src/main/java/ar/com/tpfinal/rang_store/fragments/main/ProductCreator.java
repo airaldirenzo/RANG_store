@@ -97,6 +97,7 @@ public class ProductCreator extends Fragment {
     }
 
     private void createProduct(ProductRepository pr) {
+
         String title = binding.editTextProductTitle.getText().toString();
         String description = binding.editTextProductDescription.getText().toString();
         String priceString = binding.editTextProductPrice.getText().toString();

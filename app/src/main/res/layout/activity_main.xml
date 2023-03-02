@@ -9,7 +9,8 @@
     android:animateLayoutChanges="true"
     android:animationCache="true"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:contentDescription="drawer">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
