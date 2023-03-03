@@ -14,7 +14,7 @@
         card_view:cardCornerRadius="15dp"
         card_view:cardElevation="5dp">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -22,11 +22,11 @@
 
             <ImageView
                 android:id="@+id/imageViewFavorite"
-                android:layout_width="150dp"
-                android:layout_height="110dp"
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
                 android:src="@mipmap/ic_launcher" />
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -43,7 +43,7 @@
                     android:id="@+id/descriptionFavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="description"
+                    android:text="Descripcion"
                     android:maxLength="45"
                     android:textSize="14sp" />
 
@@ -58,9 +58,9 @@
                     android:gravity="bottom"
                     android:text="$000000000"
                     android:textSize="14sp" />
-            </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.cardview.widget.CardView>
 
