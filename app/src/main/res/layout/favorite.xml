@@ -22,8 +22,8 @@
 
             <ImageView
                 android:id="@+id/imageViewFavorite"
-                android:layout_width="wrap_content"
-                android:layout_height="140dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Descripcion"
-                    android:maxLength="45"
+                    android:maxLength="128"
                     android:textSize="14sp" />
 
                 <TextView
